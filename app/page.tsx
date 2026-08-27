@@ -1,15 +1,20 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Clock3, Play, Sparkles } from "lucide-react";
+import { ArrowRight, Clock3 } from "lucide-react";
 import { ArticleCard } from "@/components/article-card";
 import { Newsletter } from "@/components/newsletter";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { articles, sectionStyles, sections } from "@/data/articles";
+import { getPublishedArticles } from "@/lib/published-articles";
 
-export default function Home() {
-  const featured = articles.find((article) => article.featured) ?? articles[0];
-  const leadStories = articles.filter((article) => article.slug !== featured.slug).slice(0, 3);
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const databaseArticles = await getPublishedArticles();
+  const databaseSlugs = new Set(databaseArticles.map((article) => article.slug));
+  const contentArticles = [...databaseArticles, ...articles.filter((article) => !databaseSlugs.has(article.slug))];
+  const featured = contentArticles.find((article) => article.featured) ?? contentArticles[0];
+  const leadStories = contentArticles.filter((article) => article.slug !== featured.slug).slice(0, 3);
 
   return (
     <>
@@ -36,7 +41,7 @@ export default function Home() {
           <div className="hero-grid">
             <article className="lead-story">
               <Link className="lead-image" href={`/article/${featured.slug}`}>
-                <Image src={featured.image} alt={featured.imageAlt} fill priority sizes="(max-width: 900px) 100vw, 66vw" />
+                <span className="lead-photo" role="img" aria-label={featured.imageAlt} style={{ backgroundImage: `url(${featured.image})` }} />
                 <div className="image-shade" />
                 <div className="lead-copy">
                   <span className={`section-pill pill-${sectionStyles[featured.section]}`}>{featured.section}</span>
@@ -71,39 +76,26 @@ export default function Home() {
             <Link className="text-link" href="/search">View all <ArrowRight size={17} /></Link>
           </div>
           <div className="article-grid">
-            {articles.slice(1, 4).map((article) => <ArticleCard key={article.slug} article={article} />)}
+            {contentArticles.slice(0, 6).map((article) => <ArticleCard key={article.slug} article={article} />)}
           </div>
         </section>
 
-        <section className="knowledge-band" id="learn">
-          <div className="shell knowledge-grid">
-            <div className="knowledge-copy">
-              <span className="feature-icon"><Sparkles size={23} /></span>
-              <p className="eyebrow">Learn something useful</p>
-              <h2>Knowledge that moves with you.</h2>
-              <p>Clear explainers, practical tutorials and structured learning paths—from SAP and new technology to creative skills.</p>
-              <Link className="button button-light" href={`/article/${articles[4].slug}`}>Start learning <ArrowRight size={18} /></Link>
-            </div>
-            <Link className="knowledge-feature" href={`/article/${articles[4].slug}`}>
-              <Image src={articles[4].image} alt={articles[4].imageAlt} fill sizes="(max-width: 800px) 100vw, 50vw" />
-              <span className="video-button"><Play fill="currentColor" size={18} /> 8 min lesson</span>
-              <div><small>{articles[4].category} · Beginner</small><h3>{articles[4].title}</h3></div>
-            </Link>
-          </div>
-        </section>
-
-        <section className="shell content-section" id="health" aria-labelledby="health-heading">
-          <div className="section-heading">
-            <div><p className="eyebrow">Evidence-minded living</p><h2 id="health-heading">Health & wellness</h2></div>
-            <Link className="text-link" href="/search?q=health">Explore health <ArrowRight size={17} /></Link>
-          </div>
-          <div className="article-grid two-up">
-            {articles.filter((article) => article.section === "Health").map((article) => (
-              <ArticleCard key={article.slug} article={article} variant="horizontal" />
-            ))}
-          </div>
-          <p className="health-note">EveryGyan health content is educational and does not replace advice from a qualified health professional.</p>
-        </section>
+        {sections.map((section) => {
+          const sectionArticles = contentArticles.filter((article) => article.section === section.name).slice(0, 6);
+          if (!sectionArticles.length) return null;
+          return (
+            <section className="shell content-section" id={section.name.toLowerCase()} key={section.name} aria-labelledby={`${section.name.toLowerCase()}-heading`}>
+              <div className="section-heading">
+                <div><p className="eyebrow">{section.description}</p><h2 id={`${section.name.toLowerCase()}-heading`}>{section.name}</h2></div>
+                <Link className="text-link" href={`/search?q=${section.name.toLowerCase()}`}>Explore {section.name.toLowerCase()} <ArrowRight size={17} /></Link>
+              </div>
+              <div className="article-grid">
+                {sectionArticles.map((article) => <ArticleCard key={article.slug} article={article} />)}
+              </div>
+              {section.name === "Health" && <p className="health-note">EveryGyan health content is educational and does not replace advice from a qualified health professional.</p>}
+            </section>
+          );
+        })}
 
         <Newsletter />
       </main>
@@ -111,4 +103,3 @@ export default function Home() {
     </>
   );
 }
-

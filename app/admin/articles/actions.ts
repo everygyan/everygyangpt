@@ -59,6 +59,7 @@ export async function saveArticle(
   if (title.length < 5) return { ...previous, error: "The headline must contain at least 5 characters." };
   if (excerpt.length < 20) return { ...previous, error: "Add a summary of at least 20 characters." };
   if (!sectionId) return { ...previous, error: "Choose a section for this article." };
+  if (!categoryId) return { ...previous, error: "Choose a category for this article." };
   if (contentText.length < 20) return { ...previous, error: "Write at least 20 characters in the article body." };
 
   const supabase = await createClient();

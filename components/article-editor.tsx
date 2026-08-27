@@ -37,6 +37,9 @@ export function ArticleEditor({
   const [state, formAction, pending] = useActionState(saveArticle, initialState);
   const [title, setTitle] = useState(initial.title ?? "");
   const [sectionId, setSectionId] = useState(initial.sectionId ?? sections[0]?.id ?? "");
+  const [categoryId, setCategoryId] = useState(
+    initial.categoryId ?? categories.find((category) => category.section_id === (initial.sectionId ?? sections[0]?.id))?.id ?? "",
+  );
   const [contentHtml, setContentHtml] = useState(initial.contentHtml ?? "");
   const editorRef = useRef<HTMLDivElement>(null);
   const availableCategories = useMemo(
@@ -99,8 +102,8 @@ export function ArticleEditor({
 
         <aside className="editor-settings">
           <h2>Article settings</h2>
-          <label>Section<select name="sectionId" value={sectionId} onChange={(event) => setSectionId(event.target.value)} required>{sections.map((section) => <option key={section.id} value={section.id}>{section.name}</option>)}</select></label>
-          <label>Category<select name="categoryId" defaultValue={initial.categoryId ?? ""}><option value="">No category</option>{availableCategories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}</select></label>
+          <label>Section<select name="sectionId" value={sectionId} onChange={(event) => { const nextSection = event.target.value; setSectionId(nextSection); setCategoryId(categories.find((category) => category.section_id === nextSection)?.id ?? ""); }} required>{sections.map((section) => <option key={section.id} value={section.id}>{section.name}</option>)}</select></label>
+          <label>Category<select name="categoryId" value={categoryId} onChange={(event) => setCategoryId(event.target.value)} required><option value="" disabled>Choose category</option>{availableCategories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}</select></label>
           <label>Tags<input name="tags" defaultValue={initial.tags} placeholder="travel, technology, guide" /></label>
           <label>Featured image URL<input name="featuredImageUrl" type="url" defaultValue={initial.featuredImageUrl} placeholder="https://..." /></label>
           <label>Featured image description<input name="featuredImageAlt" defaultValue={initial.featuredImageAlt} placeholder="Describe the image" /></label>

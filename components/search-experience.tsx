@@ -3,9 +3,9 @@
 import { Search } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { ArticleCard } from "@/components/article-card";
-import { articles } from "@/data/articles";
+import type { Article } from "@/data/articles";
 
-export function SearchExperience() {
+export function SearchExperience({ articles }: { articles: Article[] }) {
   const searchParams = useSearchParams();
   const query = searchParams.get("q") ?? "";
   const normalized = query.toLowerCase();
@@ -27,4 +27,3 @@ export function SearchExperience() {
     </main>
   );
 }
-
