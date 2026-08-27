@@ -294,3 +294,24 @@ img { max-width: 100%; }
   .large-search-form { display: grid; grid-template-columns: auto 1fr; }.large-search-form .button { grid-column: 1 / -1; }
 }
 
+/* Authenticated publishing phase */
+.database-cover { background-position: center; background-size: cover; }
+.status-draft, .status-review, .status-scheduled, .status-archived { width: fit-content; padding: 5px 8px; color: #665100; background: #fff3c4; border-radius: 10px; font-weight: 800; text-transform: capitalize; }
+.admin-account { display: flex; align-items: center; gap: 10px; }
+.admin-account form button, .text-button { color: #5c6879; background: transparent; border: 0; font-size: .73rem; font-weight: 800; }
+.admin-account form button:hover, .text-button:hover { color: var(--blue); }
+.row-actions { flex-direction: row !important; gap: 9px !important; }
+.admin-empty { display: flex; align-items: center; gap: 10px; padding: 28px 22px; color: #687487; }
+.admin-empty a { margin-left: auto; }
+.editor-actions .editor-preview { min-height: 38px; display: flex; align-items: center; gap: 6px; padding: 0 13px; color: #334155; background: white; border: 1px solid #d7dee8; border-radius: 7px; font-size: .75rem; font-weight: 800; }
+.editor-actions button:disabled { cursor: wait; opacity: .65; }
+.form-message { margin: 14px 0 0; padding: 11px 13px; border-radius: 8px; font-size: .78rem; line-height: 1.45; }
+.form-error { color: #9b1c1c; background: #fff0f0; border: 1px solid #ffcaca; }
+.form-success { color: #08633d; background: #ebfaf2; border: 1px solid #bcebd2; }
+.account-page { min-height: 100vh; display: grid; place-items: center; padding: 30px; background: linear-gradient(145deg, #edf4ff, #fff8f1); }
+.account-card { width: min(580px, 100%); padding: 42px; background: white; border: 1px solid #dfe5ee; border-radius: 20px; box-shadow: var(--shadow); }
+.account-card .admin-logo { display: block; padding: 0 0 35px; color: #071b43; }
+.account-card h1 { margin: 0; font-family: Georgia, serif; font-size: 2.5rem; }
+.account-card > p:not(.eyebrow, .form-message) { color: #687487; }
+.account-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 28px; }
+.account-secondary { color: #172033; background: #eef2f7; }

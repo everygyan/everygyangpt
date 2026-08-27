@@ -10,9 +10,9 @@ EveryGyan is a responsive digital magazine for news, travel, entertainment, heal
 - Light and dark modes
 - Multilingual-ready language selector
 - Resend-powered newsletter with secure double opt-in and confirmation-based unsubscribe
-- Sign-in screen ready for Supabase Auth
-- Admin overview and article-management preview
-- WordPress-style article editor prototype
+- Supabase email/password registration, sign-in, password reset and persistent sessions
+- Role-protected admin overview with live article, comment and subscriber counts
+- Database-backed rich article editor with drafts, publishing, editing, categories and tags
 - Initial Supabase schema, roles and Row Level Security policies
 - Generated EveryGyan logo in `public/everygyan-logo.png`
 
@@ -32,9 +32,10 @@ Useful pages:
 - `/` — publication homepage
 - `/article/cities-rethinking-the-future-of-urban-travel` — article template
 - `/search` — search prototype
-- `/login` — authentication design
-- `/admin` — admin overview
-- `/admin/articles/new` — publishing editor
+- `/login` and `/signup` — authentication
+- `/account` — signed-in reader account
+- `/admin` — protected admin overview
+- `/admin/articles/new` — create and publish an article
 
 ## Quality checks
 
@@ -49,9 +50,16 @@ npm run build
 2. Copy `.env.example` to `.env.local` and set the project URL and publishable key.
 3. Install/login to the Supabase CLI without putting credentials in Git.
 4. Link this folder to the project.
-5. Review and apply both SQL files in `supabase/migrations` in filename order.
+5. Review and apply all SQL files in `supabase/migrations` in filename order.
 6. Create a public article-images bucket and a private editorial-media bucket.
-7. Create Sandeep's account, then promote that profile to the `admin` role from the SQL editor.
+7. In Supabase Authentication settings, set the Site URL to the deployed Hostinger preview URL and add both `http://localhost:3000/**` and the Hostinger preview URL to Redirect URLs.
+8. Register Sandeep's account at `/signup`, confirm its email, then run this once in the Supabase SQL Editor:
+
+```sql
+select public.promote_user_to_admin('YOUR-REGISTERED-EMAIL@example.com');
+```
+
+9. Sign out and back in. The account will now open the publishing dashboard. There is deliberately no default admin email or password in the source code.
 
 The service-role key must be configured only as a server/hosting secret. Never prefix it with `NEXT_PUBLIC_` or commit it.
 
@@ -86,16 +94,6 @@ The target is Hostinger Business Web Hosting using its Node.js Web App flow:
 
 Connect the GitHub repository in hPanel, then add the production environment variables in Hostinger rather than uploading an `.env` file. Keep `everygyan.com` on the existing website until the new deployment has been tested on a temporary Hostinger URL.
 
-## Next implementation phase
+## Remaining product phases
 
-The current UI uses sample article data. The next phase connects:
-
-- Supabase Auth and user profiles
-- Database-backed articles, categories, tags and menus
-- Rich-text document persistence
-- Supabase Storage media uploads
-- Live comments and admin moderation
-- Newsletter campaign composition and scheduled broadcasts
-- Real multilingual routing and translated content
-- Sitemap, RSS, structured data and production analytics
-
+The authentication and core publishing workflow are connected. The next additions are Supabase Storage media uploads, live comments and moderation, configurable menus, newsletter campaign composition, multilingual routing, sitemap/RSS, structured data and production analytics.
