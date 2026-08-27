@@ -1,0 +1,101 @@
+# EveryGyan
+
+EveryGyan is a responsive digital magazine for news, travel, entertainment, health and practical learning. This repository contains the initial Next.js product experience and the database blueprint for Supabase.
+
+## Included in this foundation
+
+- Responsive editorial homepage for desktop, tablet and mobile
+- Article pages with author details, topics and comment entry point
+- Search experience across sample content
+- Light and dark modes
+- Multilingual-ready language selector
+- Resend-powered newsletter with secure double opt-in and confirmation-based unsubscribe
+- Sign-in screen ready for Supabase Auth
+- Admin overview and article-management preview
+- WordPress-style article editor prototype
+- Initial Supabase schema, roles and Row Level Security policies
+- Generated EveryGyan logo in `public/everygyan-logo.png`
+
+## Run locally
+
+Requirements: Node.js 20.9 or later.
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+Useful pages:
+
+- `/` — publication homepage
+- `/article/cities-rethinking-the-future-of-urban-travel` — article template
+- `/search` — search prototype
+- `/login` — authentication design
+- `/admin` — admin overview
+- `/admin/articles/new` — publishing editor
+
+## Quality checks
+
+```bash
+npm run lint
+npm run build
+```
+
+## Connect Supabase
+
+1. Create a new Supabase project for EveryGyan.
+2. Copy `.env.example` to `.env.local` and set the project URL and publishable key.
+3. Install/login to the Supabase CLI without putting credentials in Git.
+4. Link this folder to the project.
+5. Review and apply both SQL files in `supabase/migrations` in filename order.
+6. Create a public article-images bucket and a private editorial-media bucket.
+7. Create Sandeep's account, then promote that profile to the `admin` role from the SQL editor.
+
+The service-role key must be configured only as a server/hosting secret. Never prefix it with `NEXT_PUBLIC_` or commit it.
+
+## Newsletter setup
+
+1. Verify `mail.everygyan.com` as a sending domain in Resend.
+2. Create a sending-only Resend API key and save it as `NEWSLETTER_API_KEY`.
+3. Set `NEWSLETTER_FROM_EMAIL` to `EveryGyan <newsletter@mail.everygyan.com>`.
+4. Set `NEXT_PUBLIC_SITE_URL` to the final HTTPS site URL so email links point to the live website.
+5. Apply `202608270002_newsletter_double_opt_in.sql` after the initial Supabase migration.
+
+The Resend key is read only by the server route. Newsletter addresses remain protected by Supabase Row Level Security and can only be changed publicly through the limited subscribe, confirm and unsubscribe functions.
+
+## GitHub workflow
+
+1. Create a private empty repository named `everygyan`.
+2. Add it as this repository's `origin`.
+3. Push the initial `main` branch.
+4. Add branch protection after the first push.
+5. Develop changes on feature branches and merge reviewed changes into `main`.
+
+## Hostinger deployment
+
+The target is Hostinger Business Web Hosting using its Node.js Web App flow:
+
+- Framework: Next.js
+- Node version: 22 or 24
+- Install command: `npm install`
+- Build command: `npm run build`
+- Start command: `npm run start`
+- Production branch: `main`
+
+Connect the GitHub repository in hPanel, then add the production environment variables in Hostinger rather than uploading an `.env` file. Keep `everygyan.com` on the existing website until the new deployment has been tested on a temporary Hostinger URL.
+
+## Next implementation phase
+
+The current UI uses sample article data. The next phase connects:
+
+- Supabase Auth and user profiles
+- Database-backed articles, categories, tags and menus
+- Rich-text document persistence
+- Supabase Storage media uploads
+- Live comments and admin moderation
+- Newsletter campaign composition and scheduled broadcasts
+- Real multilingual routing and translated content
+- Sitemap, RSS, structured data and production analytics
+
