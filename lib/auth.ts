@@ -1,6 +1,7 @@
 import "server-only";
 
 import { redirect } from "next/navigation";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 
 export type AppRole = "reader" | "editor" | "moderator" | "admin";
@@ -12,18 +13,23 @@ export type CurrentProfile = {
 };
 
 export async function getCurrentProfile(): Promise<CurrentProfile | null> {
-  const supabase = await createClient();
-  const { data: claimsData } = await supabase.auth.getClaims();
-  const userId = claimsData?.claims?.sub;
-  if (!userId) return null;
+  if (!isSupabaseConfigured()) return null;
+  try {
+    const supabase = await createClient();
+    const { data: claimsData } = await supabase.auth.getClaims();
+    const userId = claimsData?.claims?.sub;
+    if (!userId) return null;
 
-  const { data } = await supabase
-    .from("profiles")
-    .select("id, display_name, avatar_url, role")
-    .eq("id", userId)
-    .single();
+    const { data } = await supabase
+      .from("profiles")
+      .select("id, display_name, avatar_url, role")
+      .eq("id", userId)
+      .single();
 
-  return (data as CurrentProfile | null) ?? null;
+    return (data as CurrentProfile | null) ?? null;
+  } catch {
+    return null;
+  }
 }
 
 export async function requireUser() {

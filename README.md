@@ -94,6 +94,16 @@ The target is Hostinger Business Web Hosting using its Node.js Web App flow:
 
 Connect the GitHub repository in hPanel, then add the production environment variables in Hostinger rather than uploading an `.env` file. Keep `everygyan.com` on the existing website until the new deployment has been tested on a temporary Hostinger URL.
 
+The following Hostinger variables are required before building or redeploying:
+
+- `NEXT_PUBLIC_SITE_URL` — the temporary Hostinger URL, without `/**`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- `NEWSLETTER_API_KEY`
+- `NEWSLETTER_FROM_EMAIL`
+
+Use `/api/health` to verify the non-secret configuration status. Supabase redirect allowlist entries may end in `/**`, but browser URLs and `NEXT_PUBLIC_SITE_URL` must not.
+
 ## Remaining product phases
 
 The authentication and core publishing workflow are connected. The next additions are Supabase Storage media uploads, live comments and moderation, configurable menus, newsletter campaign composition, multilingual routing, sitemap/RSS, structured data and production analytics.

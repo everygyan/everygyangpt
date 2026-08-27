@@ -8,6 +8,7 @@ import { Newsletter } from "@/components/newsletter";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { articles, sectionStyles } from "@/data/articles";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 
 type ArticlePageProps = { params: Promise<{ slug: string }> };
@@ -29,6 +30,7 @@ type PublishedArticle = {
 };
 
 async function getPublishedArticle(slug: string) {
+  if (!isSupabaseConfigured()) return null;
   const supabase = await createClient();
   const { data } = await supabase
     .from("articles")

@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 
 export type AuthActionState = { error?: string; success?: string };
@@ -17,10 +18,18 @@ function siteUrl() {
   return (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
 }
 
+function configurationError(): AuthActionState | null {
+  return isSupabaseConfigured()
+    ? null
+    : { error: "Account access is temporarily unavailable because the hosting environment is not configured." };
+}
+
 export async function signIn(
   _state: AuthActionState,
   formData: FormData,
 ): Promise<AuthActionState> {
+  const configError = configurationError();
+  if (configError) return configError;
   const email = value(formData, "email").toLowerCase();
   const password = value(formData, "password");
   if (!email || !password) return { error: "Enter your email address and password." };
@@ -42,6 +51,8 @@ export async function signUp(
   _state: AuthActionState,
   formData: FormData,
 ): Promise<AuthActionState> {
+  const configError = configurationError();
+  if (configError) return configError;
   const displayName = value(formData, "displayName");
   const email = value(formData, "email").toLowerCase();
   const password = value(formData, "password");
@@ -67,6 +78,8 @@ export async function requestPasswordReset(
   _state: AuthActionState,
   formData: FormData,
 ): Promise<AuthActionState> {
+  const configError = configurationError();
+  if (configError) return configError;
   const email = value(formData, "email").toLowerCase();
   if (!/^\S+@\S+\.\S+$/.test(email)) return { error: "Please enter a valid email address." };
   const supabase = await createClient();
@@ -80,6 +93,8 @@ export async function updatePassword(
   _state: AuthActionState,
   formData: FormData,
 ): Promise<AuthActionState> {
+  const configError = configurationError();
+  if (configError) return configError;
   const password = value(formData, "password");
   if (password.length < 8) return { error: "Use a password with at least 8 characters." };
   const supabase = await createClient();
@@ -88,6 +103,7 @@ export async function updatePassword(
 }
 
 export async function signOut() {
+  if (!isSupabaseConfigured()) redirect("/login");
   const supabase = await createClient();
   await supabase.auth.signOut();
   redirect("/login");
