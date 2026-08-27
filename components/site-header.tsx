@@ -2,14 +2,57 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, Menu, Search, UserRound, X } from "lucide-react";
-import { useState } from "react";
+import { ChevronDown, LayoutDashboard, LogOut, Menu, Search, UserRound, X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { sections } from "@/data/articles";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { createClient } from "@/lib/supabase/client";
+
+type HeaderProfile = {
+  displayName: string;
+  role: "reader" | "editor" | "moderator" | "admin";
+};
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [profile, setProfile] = useState<HeaderProfile | null>(null);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const supabase = useMemo(() => {
+    try {
+      return createClient();
+    } catch {
+      return null;
+    }
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    async function loadProfile() {
+      if (!supabase) return;
+      const { data: userData } = await supabase.auth.getUser();
+      if (!active || !userData.user) return;
+      const { data } = await supabase
+        .from("profiles")
+        .select("display_name, role")
+        .eq("id", userData.user.id)
+        .single();
+      if (!active) return;
+      setProfile({
+        displayName: data?.display_name || userData.user.user_metadata?.display_name || "EveryGyan reader",
+        role: data?.role || "reader",
+      });
+    }
+    void loadProfile();
+    return () => { active = false; };
+  }, [supabase]);
+
+  async function signOut() {
+    if (supabase) await supabase.auth.signOut();
+    window.location.replace("/");
+  }
+
+  const canPublish = profile?.role === "admin" || profile?.role === "editor";
 
   return (
     <>
@@ -66,10 +109,36 @@ export function SiteHeader() {
             >
               <Search size={20} />
             </button>
-            <Link className="sign-in" href="/login">
-              <UserRound size={18} />
-              <span>Sign in</span>
-            </Link>
+            {profile ? (
+              <div className="profile-menu" onMouseLeave={() => setProfileOpen(false)}>
+                <button
+                  className="profile-trigger"
+                  type="button"
+                  aria-label={`Open account menu for ${profile.displayName}`}
+                  aria-expanded={profileOpen}
+                  onClick={() => setProfileOpen((value) => !value)}
+                  onMouseEnter={() => setProfileOpen(true)}
+                >
+                  <span className="profile-avatar">{profile.displayName.charAt(0).toUpperCase()}</span>
+                  <span className="profile-name">{profile.displayName.split(" ")[0]}</span>
+                  <ChevronDown size={14} />
+                </button>
+                <div className={`profile-dropdown ${profileOpen ? "is-open" : ""}`}>
+                  <div className="profile-summary">
+                    <span className="profile-avatar profile-avatar-large">{profile.displayName.charAt(0).toUpperCase()}</span>
+                    <div><strong>{profile.displayName}</strong><small>{profile.role}</small></div>
+                  </div>
+                  <Link href="/account" onClick={() => setProfileOpen(false)}><UserRound size={17} /> My profile</Link>
+                  {canPublish && <Link href="/admin" onClick={() => setProfileOpen(false)}><LayoutDashboard size={17} /> Publishing dashboard</Link>}
+                  <button type="button" onClick={signOut}><LogOut size={17} /> Sign out</button>
+                </div>
+              </div>
+            ) : (
+              <Link className="sign-in" href="/login">
+                <UserRound size={18} />
+                <span>Sign in</span>
+              </Link>
+            )}
           </div>
         </div>
 
@@ -86,4 +155,3 @@ export function SiteHeader() {
     </>
   );
 }
-
