@@ -12,7 +12,7 @@ EveryGyan is a responsive digital magazine for news, travel, entertainment, heal
 - Resend-powered newsletter with secure double opt-in and confirmation-based unsubscribe
 - Supabase email/password registration, sign-in, password reset and persistent sessions
 - Role-protected admin overview with live article, comment and subscriber counts
-- Database-backed rich article editor with drafts, publishing, editing, categories and tags
+- Database-backed rich article editor with drafts, publishing, editing, categories, tags and pasted-image uploads
 - Initial Supabase schema, roles and Row Level Security policies
 - Generated EveryGyan logo in `public/everygyan-logo.png`
 
@@ -51,7 +51,7 @@ npm run build
 3. Install/login to the Supabase CLI without putting credentials in Git.
 4. Link this folder to the project.
 5. Review and apply all SQL files in `supabase/migrations` in filename order.
-6. Create a public article-images bucket and a private editorial-media bucket.
+6. Configure `SUPABASE_SERVICE_ROLE_KEY` as a server-only secret. The first editorial image upload creates the public `article-images` bucket automatically.
 7. In Supabase Authentication settings, set the Site URL to the deployed Hostinger preview URL and add both `http://localhost:3000/**` and the Hostinger preview URL to Redirect URLs.
 8. Register Sandeep's account at `/signup`, confirm its email, then run this once in the Supabase SQL Editor:
 
@@ -62,6 +62,8 @@ select public.promote_user_to_admin('YOUR-REGISTERED-EMAIL@example.com');
 9. Sign out and back in. The account will now open the publishing dashboard. There is deliberately no default admin email or password in the source code.
 
 The service-role key must be configured only as a server/hosting secret. Never prefix it with `NEXT_PUBLIC_` or commit it.
+
+The former hard-coded demonstration stories are now imported into Supabase and can be edited or deleted from the admin dashboard. For a new database, run `npm run seed:samples` once after promoting an admin account. The command is idempotent and does not overwrite existing stories.
 
 ## Newsletter setup
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BarChart3, Eye, FileText, MessageSquare, Plus, Users } from "lucide-react";
 import { signOut } from "@/app/auth/actions";
+import { DeleteArticleButton } from "@/components/delete-article-button";
 import { requireEditorialUser } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 
@@ -53,7 +54,7 @@ export default async function AdminPage() {
                   <div><strong>{article.title}</strong><span>{sectionName || "Uncategorised"}</span></div>
                   <span className={`status-${article.status}`}>{article.status}</span>
                   <span>{new Date(article.updated_at).toLocaleDateString("en-GB")}</span>
-                  <div className="row-actions"><Link href={`/admin/articles/${article.id}/edit`}>Edit</Link><Link href={`/article/${article.slug}`}>View</Link></div>
+                  <div className="row-actions"><Link href={`/admin/articles/${article.id}/edit`}>Edit</Link><Link href={`/article/${article.slug}`}>View</Link>{profile.role === "admin" && <DeleteArticleButton articleId={article.id} title={article.title} />}</div>
                 </div>
               );})}
               {!articles.length && <div className="admin-empty"><strong>No articles yet.</strong><span>Create your first EveryGyan story and save it as a draft.</span><Link href="/admin/articles/new">Create article</Link></div>}

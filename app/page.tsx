@@ -4,17 +4,16 @@ import { ArticleCard } from "@/components/article-card";
 import { Newsletter } from "@/components/newsletter";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { articles, sectionStyles, sections } from "@/data/articles";
+import { sectionStyles, sections } from "@/data/articles";
 import { getPublishedArticles } from "@/lib/published-articles";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const databaseArticles = await getPublishedArticles();
-  const databaseSlugs = new Set(databaseArticles.map((article) => article.slug));
-  const contentArticles = [...databaseArticles, ...articles.filter((article) => !databaseSlugs.has(article.slug))];
+  const contentArticles = databaseArticles;
   const featured = contentArticles.find((article) => article.featured) ?? contentArticles[0];
-  const leadStories = contentArticles.filter((article) => article.slug !== featured.slug).slice(0, 3);
+  const leadStories = featured ? contentArticles.filter((article) => article.slug !== featured.slug).slice(0, 3) : [];
 
   return (
     <>
@@ -38,7 +37,7 @@ export default async function Home() {
             <p className="hero-intro">A sharper view of the world, with useful ideas for how you travel, learn and live.</p>
           </div>
 
-          <div className="hero-grid">
+          {featured ? <div className="hero-grid">
             <article className="lead-story">
               <Link className="lead-image" href={`/article/${featured.slug}`}>
                 <span className="lead-photo" role="img" aria-label={featured.imageAlt} style={{ backgroundImage: `url(${featured.image})` }} />
@@ -57,7 +56,7 @@ export default async function Home() {
                 <ArticleCard key={article.slug} article={article} variant={index === 0 ? "horizontal" : "compact"} />
               ))}
             </div>
-          </div>
+          </div> : <div className="empty-publication"><h2>Your next story starts here.</h2><p>Published articles will appear here as soon as they are ready.</p></div>}
         </section>
 
         <section className="shell topic-rail" aria-label="Explore EveryGyan topics">

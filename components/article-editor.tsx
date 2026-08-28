@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Bold, Eye, Italic, Link2, List, ListOrdered, Quote, Save, Send } from "lucide-react";
-import { useActionState, useMemo, useRef, useState } from "react";
+import { ArrowLeft, Bold, Eye, ImagePlus, Italic, Link2, List, ListOrdered, LoaderCircle, Quote, Save, Send } from "lucide-react";
+import { useActionState, useMemo, useRef, useState, type ClipboardEvent, type DragEvent } from "react";
 import { saveArticle, type ArticleActionState } from "@/app/admin/articles/actions";
 
 export type EditorSection = { id: string; name: string };
@@ -36,12 +36,16 @@ export function ArticleEditor({
   const initialState: ArticleActionState = { articleId: initial.id, slug: initial.slug };
   const [state, formAction, pending] = useActionState(saveArticle, initialState);
   const [title, setTitle] = useState(initial.title ?? "");
+  const [excerpt, setExcerpt] = useState(initial.excerpt ?? "");
   const [sectionId, setSectionId] = useState(initial.sectionId ?? sections[0]?.id ?? "");
   const [categoryId, setCategoryId] = useState(
     initial.categoryId ?? categories.find((category) => category.section_id === (initial.sectionId ?? sections[0]?.id))?.id ?? "",
   );
   const [contentHtml, setContentHtml] = useState(initial.contentHtml ?? "");
+  const [mediaUploads, setMediaUploads] = useState(0);
+  const [mediaError, setMediaError] = useState("");
   const editorRef = useRef<HTMLDivElement>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
   const availableCategories = useMemo(
     () => categories.filter((category) => category.section_id === sectionId),
     [categories, sectionId],
@@ -58,6 +62,88 @@ export function ArticleEditor({
     if (url) format("createLink", url);
   }
 
+  async function uploadImage(file: File) {
+    if (!file.type.startsWith("image/")) return null;
+    setMediaUploads((count) => count + 1);
+    setMediaError("");
+    try {
+      const body = new FormData();
+      body.set("file", file);
+      const response = await fetch("/api/admin/media", { method: "POST", body });
+      const result = await response.json() as { url?: string; error?: string };
+      if (!response.ok || !result.url) throw new Error(result.error || "The image could not be uploaded.");
+      return result.url;
+    } catch (error) {
+      setMediaError(error instanceof Error ? error.message : "The image could not be uploaded.");
+      return null;
+    } finally {
+      setMediaUploads((count) => Math.max(0, count - 1));
+    }
+  }
+
+  function currentRange() {
+    const selection = window.getSelection();
+    if (!selection?.rangeCount || !editorRef.current?.contains(selection.anchorNode)) return null;
+    return selection.getRangeAt(0).cloneRange();
+  }
+
+  function insertImage(url: string, alt: string, range: Range | null) {
+    const editor = editorRef.current;
+    if (!editor) return null;
+    const figure = document.createElement("figure");
+    const image = document.createElement("img");
+    image.src = url;
+    image.alt = alt.replace(/\.[^.]+$/, "") || "Article image";
+    image.loading = "lazy";
+    figure.appendChild(image);
+    const nextRange = document.createRange();
+    if (range && editor.contains(range.commonAncestorContainer)) {
+      range.deleteContents();
+      range.insertNode(figure);
+      nextRange.setStartAfter(figure);
+    } else {
+      editor.appendChild(figure);
+      nextRange.setStartAfter(figure);
+    }
+    const paragraph = document.createElement("p");
+    paragraph.appendChild(document.createElement("br"));
+    figure.after(paragraph);
+    nextRange.setStart(paragraph, 0);
+    nextRange.collapse(true);
+    const selection = window.getSelection();
+    selection?.removeAllRanges();
+    selection?.addRange(nextRange);
+    setContentHtml(editor.innerHTML);
+    return nextRange;
+  }
+
+  async function addImages(files: File[]) {
+    let range = currentRange();
+    for (const file of files) {
+      const url = await uploadImage(file);
+      if (url) range = insertImage(url, file.name, range);
+    }
+    editorRef.current?.focus();
+  }
+
+  function pasteImages(event: ClipboardEvent<HTMLDivElement>) {
+    const files = Array.from(event.clipboardData.items)
+      .filter((item) => item.kind === "file" && item.type.startsWith("image/"))
+      .map((item) => item.getAsFile())
+      .filter((file): file is File => Boolean(file));
+    if (!files.length) return;
+    event.preventDefault();
+    void addImages(files);
+  }
+
+  function dropImages(event: DragEvent<HTMLDivElement>) {
+    const files = Array.from(event.dataTransfer.files).filter((file) => file.type.startsWith("image/"));
+    if (!files.length) return;
+    event.preventDefault();
+    editorRef.current?.focus();
+    void addImages(files);
+  }
+
   return (
     <form className="editor-page" action={formAction}>
       <input type="hidden" name="articleId" value={state.articleId ?? initial.id ?? ""} />
@@ -67,9 +153,9 @@ export function ArticleEditor({
         <Link href="/admin" className="editor-back"><ArrowLeft size={19} /> Dashboard</Link>
         <span className="save-status">{pending ? "Saving…" : state.success || "Changes not saved"}</span>
         <div className="editor-actions">
-          <button type="submit" name="intent" value="draft" disabled={pending}><Save size={17} /> Save draft</button>
+          <button type="submit" name="intent" value="draft" disabled={pending || mediaUploads > 0}><Save size={17} /> Save draft</button>
           {state.slug && <Link className="editor-preview" href={`/article/${state.slug}`} target="_blank"><Eye size={17} /> Preview</Link>}
-          <button className="publish-button" type="submit" name="intent" value="publish" disabled={pending}><Send size={17} /> Publish</button>
+          <button className="publish-button" type="submit" name="intent" value="publish" disabled={pending || mediaUploads > 0}><Send size={17} /> Publish</button>
         </div>
       </header>
 
@@ -79,7 +165,7 @@ export function ArticleEditor({
           {state.error && <p className="form-message form-error" role="alert">{state.error}</p>}
           {state.success && <p className="form-message form-success" role="status">{state.success}</p>}
           <input className="title-input" name="title" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Enter an engaging headline..." aria-label="Article title" required />
-          <textarea className="excerpt-input" name="excerpt" defaultValue={initial.excerpt} placeholder="Write a short summary that gives readers a reason to continue..." aria-label="Article summary" required />
+          <textarea className="excerpt-input" name="excerpt" value={excerpt} onChange={(event) => setExcerpt(event.target.value)} placeholder="Write a short summary that gives readers a reason to continue..." aria-label="Article summary" required />
           <div className="format-toolbar" aria-label="Article formatting">
             <button type="button" onClick={() => format("bold")} aria-label="Bold"><Bold size={17} /></button>
             <button type="button" onClick={() => format("italic")} aria-label="Italic"><Italic size={17} /></button>
@@ -87,6 +173,9 @@ export function ArticleEditor({
             <button type="button" onClick={() => format("insertUnorderedList")} aria-label="Bullet list"><List size={17} /></button>
             <button type="button" onClick={() => format("insertOrderedList")} aria-label="Numbered list"><ListOrdered size={17} /></button>
             <button type="button" onClick={() => format("formatBlock", "blockquote")} aria-label="Quote"><Quote size={17} /></button>
+            <button type="button" onClick={() => imageInputRef.current?.click()} aria-label="Add image"><ImagePlus size={17} /></button>
+            <input ref={imageInputRef} className="visually-hidden" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif" multiple onChange={(event) => { void addImages(Array.from(event.target.files ?? [])); event.target.value = ""; }} />
+            {mediaUploads > 0 && <span className="media-upload-status"><LoaderCircle className="spinner" size={15} /> Uploading image…</span>}
           </div>
           <div
             ref={editorRef}
@@ -95,8 +184,12 @@ export function ArticleEditor({
             suppressContentEditableWarning
             data-placeholder="Start writing your story here..."
             onInput={(event) => setContentHtml(event.currentTarget.innerHTML)}
+            onPaste={pasteImages}
+            onDrop={dropImages}
+            onDragOver={(event) => { if (Array.from(event.dataTransfer.items).some((item) => item.type.startsWith("image/"))) event.preventDefault(); }}
             dangerouslySetInnerHTML={{ __html: initial.contentHtml ?? "" }}
           />
+          {mediaError && <p className="form-message form-error" role="alert">{mediaError}</p>}
           <div className="editor-tip"><strong>Secure publishing</strong><span>Article HTML is cleaned on the server before it is stored. Save as a draft until the story is ready, then publish it.</span></div>
         </section>
 

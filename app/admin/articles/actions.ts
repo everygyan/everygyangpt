@@ -127,6 +127,8 @@ export async function saveArticle(
   }
 
   revalidatePath("/admin");
+  revalidatePath("/");
+  revalidatePath("/search");
   revalidatePath(`/article/${slug}`);
   return {
     articleId,
@@ -134,4 +136,23 @@ export async function saveArticle(
     status: intent,
     success: intent === "published" ? "Article published successfully." : "Draft saved successfully.",
   };
+}
+
+export async function deleteArticle(articleId: string) {
+  const profile = await requireEditorialUser();
+  if (profile.role !== "admin") return { error: "Only an administrator can delete articles." };
+  const supabase = await createClient();
+  const { data: article, error: findError } = await supabase
+    .from("articles")
+    .select("slug")
+    .eq("id", articleId)
+    .single();
+  if (findError || !article) return { error: findError?.message || "The article was not found." };
+  const { error } = await supabase.from("articles").delete().eq("id", articleId);
+  if (error) return { error: error.message };
+  revalidatePath("/admin");
+  revalidatePath("/");
+  revalidatePath("/search");
+  revalidatePath(`/article/${article.slug}`);
+  return { success: true };
 }
