@@ -13,6 +13,9 @@ EveryGyan is a responsive digital magazine for news, travel, entertainment, heal
 - Supabase email/password registration, sign-in, password reset and persistent sessions
 - Role-protected admin overview with live article, comment and subscriber counts
 - Database-backed rich article editor with drafts, publishing, editing, categories, tags and pasted-image uploads
+- Anonymous reader comments with administrator hide, restore and delete controls
+- Database-driven Live ticker and a selectable homepage carousel capped at 25 articles
+- Dedicated publishing pages for articles, comments, subscribers and website menus
 - Initial Supabase schema, roles and Row Level Security policies
 - Generated EveryGyan logo in `public/everygyan-logo.png`
 
@@ -50,7 +53,7 @@ npm run build
 2. Copy `.env.example` to `.env.local` and set the project URL and publishable key.
 3. Install/login to the Supabase CLI without putting credentials in Git.
 4. Link this folder to the project.
-5. Review and apply all SQL files in `supabase/migrations` in filename order.
+5. Review and apply all SQL files in `supabase/migrations` in filename order. Existing projects must also apply `202608300001_anonymous_comments.sql` before anonymous comments can be posted.
 6. Configure `SUPABASE_SERVICE_ROLE_KEY` as a server-only secret. The first editorial image upload creates the public `article-images` bucket automatically.
 7. In Supabase Authentication settings, set the Site URL to the deployed Hostinger preview URL and add both `http://localhost:3000/**` and the Hostinger preview URL to Redirect URLs.
 8. Register Sandeep's account at `/signup`, confirm its email, then run this once in the Supabase SQL Editor:

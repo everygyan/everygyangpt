@@ -46,3 +46,10 @@ export async function requireEditorialUser() {
   }
   return profile;
 }
+
+export async function requireAdminUser() {
+  const profile = await getCurrentProfile();
+  if (!profile) redirect("/login?next=/admin");
+  if (profile.role !== "admin") redirect("/admin");
+  return profile;
+}

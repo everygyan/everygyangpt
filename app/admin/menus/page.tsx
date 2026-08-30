@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { BarChart3, Eye, FileText, ListTree, MessageSquare, Plus, Users } from "lucide-react";
+import { Plus } from "lucide-react";
 import { redirect } from "next/navigation";
-import { signOut } from "@/app/auth/actions";
+import { AdminPageHeader } from "@/components/admin-page-header";
+import { AdminSidebar } from "@/components/admin-sidebar";
 import { DeleteMenuItemButton } from "@/components/delete-menu-item-button";
 import { MenuItemForm, type MenuFormInitial } from "@/components/menu-item-form";
 import { requireEditorialUser } from "@/lib/auth";
@@ -39,23 +40,11 @@ export default async function MenusPage({ searchParams }: { searchParams: Promis
     sortOrder: editing.sort_order,
     isActive: editing.is_active,
   } : undefined;
-  const firstName = profile.display_name.split(" ")[0] || "Admin";
-
   return (
     <main className="admin-shell">
-      <aside className="admin-sidebar">
-        <Link className="admin-logo" href="/">Every<span>Gyan</span></Link>
-        <nav>
-          <Link href="/admin"><BarChart3 size={19} /> Overview</Link>
-          <Link href="/admin"><FileText size={19} /> Articles</Link>
-          <Link className="active" href="/admin/menus"><ListTree size={19} /> Menus</Link>
-          <Link href="/admin"><MessageSquare size={19} /> Comments</Link>
-          <Link href="/admin"><Users size={19} /> Subscribers</Link>
-        </nav>
-        <Link className="admin-view-site" href="/"><Eye size={17} /> View website</Link>
-      </aside>
+      <AdminSidebar active="menus" role={profile.role} />
       <section className="admin-main">
-        <header className="admin-topbar"><div><p>EveryGyan workspace · navigation</p><h1>Manage website menus</h1></div><div className="admin-account"><div className="author-avatar">{firstName[0]?.toUpperCase()}</div><form action={signOut}><button type="submit">Sign out</button></form></div></header>
+        <AdminPageHeader title="Manage website menus" context="navigation" displayName={profile.display_name} />
         <div className="admin-content menu-management">
           <div className="menu-management-heading"><div><p className="eyebrow">Primary navigation</p><h2>Menu items and submenus</h2><p>Connect each item to a section, category or custom page. Drag-free ordering keeps changes predictable.</p></div>{editing && <Link className="button menu-new-button" href="/admin/menus"><Plus size={17} /> Create new</Link>}</div>
           <div className="menu-management-grid">

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Bookmark, MessageCircle, Share2 } from "lucide-react";
+import { ArrowLeft, Bookmark, Share2 } from "lucide-react";
 import { notFound } from "next/navigation";
 import { Newsletter } from "@/components/newsletter";
+import { CommentsSection, type PublicComment } from "@/components/comments-section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
@@ -45,6 +46,31 @@ function relationDisplayName(value: { display_name?: string } | { display_name?:
   return Array.isArray(value) ? value[0]?.display_name : value?.display_name;
 }
 
+async function getComments(articleId: string): Promise<PublicComment[]> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("comments")
+      .select("id, body, guest_name, created_at, profiles(display_name)")
+      .eq("article_id", articleId)
+      .eq("is_hidden", false)
+      .order("created_at", { ascending: false })
+      .limit(100);
+    if (error) return [];
+    return (data ?? []).map((comment) => {
+      const profiles = comment.profiles as unknown as { display_name?: string } | { display_name?: string }[] | null;
+      return {
+        id: comment.id,
+        author: comment.guest_name || relationDisplayName(profiles) || "EveryGyan reader",
+        body: comment.body,
+        createdAt: comment.created_at,
+      };
+    });
+  } catch {
+    return [];
+  }
+}
+
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const article = await getArticle((await params).slug);
   return article ? { title: article.title, description: article.excerpt ?? undefined } : {};
@@ -53,6 +79,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const article = await getArticle((await params).slug);
   if (!article) notFound();
+  const comments = article.allow_comments ? await getComments(article.id) : [];
 
   const section = relationName(article.sections) || "Latest";
   const author = relationDisplayName(article.profiles) || "Sandeep";
@@ -81,7 +108,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <article className="article-content" dangerouslySetInnerHTML={{ __html: article.content_html || "" }} />
           <aside className="article-aside"><div className="aside-card"><p className="eyebrow">About the author</p><h3>{author}</h3><p>EveryGyan editor sharing clear, useful knowledge for curious readers.</p></div></aside>
         </div>
-        {article.allow_comments && <section className="comments shell"><div><MessageCircle size={24} /><h2>Join the conversation</h2><p>Sign in to share your perspective.</p></div><Link className="button button-primary" href="/login">Sign in to comment</Link></section>}
+        {article.allow_comments && <CommentsSection articleId={article.id} initialComments={comments} />}
         {!!tags.length && <div className="article-tags shell"><span>Topics</span>{tags.map((tag) => <span key={tag}>{tag}</span>)}</div>}
         <Newsletter />
       </main>

@@ -19,6 +19,7 @@ export type ArticleEditorData = {
   featuredImageUrl?: string;
   featuredImageAlt?: string;
   isFeatured?: boolean;
+  isBreaking?: boolean;
   allowComments?: boolean;
   seoTitle?: string;
   seoDescription?: string;
@@ -200,7 +201,8 @@ export function ArticleEditor({
           <label>Tags<input name="tags" defaultValue={initial.tags} placeholder="travel, technology, guide" /></label>
           <label>Featured image URL<input name="featuredImageUrl" type="url" defaultValue={initial.featuredImageUrl} placeholder="https://..." /></label>
           <label>Featured image description<input name="featuredImageAlt" defaultValue={initial.featuredImageAlt} placeholder="Describe the image" /></label>
-          <label className="toggle-label"><span><strong>Featured story</strong><small>Show prominently on the homepage</small></span><input name="isFeatured" type="checkbox" defaultChecked={initial.isFeatured} /></label>
+          <label className="toggle-label"><span><strong>Homepage carousel</strong><small>Include this story in the rotating homepage feature (maximum 25)</small></span><input name="isFeatured" type="checkbox" defaultChecked={initial.isFeatured} /></label>
+          <label className="toggle-label"><span><strong>Show in Live ticker</strong><small>Scroll this article topic and headline in the Live bar</small></span><input name="isBreaking" type="checkbox" defaultChecked={initial.isBreaking} /></label>
           <label className="toggle-label"><span><strong>Allow comments</strong><small>Readers can join the discussion</small></span><input name="allowComments" type="checkbox" defaultChecked={initial.allowComments ?? true} /></label>
           <details><summary>Search & social preview</summary><label>SEO title<input name="seoTitle" defaultValue={initial.seoTitle} placeholder={title || "Article title"} /></label><label>Meta description<textarea name="seoDescription" defaultValue={initial.seoDescription} placeholder="Description for search results" /></label></details>
         </aside>

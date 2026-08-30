@@ -51,7 +51,7 @@ export async function getPublishedArticles(): Promise<Article[]> {
     const supabase = createPublicSupabaseClient();
     const { data, error } = await supabase
       .from("articles")
-      .select("slug, title, excerpt, content_html, featured_image_url, featured_image_alt, is_featured, published_at, sections(name, slug), profiles(display_name), article_categories(is_primary, categories(name, slug))")
+      .select("slug, title, excerpt, content_html, featured_image_url, featured_image_alt, is_featured, is_breaking, published_at, sections(name, slug), profiles(display_name), article_categories(is_primary, categories(name, slug))")
       .eq("status", "published")
       .order("published_at", { ascending: false })
       .limit(50);
@@ -77,6 +77,7 @@ export async function getPublishedArticles(): Promise<Article[]> {
         publishedAt: new Date(row.published_at ?? Date.now()).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),
         readTime: `${readMinutes} min read`,
         featured: row.is_featured,
+        breaking: row.is_breaking,
         body: [],
       } satisfies Article;
     });

@@ -67,6 +67,15 @@ export async function saveArticle(
   let slug = text(formData, "slug") || previous.slug || "";
   if (!slug) slug = `${slugify(title) || "article"}-${crypto.randomUUID().slice(0, 8)}`;
 
+  const isFeatured = formData.get("isFeatured") === "on";
+  if (isFeatured) {
+    let featuredQuery = supabase.from("articles").select("id", { count: "exact", head: true }).eq("is_featured", true);
+    if (existingId) featuredQuery = featuredQuery.neq("id", existingId);
+    const { count, error } = await featuredQuery;
+    if (error) return { ...previous, error: `Could not check carousel capacity: ${error.message}` };
+    if ((count ?? 0) >= 25) return { ...previous, error: "The homepage carousel already has 25 articles. Remove one before adding another." };
+  }
+
   const articleValues = {
     author_id: profile.id,
     section_id: sectionId,
@@ -78,7 +87,8 @@ export async function saveArticle(
     featured_image_url: text(formData, "featuredImageUrl") || null,
     featured_image_alt: text(formData, "featuredImageAlt") || title,
     status: intent,
-    is_featured: formData.get("isFeatured") === "on",
+    is_featured: isFeatured,
+    is_breaking: formData.get("isBreaking") === "on",
     allow_comments: formData.get("allowComments") === "on",
     seo_title: text(formData, "seoTitle") || null,
     seo_description: text(formData, "seoDescription") || excerpt,
@@ -127,6 +137,7 @@ export async function saveArticle(
   }
 
   revalidatePath("/admin");
+  revalidatePath("/admin/articles");
   revalidatePath("/");
   revalidatePath("/search");
   revalidatePath(`/article/${slug}`);
@@ -151,6 +162,7 @@ export async function deleteArticle(articleId: string) {
   const { error } = await supabase.from("articles").delete().eq("id", articleId);
   if (error) return { error: error.message };
   revalidatePath("/admin");
+  revalidatePath("/admin/articles");
   revalidatePath("/");
   revalidatePath("/search");
   revalidatePath(`/article/${article.slug}`);

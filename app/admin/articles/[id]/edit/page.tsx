@@ -8,7 +8,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
   const supabase = await createClient();
   const [{ sections, categories }, articleResult, categoryResult, tagsResult] = await Promise.all([
     getEditorOptions(),
-    supabase.from("articles").select("id, title, slug, excerpt, content_html, section_id, featured_image_url, featured_image_alt, is_featured, allow_comments, seo_title, seo_description").eq("id", id).single(),
+    supabase.from("articles").select("id, title, slug, excerpt, content_html, section_id, featured_image_url, featured_image_alt, is_featured, is_breaking, allow_comments, seo_title, seo_description").eq("id", id).single(),
     supabase.from("article_categories").select("category_id").eq("article_id", id).eq("is_primary", true).maybeSingle(),
     supabase.from("article_tags").select("tags(name)").eq("article_id", id),
   ]);
@@ -33,6 +33,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
     featuredImageUrl: article.featured_image_url ?? "",
     featuredImageAlt: article.featured_image_alt ?? "",
     isFeatured: article.is_featured,
+    isBreaking: article.is_breaking,
     allowComments: article.allow_comments,
     seoTitle: article.seo_title ?? "",
     seoDescription: article.seo_description ?? "",
