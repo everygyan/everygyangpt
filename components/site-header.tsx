@@ -6,6 +6,7 @@ import { ChevronDown, LayoutDashboard, LogOut, Menu, Search, UserRound, X } from
 import { useEffect, useMemo, useState } from "react";
 import { sections } from "@/data/articles";
 import { ThemeToggle } from "@/components/theme-toggle";
+import type { NavigationItem } from "@/lib/navigation-types";
 import { createClient } from "@/lib/supabase/client";
 
 type HeaderProfile = {
@@ -18,6 +19,11 @@ export function SiteHeader() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [profile, setProfile] = useState<HeaderProfile | null>(null);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [openNavigationId, setOpenNavigationId] = useState<string | null>(null);
+  const [navigation, setNavigation] = useState<NavigationItem[]>([
+    { id: "latest", label: "Latest", href: "/#latest", children: [] },
+    ...sections.map((section) => ({ id: section.name, label: section.name, href: `/topic/${section.name.toLowerCase()}`, children: [] })),
+  ]);
   const supabase = useMemo(() => {
     try {
       return createClient();
@@ -46,6 +52,22 @@ export function SiteHeader() {
     void loadProfile();
     return () => { active = false; };
   }, [supabase]);
+
+  useEffect(() => {
+    let active = true;
+    void fetch("/api/navigation", { cache: "no-store" })
+      .then((response) => response.ok ? response.json() : Promise.reject())
+      .then((result: { items?: NavigationItem[] }) => {
+        if (active && result.items?.length) setNavigation(result.items);
+      })
+      .catch(() => undefined);
+    return () => { active = false; };
+  }, []);
+
+  function closeNavigation() {
+    setMenuOpen(false);
+    setOpenNavigationId(null);
+  }
 
   async function signOut() {
     if (supabase) await supabase.auth.signOut();
@@ -84,12 +106,12 @@ export function SiteHeader() {
           </Link>
 
           <nav className={`primary-nav ${menuOpen ? "is-open" : ""}`} aria-label="Primary navigation">
-            <Link href="/#latest" onClick={() => setMenuOpen(false)}>Latest</Link>
-            {sections.map((section) => (
-              <Link key={section.name} href={`/#${section.name.toLowerCase()}`} onClick={() => setMenuOpen(false)}>
-                {section.name}
-                <ChevronDown size={14} aria-hidden="true" />
-              </Link>
+            {navigation.map((item) => (
+              <div className={`navigation-item ${openNavigationId === item.id ? "is-open" : ""}`} key={item.id}>
+                <Link href={item.href} onClick={closeNavigation}>{item.label}</Link>
+                {!!item.children.length && <button type="button" aria-label={`Show ${item.label} submenu`} aria-expanded={openNavigationId === item.id} onClick={() => setOpenNavigationId((current) => current === item.id ? null : item.id)}><ChevronDown size={14} /></button>}
+                {!!item.children.length && <div className="navigation-submenu">{item.children.map((child) => <Link key={child.id} href={child.href} onClick={closeNavigation}>{child.label}</Link>)}</div>}
+              </div>
             ))}
           </nav>
 

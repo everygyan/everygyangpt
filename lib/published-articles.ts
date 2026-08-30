@@ -21,6 +21,15 @@ function relationName(value: unknown): string | undefined {
   return undefined;
 }
 
+function relationSlug(value: unknown): string | undefined {
+  if (Array.isArray(value)) return relationSlug(value[0]);
+  if (value && typeof value === "object" && "slug" in value) {
+    const slug = (value as { slug?: unknown }).slug;
+    return typeof slug === "string" ? slug : undefined;
+  }
+  return undefined;
+}
+
 function displayName(value: unknown): string | undefined {
   if (Array.isArray(value)) return displayName(value[0]);
   if (value && typeof value === "object" && "display_name" in value) {
@@ -42,7 +51,7 @@ export async function getPublishedArticles(): Promise<Article[]> {
     const supabase = createPublicSupabaseClient();
     const { data, error } = await supabase
       .from("articles")
-      .select("slug, title, excerpt, content_html, featured_image_url, featured_image_alt, is_featured, published_at, sections(name), profiles(display_name), article_categories(is_primary, categories(name))")
+      .select("slug, title, excerpt, content_html, featured_image_url, featured_image_alt, is_featured, published_at, sections(name, slug), profiles(display_name), article_categories(is_primary, categories(name, slug))")
       .eq("status", "published")
       .order("published_at", { ascending: false })
       .limit(50);
@@ -60,6 +69,8 @@ export async function getPublishedArticles(): Promise<Article[]> {
         excerpt: row.excerpt ?? "",
         section,
         category: relationName(primaryCategory?.categories) ?? section,
+        sectionSlug: relationSlug(row.sections),
+        categorySlug: relationSlug(primaryCategory?.categories),
         image: row.featured_image_url || fallbackImages[section],
         imageAlt: row.featured_image_alt || row.title,
         author: displayName(row.profiles) ?? "Sandeep",

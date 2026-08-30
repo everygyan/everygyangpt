@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BarChart3, Eye, FileText, MessageSquare, Plus, Users } from "lucide-react";
+import { BarChart3, Eye, FileText, ListTree, MessageSquare, Plus, Users } from "lucide-react";
 import { signOut } from "@/app/auth/actions";
 import { DeleteArticleButton } from "@/components/delete-article-button";
 import { requireEditorialUser } from "@/lib/auth";
@@ -25,6 +25,7 @@ export default async function AdminPage() {
         <nav>
           <a className="active" href="#"><BarChart3 size={19} /> Overview</a>
           <Link href="/admin"><FileText size={19} /> Articles</Link>
+          {profile.role === "admin" && <Link href="/admin/menus"><ListTree size={19} /> Menus</Link>}
           <Link href="/admin"><MessageSquare size={19} /> Comments</Link>
           <Link href="/admin"><Users size={19} /> Subscribers</Link>
         </nav>

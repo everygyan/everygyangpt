@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint app components data lib proxy.ts next.config.ts",
-    "seed:samples": "node --env-file=.env.local scripts/seed-sample-articles.mjs"
+    "seed:samples": "node --env-file=.env.local scripts/seed-sample-articles.mjs",
+    "seed:navigation": "node --env-file=.env.local scripts/seed-navigation.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.5",

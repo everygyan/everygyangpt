@@ -65,6 +65,8 @@ The service-role key must be configured only as a server/hosting secret. Never p
 
 The former hard-coded demonstration stories are now imported into Supabase and can be edited or deleted from the admin dashboard. For a new database, run `npm run seed:samples` once after promoting an admin account. The command is idempotent and does not overwrite existing stories.
 
+The primary website navigation is stored in the existing `menus` and `menu_items` tables. Run `npm run seed:navigation` once for a new database to create the default section and category menu. Administrators can then create, edit, hide, reorder, nest or delete items at `/admin/menus`.
+
 ## Newsletter setup
 
 1. Verify `mail.everygyan.com` as a sending domain in Resend.

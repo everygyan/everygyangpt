@@ -6,6 +6,8 @@ export type Article = {
   excerpt: string;
   section: Section;
   category: string;
+  sectionSlug?: string;
+  categorySlug?: string;
   image: string;
   imageAlt: string;
   author: string;
