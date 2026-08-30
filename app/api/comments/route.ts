@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     if (error || !comment) throw error || new Error("The comment could not be saved.");
     return Response.json({ comment }, { status: 201 });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "The comment could not be saved.";
-    return Response.json({ error: message }, { status: 500 });
+    console.error("Comment submission failed", error);
+    return Response.json({ error: "Comments are temporarily unavailable. Please try again later." }, { status: 500 });
   }
 }
