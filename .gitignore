@@ -11,6 +11,7 @@
 # environment and secrets
 .env*
 !.env.example
+!**/.env*.example
 
 # local tooling
 .DS_Store
@@ -22,3 +23,4 @@ yarn-error.log*
 *.tsbuildinfo
 /tmp/
 /output/
+
