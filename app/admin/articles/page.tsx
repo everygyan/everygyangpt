@@ -69,7 +69,7 @@ export default async function ArticlesPage({ searchParams }: { searchParams: Pro
     <main className="admin-shell">
       <AdminSidebar active="articles" role={profile.role} />
       <section className="admin-main">
-        <AdminPageHeader title="Articles" context="publishing" displayName={profile.display_name} />
+        <AdminPageHeader title="Articles" context="publishing" displayName={profile.display_name} avatarUrl={profile.avatar_url} role={profile.role} />
         <div className="admin-content">
           <div className="admin-page-heading">
             <div><p className="eyebrow">Publishing library</p><h2>Manage every story</h2><p>Browse stories by the same menu and submenu structure readers use on the website.</p></div>
@@ -118,3 +118,4 @@ export default async function ArticlesPage({ searchParams }: { searchParams: Pro
     </main>
   );
 }
+

@@ -44,7 +44,7 @@ export default async function MenusPage({ searchParams }: { searchParams: Promis
     <main className="admin-shell">
       <AdminSidebar active="menus" role={profile.role} />
       <section className="admin-main">
-        <AdminPageHeader title="Manage website menus" context="navigation" displayName={profile.display_name} />
+        <AdminPageHeader title="Manage website menus" context="navigation" displayName={profile.display_name} avatarUrl={profile.avatar_url} role={profile.role} />
         <div className="admin-content menu-management">
           <div className="menu-management-heading"><div><p className="eyebrow">Primary navigation</p><h2>Menu items and submenus</h2><p>Connect each item to a section, category or custom page. Drag-free ordering keeps changes predictable.</p></div>{editing && <Link className="button menu-new-button" href="/admin/menus"><Plus size={17} /> Create new</Link>}</div>
           <div className="menu-management-grid">
@@ -68,3 +68,4 @@ export default async function MenusPage({ searchParams }: { searchParams: Promis
 function MenuRow({ item, child = false, hasChildren = false }: { item: MenuRow; child?: boolean; hasChildren?: boolean }) {
   return <div className={`menu-list-row ${child ? "is-child" : ""}`}><div><strong>{item.label}</strong><span>{child ? "Submenu" : "Main item"} · order {item.sort_order}</span></div><span className={item.is_active ? "menu-visible" : "menu-hidden"}>{item.is_active ? "Visible" : "Hidden"}</span><div><Link href={`/admin/menus?edit=${item.id}`}>Edit</Link><DeleteMenuItemButton id={item.id} label={item.label} hasChildren={hasChildren} /></div></div>;
 }
+

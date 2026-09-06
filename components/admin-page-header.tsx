@@ -1,13 +1,13 @@
 
-export function AdminPageHeader({ title, context, displayName }: { title: string; context: string; displayName: string }) {
-  const firstName = displayName.split(" ")[0] || "Admin";
+import { AccountMenu } from "@/components/account-menu";
+import type { AppRole } from "@/lib/auth";
+
+export function AdminPageHeader({ title, context, displayName, avatarUrl, role }: { title: string; context: string; displayName: string; avatarUrl: string | null; role: AppRole }) {
   return (
     <header className="admin-topbar">
       <div><p>EveryGyan workspace · {context}</p><h1>{title}</h1></div>
-      <div className="admin-account">
-        <div className="author-avatar">{firstName[0]?.toUpperCase()}</div>
-        <form action="/auth/signout" method="post"><button type="submit">Sign out</button></form>
-      </div>
+      <AccountMenu displayName={displayName} avatarUrl={avatarUrl} role={role} />
     </header>
   );
 }
+

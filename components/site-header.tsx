@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, LayoutDashboard, LogOut, Menu, Search, UserRound, X } from "lucide-react";
+import { ChevronDown, Menu, Search, UserRound, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { sections } from "@/data/articles";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { ProfileAvatar } from "@/components/profile-avatar";
+import { AccountMenu } from "@/components/account-menu";
 import type { NavigationItem } from "@/lib/navigation-types";
 import { createClient } from "@/lib/supabase/client";
 
@@ -20,7 +20,6 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [profile, setProfile] = useState<HeaderProfile | null>(null);
-  const [profileOpen, setProfileOpen] = useState(false);
   const [openNavigationId, setOpenNavigationId] = useState<string | null>(null);
   const [navigation, setNavigation] = useState<NavigationItem[]>([
     { id: "latest", label: "Latest", href: "/#latest", children: [] },
@@ -71,8 +70,6 @@ export function SiteHeader() {
     setMenuOpen(false);
     setOpenNavigationId(null);
   }
-
-  const canPublish = profile?.role === "admin" || profile?.role === "editor";
 
   return (
     <>
@@ -130,29 +127,7 @@ export function SiteHeader() {
               <Search size={20} />
             </button>
             {profile ? (
-              <div className="profile-menu" onMouseLeave={() => setProfileOpen(false)}>
-                <button
-                  className="profile-trigger"
-                  type="button"
-                  aria-label={`Open account menu for ${profile.displayName}`}
-                  aria-expanded={profileOpen}
-                  onClick={() => setProfileOpen((value) => !value)}
-                  onMouseEnter={() => setProfileOpen(true)}
-                >
-                  <ProfileAvatar name={profile.displayName} url={profile.avatarUrl} />
-                  <span className="profile-name">{profile.displayName.split(" ")[0]}</span>
-                  <ChevronDown size={14} />
-                </button>
-                <div className={`profile-dropdown ${profileOpen ? "is-open" : ""}`}>
-                  <div className="profile-summary">
-                    <ProfileAvatar name={profile.displayName} url={profile.avatarUrl} className="profile-avatar-large" />
-                    <div><strong>{profile.displayName}</strong><small>{profile.role}</small></div>
-                  </div>
-                  <Link href="/account" onClick={() => setProfileOpen(false)}><UserRound size={17} /> My profile</Link>
-                  {canPublish && <Link href="/admin" onClick={() => setProfileOpen(false)}><LayoutDashboard size={17} /> Publishing dashboard</Link>}
-                  <form action="/auth/signout" method="post"><button type="submit"><LogOut size={17} /> Sign out</button></form>
-                </div>
-              </div>
+              <AccountMenu displayName={profile.displayName} avatarUrl={profile.avatarUrl} role={profile.role} />
             ) : (
               <Link className="sign-in" href="/login">
                 <UserRound size={18} />
@@ -175,3 +150,4 @@ export function SiteHeader() {
     </>
   );
 }
+

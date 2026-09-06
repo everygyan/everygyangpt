@@ -33,7 +33,7 @@ export default async function CommentsPage() {
     <main className="admin-shell">
       <AdminSidebar active="comments" role={profile.role} />
       <section className="admin-main">
-        <AdminPageHeader title="Comments" context="community moderation" displayName={profile.display_name} />
+        <AdminPageHeader title="Comments" context="community moderation" displayName={profile.display_name} avatarUrl={profile.avatar_url} role={profile.role} />
         <div className="admin-content">
           <div className="admin-page-heading"><div><p className="eyebrow">Community</p><h2>Moderate reader comments</h2><p>Hide a comment from the public site, restore it later, or delete it permanently.</p></div></div>
           <section className="admin-table-card admin-library-card">
@@ -58,3 +58,4 @@ export default async function CommentsPage() {
     </main>
   );
 }
+

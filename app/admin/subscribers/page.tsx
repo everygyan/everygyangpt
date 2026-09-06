@@ -16,7 +16,7 @@ export default async function SubscribersPage() {
     <main className="admin-shell">
       <AdminSidebar active="subscribers" role={profile.role} />
       <section className="admin-main">
-        <AdminPageHeader title="Newsletter subscribers" context="audience" displayName={profile.display_name} />
+        <AdminPageHeader title="Newsletter subscribers" context="audience" displayName={profile.display_name} avatarUrl={profile.avatar_url} role={profile.role} />
         <div className="admin-content">
           <div className="admin-page-heading"><div><p className="eyebrow">Newsletter</p><h2>Your subscriber audience</h2><p>Review active, pending and unsubscribed readers in one place.</p></div></div>
           <section className="admin-table-card admin-library-card">
@@ -39,3 +39,4 @@ export default async function SubscribersPage() {
     </main>
   );
 }
+

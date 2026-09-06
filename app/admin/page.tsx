@@ -23,7 +23,7 @@ export default async function AdminPage() {
     <main className="admin-shell">
       <AdminSidebar active="overview" role={profile.role} />
       <section className="admin-main">
-        <AdminPageHeader title={`Welcome, ${firstName}.`} context={profile.role} displayName={profile.display_name} />
+        <AdminPageHeader title={`Welcome, ${firstName}.`} context={profile.role} displayName={profile.display_name} avatarUrl={profile.avatar_url} role={profile.role} />
         <div className="admin-content">
           <div className="admin-welcome">
             <div><p className="eyebrow">Your newsroom</p><h2>What will readers discover today?</h2><p>Create a clear, engaging story with the new EveryGyan editor.</p></div>
@@ -57,3 +57,4 @@ export default async function AdminPage() {
     </main>
   );
 }
+
