@@ -1,3 +1,5 @@
+import { germanA1Lessons } from "./german-a1";
+
 export type GermanExercise = {
   prompt: string;
   choices: string[];
@@ -18,6 +20,12 @@ export type GermanLesson = {
   xp: number;
   phrases: { german: string; english: string }[];
   exercise: GermanExercise;
+  exercises?: GermanExercise[];
+  notes?: string[];
+  dialogue?: { speaker: string; german: string; english: string }[];
+  task?: string;
+  model?: string;
+  pdfUrl?: string;
 };
 
 export type GermanLevelCode = "A1" | "A2" | "B1" | "B2" | "C1";
@@ -156,6 +164,6 @@ export const germanResources: GermanResource[] = [
 
 export const fallbackGermanCatalog: GermanCourseCatalog = {
   levels: germanLevels,
-  lessons: germanLessons,
+  lessons: [...germanA1Lessons, ...germanLessons.filter((lesson) => lesson.level !== "A1")],
   resources: germanResources,
 };

@@ -1,0 +1,502 @@
+[
+  {
+    "slug":"a1-greetings","title":"Hello, Germany!","goal":"Choose greetings for the time of day and the person you meet.",
+    "notes":["Start with Hallo for a relaxed greeting. Guten Morgen fits the morning, Guten Tag the daytime and Guten Abend the evening. Gute Nacht is normally a farewell before sleep, not a greeting when arriving at dinner. Say each expression aloud and connect it with a real moment in your day.","Use Wie geht es dir? with someone you know well. Wie geht es Ihnen? is the polite version for an unfamiliar adult. Answer with Gut, danke before returning the question. Tschüss is informal; Auf Wiedersehen is a useful polite goodbye. German nouns such as Morgen and Tag begin with capital letters."],
+    "phrases":[["Guten Morgen!","Good morning!"],["Guten Abend!","Good evening!"],["Wie geht es dir?","How are you? (informal)"],["Gut, danke.","Good, thank you."],["Auf Wiedersehen!","Goodbye! (polite)"]],
+    "dialogue":[["Mia","Guten Morgen, Ben! Wie geht es dir?","Good morning, Ben! How are you?"],["Ben","Gut, danke. Und dir?","Good, thank you. And you?"],["Mia","Auch gut. Bis später!","Good too. See you later!"]],
+    "task":"Record three greetings: to a friend in the morning, a shop assistant in the afternoon and a neighbour in the evening. Add a suitable goodbye to each.",
+    "model":"Guten Morgen, Mia! Guten Tag! Guten Abend! Auf Wiedersehen!",
+    "quiz":["You arrive at a restaurant at 7 p.m. What do you say?",["Gute Nacht!","Guten Abend!","Guten Morgen!"],1,"Guten Abend greets someone in the evening. Gute Nacht usually ends an interaction before sleep."],
+    "readingQuiz":["How does Ben feel?",["Good","Tired","Hungry"],0,"Ben says Gut, danke: good, thank you."]
+  },
+  {
+    "slug":"a1-introductions","title":"Introduce yourself","goal":"Give your name, home country and a friendly response.",
+    "notes":["Ich means I. Use Ich heiße followed by your name, or Ich bin followed by your name. To ask a friend their name, say Wie heißt du? Listen for the different endings in heiße and heißt: the verb changes with the person doing the action.","Ich komme aus describes your origin. Most country names have no article: aus Indien, aus Deutschland. Some do: aus der Schweiz. Learn those as complete phrases for now. After meeting someone, Freut mich! is a natural short response. Build an introduction one sentence at a time instead of translating a long English sentence."],
+    "phrases":[["Ich heiße Sandeep.","My name is Sandeep."],["Wie heißt du?","What is your name?"],["Ich komme aus Indien.","I come from India."],["Ich bin Mia.","I am Mia."],["Freut mich!","Nice to meet you!"]],
+    "dialogue":[["Mia","Hallo! Ich heiße Mia. Wie heißt du?","Hello! My name is Mia. What is your name?"],["Sandeep","Ich heiße Sandeep. Ich komme aus Indien.","My name is Sandeep. I come from India."],["Mia","Freut mich! Ich komme aus Deutschland.","Nice to meet you! I come from Germany."]],
+    "task":"Write a three-sentence introduction using your own name and country. Ask an imaginary partner their name and answer as that person.",
+    "model":"Hallo! Ich heiße Alex. Ich komme aus Indien. Wie heißt du?",
+    "quiz":["Complete: Ich ___ aus Indien.",["heißt","komme","kommen"],1,"Ich takes komme. Kommen aus expresses origin; heißen introduces a name."],
+    "readingQuiz":["Where does Mia come from?",["India","Switzerland","Germany"],2,"Mia says Ich komme aus Deutschland."]
+  },
+  {
+    "slug":"a1-alphabet","title":"Spell it out","goal":"Spell names and recognise German letters and special characters.",
+    "notes":["German uses the letters A to Z plus ä, ö, ü and ß. The names of letters differ from English: J is jot, W is weh and Z is tsett in approximate English spelling. These hints are only a starting point; use the listening buttons and practise saying a name slowly, one letter at a time.","Buchstabieren means to spell. Ask Wie schreibt man das? when you need the written form. ß is called Eszett or scharfes S; it is not the letter B. An umlaut can change meaning: schon and schön are different words. Keep the dots when copying names, and check the spelling back to the other person."],
+    "phrases":[["Wie schreibt man das?","How do you write that?"],["Bitte buchstabieren Sie.","Please spell it."],["Mein Name ist Müller.","My name is Müller."],["Mit ü.","With ü."],["Noch einmal, bitte.","Once again, please."]],
+    "dialogue":[["Receptionist","Wie ist Ihr Name?","What is your name?"],["Guest","Müller. Mit ü.","Müller. With ü."],["Receptionist","Bitte buchstabieren Sie.","Please spell it."]],
+    "task":"Spell your first name and surname aloud. Then write Müller, Straße and schön, marking the letters that are not in the English alphabet.",
+    "model":"Müller: M - ü - l - l - e - r. Straße contains ß. Schön contains ö.",
+    "quiz":["Which character is called Eszett?",["B","ü","ß"],2,"ß is Eszett; it represents an s sound and is not a capital B."],
+    "readingQuiz":["Which special letter is in the guest's name?",["ä","ü","ö"],1,"The guest explicitly says Mit ü."]
+  },
+  {
+    "slug":"a1-sounds","title":"Hear the difference","goal":"Recognise common sound patterns and practise clear pronunciation.",
+    "notes":["Learn sounds in words: ei in mein sounds roughly like English eye, while ie in sie is a long ee sound. Eu in neu is roughly oy. Read mein and sie slowly, then in a sentence. The order of the letters matters: changing ei to ie can create a different word.","Sch in Schule is like English sh. At the start of a stressed syllable, sp and st often begin with a sh-like sound, as in sprechen and Straße. German w sounds like English v in Wasser. Pronunciation varies by region, so aim for an understandable standard pattern and listen more than once."],
+    "phrases":[["mein Name","my name"],["sie lernen","they learn"],["die Schule","the school"],["das Wasser","the water"],["Deutsch sprechen","to speak German"]],
+    "dialogue":[["Teacher","Sprechen Sie Deutsch?","Do you speak German?"],["Learner","Ein bisschen. Bitte langsam.","A little. Slowly, please."],["Teacher","Sehr gut! Noch einmal: Schule.","Very good! Once again: school."]],
+    "task":"Make two columns headed ei and ie. Add mein, nein, sie and sieben. Read each column aloud, then practise Schule and Wasser three times.",
+    "model":"ei: mein, nein. ie: sie, sieben. Ich spreche ein bisschen Deutsch.",
+    "quiz":["Which spelling commonly represents a long ee sound?",["ie","ei","eu"],0,"Ie as in sie usually has a long ee sound. Ei as in mein is different."],
+    "readingQuiz":["What does the learner ask the teacher to do?",["Write a letter","Speak slowly","Leave"],1,"Bitte langsam asks for a slower pace."]
+  },
+  {
+    "slug":"a1-first-conversation","title":"Your first conversation","goal":"Combine greetings, introductions and requests for help.",
+    "notes":["A successful first conversation can be very short: greet, give your name, say your country and ask one question. Use du for a familiar person and Sie for a polite interaction; avoid switching randomly between them. Und du? or Und Sie? returns a question without repeating the full sentence.","When you do not understand, say Ich verstehe nicht or ask Noch einmal, bitte. These are useful communication tools, not signs of failure. Add Bitte langsam when someone speaks quickly. In the dialogue, notice that the learner uses a request for repetition and then continues the conversation."],
+    "phrases":[["Ich lerne Deutsch.","I am learning German."],["Ich verstehe nicht.","I do not understand."],["Bitte langsam.","Slowly, please."],["Und du?","And you? (informal)"],["Vielen Dank!","Thank you very much!"]],
+    "dialogue":[["Ben","Hallo, ich bin Ben. Wie heißt du?","Hello, I am Ben. What is your name?"],["Alex","Noch einmal, bitte. Ich lerne Deutsch.","Once again, please. I am learning German."],["Ben","Wie heißt du?","What is your name?"],["Alex","Ich heiße Alex. Freut mich!","My name is Alex. Nice to meet you!"]],
+    "task":"Role-play meeting a classmate. Include a greeting, your name, your country, one question and one request for repetition. Perform both roles.",
+    "model":"Hallo! Ich heiße Alex. Ich komme aus Indien. Und du? Noch einmal, bitte. Vielen Dank!",
+    "quiz":["Which phrase politely asks someone to repeat?",["Auf Wiedersehen!","Noch einmal, bitte.","Ich heiße Ben."],1,"Noch einmal means once again; bitte makes it a polite request."],
+    "readingQuiz":["Why does Alex ask for repetition?",["Alex is learning German","Alex is leaving","Alex wants coffee"],0,"Alex explains Ich lerne Deutsch immediately after asking for repetition."]
+  },
+  {
+    "slug":"a1-numbers","title":"Numbers from zero to twenty","goal":"Use small numbers for ages, quantities and contact details.",
+    "notes":["Learn null, eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun and zehn first. Eleven and twelve are elf and zwölf. From thirteen, many numbers combine a small number with zehn: dreizehn, vierzehn and fünfzehn. Sixteen and seventeen shorten to sechzehn and siebzehn.","Use Wie viele? for a count of things and Wie alt? for age. In German, age uses sein: Ich bin zwanzig Jahre alt, literally I am twenty years old. When giving a telephone number, speaking one digit at a time is clear and practical. Say zero as null, not the letter O."],
+    "phrases":[["null","zero"],["zwölf","twelve"],["sechzehn","sixteen"],["zwanzig","twenty"],["Wie alt bist du?","How old are you?"]],
+    "dialogue":[["Mia","Wie alt bist du?","How old are you?"],["Ben","Ich bin zwanzig Jahre alt. Und du?","I am twenty years old. And you?"],["Mia","Ich bin neunzehn.","I am nineteen."]],
+    "task":"Count from zero to twenty. Write five imaginary telephone digits and read them aloud individually. Give the ages of two fictional people.",
+    "model":"Null, fünf, acht, zwei, neun. Ben ist zwanzig Jahre alt. Mia ist neunzehn.",
+    "quiz":["Which spelling means sixteen?",["sechszehn","sechzehn","sechzig"],1,"Sechzehn drops the s from sechs. Sechzig means sixty."],
+    "readingQuiz":["How old is Mia?",["Twenty","Twelve","Nineteen"],2,"Mia says Ich bin neunzehn."]
+  },
+  {
+    "slug":"a1-bigger-numbers","title":"Prices and bigger numbers","goal":"Read numbers to one hundred and understand simple prices.",
+    "notes":["German numbers from twenty-one put the units first: einundzwanzig means one-and-twenty. The linking und stays inside the word. Use ein, not eins, in einundzwanzig. The tens include dreißig, vierzig, fünfzig, sechzig, siebzig, achtzig and neunzig; one hundred is hundert.","German prices often use a decimal comma: 3,50 €. In everyday speech, drei Euro fünfzig means three euros fifty. Ask Wie viel kostet das? for the price of one thing. For practice, break a written number into its units and tens before reading it aloud. Do not reverse the written digits."],
+    "phrases":[["einundzwanzig","twenty-one"],["fünfunddreißig","thirty-five"],["hundert","one hundred"],["drei Euro fünfzig","three euros fifty"],["Wie viel kostet das?","How much does that cost?"]],
+    "dialogue":[["Customer","Wie viel kostet das Buch?","How much does the book cost?"],["Seller","Es kostet zwölf Euro.","It costs twelve euros."],["Customer","Und die Tasche?","And the bag?"],["Seller","Fünfunddreißig Euro.","Thirty-five euros."]],
+    "task":"Write 21, 35, 48 and 72 in German. Create price labels for a book and a bag, then ask and answer the price question.",
+    "model":"einundzwanzig; fünfunddreißig; achtundvierzig; zweiundsiebzig. Das Buch kostet zwölf Euro.",
+    "quiz":["What number is zweiundvierzig?",["24","42","22"],1,"The units zwei come before the tens vierzig in speech: 42."],
+    "readingQuiz":["How much is the bag?",["12 euros","35 euros","50 euros"],1,"The seller answers Fünfunddreißig Euro for the bag."]
+  },
+  {
+    "slug":"a1-countries","title":"Countries and languages","goal":"Say where you live, where you come from and which languages you speak.",
+    "notes":["Separate origin from residence: Ich komme aus Indien describes where you come from; Ich wohne in Berlin describes where you live. A person can use both sentences together. Most cities and countries follow in or aus without an article, but learn exceptions such as in der Schweiz as whole expressions.","Language names include Deutsch, Englisch, Hindi and Spanisch. Use Ich spreche with a language and ein bisschen to describe a little knowledge. Sprechen changes its vowel with du and er/sie: du sprichst, sie spricht. At this stage, memorise the forms you need for introductions and practise them in context."],
+    "phrases":[["Ich wohne in Berlin.","I live in Berlin."],["Ich spreche Englisch.","I speak English."],["ein bisschen Deutsch","a little German"],["Wo wohnst du?","Where do you live?"],["Woher kommst du?","Where do you come from?"]],
+    "dialogue":[["Mia","Woher kommst du, Alex?","Where do you come from, Alex?"],["Alex","Aus Indien. Jetzt wohne ich in Berlin.","From India. Now I live in Berlin."],["Mia","Sprichst du Deutsch?","Do you speak German?"],["Alex","Ein bisschen. Ich spreche auch Englisch.","A little. I also speak English."]],
+    "task":"Create a profile with three lines: origin, current city and languages. Ask an imaginary partner Woher kommst du? and Wo wohnst du?",
+    "model":"Ich komme aus Indien. Ich wohne in Hamburg. Ich spreche Hindi, Englisch und ein bisschen Deutsch.",
+    "quiz":["Which question asks about origin?",["Wo wohnst du?","Woher kommst du?","Wie heißt du?"],1,"Woher asks where someone comes from; wo asks about location."],
+    "readingQuiz":["Where does Alex live now?",["Berlin","Hamburg","Munich"],0,"Jetzt wohne ich in Berlin gives Alex's current city."]
+  },
+  {
+    "slug":"a1-sein-haben","title":"Two essential verbs: sein and haben","goal":"Use basic forms of to be and to have.",
+    "notes":["Sein is irregular: ich bin, du bist, er/sie/es ist, wir sind, ihr seid, sie/Sie sind. Use it for identity, age and condition: Ich bin Student; sie ist müde. German usually omits an article before a profession after sein: Ich bin Lehrer, not normally Ich bin ein Lehrer in a simple introduction.","Haben means to have: ich habe, du hast, er/sie/es hat, wir haben, ihr habt, sie/Sie haben. Use it for possessions and fixed expressions such as Hunger haben. English I am hungry becomes Ich habe Hunger. Compare Ich bin müde with Ich habe Hunger so you remember which verb belongs in each expression."],
+    "phrases":[["Ich bin müde.","I am tired."],["Du bist nett.","You are nice."],["Wir sind hier.","We are here."],["Ich habe Hunger.","I am hungry."],["Sie hat Zeit.","She has time."]],
+    "dialogue":[["Ben","Bist du müde?","Are you tired?"],["Mia","Ja, aber ich habe auch Hunger.","Yes, but I am also hungry."],["Ben","Wir haben Zeit. Gehen wir ins Café?","We have time. Shall we go to the café?"]],
+    "task":"Write three sentences with sein and three with haben. Include one about age, one about tiredness and one about hunger.",
+    "model":"Ich bin zwanzig. Du bist nett. Wir sind hier. Ich habe Hunger. Sie hat Zeit. Wir haben ein Buch.",
+    "quiz":["Complete: Du ___ nett.",["bin","bist","sind"],1,"The form of sein with du is bist."],
+    "readingQuiz":["What two things does Mia describe?",["Being tired and hungry","Being late and cold","Being happy and rich"],0,"Mia answers yes to tiredness and adds Ich habe auch Hunger."]
+  },
+  {
+    "slug":"a1-profile","title":"Mission: your German profile","goal":"Fill in a simple form and introduce a fictional person.",
+    "notes":["Forms often use Vorname for first name, Nachname for surname, Wohnort for place of residence and Alter for age. Read the label before answering: a country does not belong in the Wohnort box if the form asks for a city. Use invented details when practising instead of sharing personal contact information.","Turn form entries into complete sentences with the patterns you already know: Sie heißt Mia. Sie wohnt in Köln. Sie spricht Deutsch. When changing ich to sie, change the verb as well. This review brings together names, numbers, countries and sein; accuracy with short sentences matters more than length."],
+    "phrases":[["der Vorname","the first name"],["der Nachname","the surname"],["der Wohnort","the place of residence"],["das Alter","the age"],["Sie wohnt in Köln.","She lives in Cologne."]],
+    "dialogue":[["Tutor","Wie heißt sie?","What is her name?"],["Ben","Sie heißt Mia Klein. Sie ist zwanzig.","Her name is Mia Klein. She is twenty."],["Tutor","Wo wohnt sie?","Where does she live?"],["Ben","Sie wohnt in Köln.","She lives in Cologne."]],
+    "task":"Invent a person. Fill in Vorname, Nachname, Wohnort and Alter, then introduce that person in four complete German sentences.",
+    "model":"Vorname: Mia. Nachname: Klein. Wohnort: Köln. Alter: 20. Sie heißt Mia Klein. Sie wohnt in Köln. Sie ist zwanzig. Sie spricht Deutsch.",
+    "quiz":["Which field asks for a surname?",["Vorname","Wohnort","Nachname"],2,"Nachname is surname; Vorname is first name."],
+    "readingQuiz":["What is Mia's surname?",["Köln","Klein","Ben"],1,"Ben introduces her as Mia Klein."]
+  },
+  {
+    "slug":"a1-articles","title":"Der, die or das?","goal":"Learn nouns together with their definite articles.",
+    "notes":["German nouns have grammatical gender: masculine der, feminine die and neuter das in the basic subject form. Gender is not the same as biological sex, and it often cannot be guessed from English. Learn der Tisch as one vocabulary item, not Tisch alone. All nouns start with a capital letter.","The definite article points to a particular or known thing, like English the. In the plural, the basic article is die for every gender: die Bücher. Keep a vocabulary notebook with article, noun and plural. Colours can help you organise genders, but the real goal is recalling the article when you say the word."],
+    "phrases":[["der Tisch","the table"],["die Lampe","the lamp"],["das Buch","the book"],["die Bücher","the books"],["Das ist der Tisch.","That is the table."]],
+    "dialogue":[["Mia","Was ist das?","What is that?"],["Ben","Das ist das Buch. Und das ist die Lampe.","That is the book. And that is the lamp."],["Mia","Ist das der Tisch?","Is that the table?"],["Ben","Ja, genau.","Yes, exactly."]],
+    "task":"Label five objects near you with an article and noun. Practise covering the article and recalling it before checking your answer.",
+    "model":"der Tisch; die Lampe; das Buch; der Stuhl; das Handy.",
+    "quiz":["What is the basic definite article for plural nouns?",["der","das","die"],2,"Plural nouns use die in the nominative, regardless of their singular gender."],
+    "readingQuiz":["Which object does Ben mention after the book?",["A lamp","A chair","A phone"],0,"Ben adds Und das ist die Lampe."]
+  },
+  {
+    "slug":"a1-ein-kein","title":"A thing, or no thing","goal":"Use ein, eine, kein and keine to identify objects.",
+    "notes":["For a singular subject or after Das ist, use ein with masculine and neuter nouns and eine with feminine nouns: ein Tisch, ein Buch, eine Lampe. These mean a or an. There is no ordinary plural indefinite article: Das sind Bücher means those are books.","Kein negates an indefinite noun: Das ist kein Buch means that is not a book. Use keine for feminine singular and basic plural: keine Lampe, keine Bücher. Compare the noun's article before choosing the ending. Do not use nicht ein as your default translation of not a when kein is the straightforward choice."],
+    "phrases":[["ein Buch","a book"],["eine Lampe","a lamp"],["kein Tisch","not a table"],["keine Bücher","no books"],["Das ist kein Handy.","That is not a mobile phone."]],
+    "dialogue":[["Ben","Ist das ein Handy?","Is that a mobile phone?"],["Mia","Nein, das ist kein Handy. Das ist ein Buch.","No, that is not a mobile phone. That is a book."],["Ben","Und das ist eine Lampe.","And that is a lamp."]],
+    "task":"Write four object identifications, two true and two deliberately false. Correct the false ones using kein or keine.",
+    "model":"Das ist ein Buch. Das ist keine Lampe. Das ist kein Tisch. Das ist eine Tasche.",
+    "quiz":["Complete: Das ist ___ Lampe.",["ein","eine","einen"],1,"Lampe is feminine, so its indefinite nominative article is eine."],
+    "readingQuiz":["What is the first object really?",["A phone","A lamp","A book"],2,"Mia corrects Ben and says Das ist ein Buch."]
+  },
+  {
+    "slug":"a1-plurals","title":"One book, two books","goal":"Recognise common plural patterns and count familiar objects.",
+    "notes":["German plurals do not follow one universal ending. Common patterns include -e, -er, -(e)n and -s, sometimes with an umlaut. Compare der Tisch/die Tische, das Buch/die Bücher, die Lampe/die Lampen and das Handy/die Handys. Learn the plural alongside each new noun.","Use Das ist for one thing and Das sind for several things. After a number greater than one, use the plural noun: zwei Bücher, drei Lampen. The number eins becomes ein before a masculine or neuter noun in the basic form: ein Buch. The plural article die does not mean every plural noun is feminine."],
+    "phrases":[["zwei Bücher","two books"],["drei Lampen","three lamps"],["vier Tische","four tables"],["die Handys","the mobile phones"],["Das sind Stühle.","Those are chairs."]],
+    "dialogue":[["Mia","Wie viele Bücher sind hier?","How many books are here?"],["Ben","Drei Bücher und zwei Handys.","Three books and two mobile phones."],["Mia","Und eine Lampe!","And one lamp!"]],
+    "task":"Draw a desk with several objects. Write four captions with numbers and plural nouns, then describe the picture aloud.",
+    "model":"Hier sind drei Bücher, zwei Handys, vier Stühle und eine Lampe.",
+    "quiz":["Choose the plural of das Buch.",["die Buchs","die Bücher","die Buche"],1,"Buch forms Bücher with an umlaut and -er."],
+    "readingQuiz":["How many phones are in the dialogue?",["One","Three","Two"],2,"Ben says zwei Handys."]
+  },
+  {
+    "slug":"a1-family","title":"Meet the family","goal":"Describe family relationships with mein and meine.",
+    "notes":["Start with family words: der Vater, die Mutter, der Bruder, die Schwester and das Kind. Use mein with a masculine or neuter subject and meine with a feminine or plural subject: mein Bruder, meine Schwester, meine Eltern. The ending follows the noun, not the gender of the person speaking.","Introduce a relative using Das ist and add a name or age. For more than one person, use Das sind meine Eltern. Remember that Geschwister means siblings and is used in the plural. You can describe an invented family or chosen family for practice; the grammar works the same way."],
+    "phrases":[["mein Vater","my father"],["meine Mutter","my mother"],["mein Bruder","my brother"],["meine Schwester","my sister"],["meine Eltern","my parents"]],
+    "dialogue":[["Mia","Das ist meine Schwester. Sie heißt Anna.","This is my sister. Her name is Anna."],["Ben","Wie alt ist sie?","How old is she?"],["Mia","Sie ist achtzehn.","She is eighteen."]],
+    "task":"Make a small fictional family tree. Introduce four people using mein or meine and give two of their ages.",
+    "model":"Das ist mein Vater. Das ist meine Mutter. Meine Schwester heißt Anna. Sie ist achtzehn.",
+    "quiz":["Complete: Das ist ___ Schwester.",["mein","meine","meinen"],1,"Schwester is feminine, so the basic possessive form is meine."],
+    "readingQuiz":["Who is Anna?",["Mia's mother","Mia's sister","Ben's sister"],1,"Mia introduces Anna as meine Schwester."]
+  },
+  {
+    "slug":"a1-people-review","title":"Mission: people and possessions","goal":"Combine articles, plurals and family descriptions.",
+    "notes":["Use this checkpoint to connect people with objects. First identify the noun's article, then choose ein/eine or mein/meine. Das ist mein Bruder introduces a person; Das sind seine Bücher describes several books belonging to him. Sein and seine mean his in these examples.","Read a short description for facts before you answer. Underline names, circle numbers and mark possessive words. Do not guess from a single familiar word: no books and two books have different meanings. Finish by writing a short description of a fictional photograph with both singular and plural sentences."],
+    "phrases":[["Das ist mein Bruder.","That is my brother."],["Das sind seine Bücher.","Those are his books."],["Das ist ihre Tasche.","That is her bag."],["Er hat zwei Kinder.","He has two children."],["Sie hat keine Bücher.","She has no books."]],
+    "dialogue":[["Mia","Das ist mein Bruder Tom. Das sind seine Bücher.","That is my brother Tom. Those are his books."],["Ben","Wie viele Bücher hat er?","How many books does he have?"],["Mia","Er hat vier Bücher und ein Handy.","He has four books and a mobile phone."]],
+    "task":"Describe a fictional photo in six sentences. Include one relative, two objects, one plural, one number and one negative statement.",
+    "model":"Das ist mein Bruder. Er heißt Tom. Das ist sein Handy. Das sind seine Bücher. Er hat vier Bücher. Er hat keine Tasche.",
+    "quiz":["Which sentence describes several objects?",["Das ist ein Buch.","Das sind Bücher.","Das ist mein Bruder."],1,"Sind and the plural Bücher signal more than one book."],
+    "readingQuiz":["How many books does Tom have?",["Two","Three","Four"],2,"Mia says Er hat vier Bücher."]
+  },
+  {
+    "slug":"a1-present-verbs","title":"What do you do?","goal":"Build sentences with regular present-tense verbs.",
+    "notes":["Many German verbs end in -en in the dictionary: lernen, wohnen and machen. Remove -en and add a personal ending: ich lerne, du lernst, er lernt, wir lernen, ihr lernt, sie lernen. The polite Sie uses the same verb form as wir and plural sie.","In an ordinary statement, the conjugated verb is the second sentence element: Ich lerne Deutsch. A subject is normally required even when English might use a short note. Practise with one verb and several people before adding many verbs. Some verbs are irregular, so these endings are a starting pattern, not a rule for every verb."],
+    "phrases":[["Ich lerne Deutsch.","I learn German."],["Du wohnst hier.","You live here."],["Wir machen eine Pause.","We take a break."],["Ihr spielt Fußball.","You all play football."],["Sie lernen zusammen.","They learn together."]],
+    "dialogue":[["Ben","Was machst du?","What are you doing?"],["Mia","Ich lerne Deutsch. Und du?","I am learning German. And you?"],["Ben","Ich mache eine Pause.","I am taking a break."]],
+    "task":"Conjugate lernen with ich, du, er, wir, ihr and sie. Then write two sentences about things you do regularly.",
+    "model":"ich lerne, du lernst, er lernt, wir lernen, ihr lernt, sie lernen. Ich wohne in Berlin. Ich spiele Fußball.",
+    "quiz":["Complete: Wir ___ Deutsch.",["lernt","lernen","lerne"],1,"Wir takes the ending -en: wir lernen."],
+    "readingQuiz":["Who is taking a break?",["Mia","Both speakers","Ben"],2,"Ben says Ich mache eine Pause."]
+  },
+  {
+    "slug":"a1-questions","title":"Ask better questions","goal":"Form yes/no questions and questions with question words.",
+    "notes":["For a yes/no question, put the conjugated verb first: Wohnst du hier? Answer Ja or Nein and add a short sentence. For a question with a question word, use question word + verb + subject: Wo wohnst du? The verb remains near the start even when the question is longer.","Wer asks who, was asks what, wo asks where, woher asks where from and wann asks when. Wie asks how and appears in fixed questions such as Wie heißt du? Choose the question word based on the information you want. Compare Wo wohnst du? with Wann lernst du? rather than memorising word order alone."],
+    "phrases":[["Wer ist das?","Who is that?"],["Was machst du?","What are you doing?"],["Wann lernst du?","When do you study?"],["Wohnst du hier?","Do you live here?"],["Wo ist das Café?","Where is the café?"]],
+    "dialogue":[["Mia","Wohnst du in Berlin?","Do you live in Berlin?"],["Ben","Ja. Und wo wohnst du?","Yes. And where do you live?"],["Mia","In Köln. Wann lernst du Deutsch?","In Cologne. When do you study German?"],["Ben","Am Abend.","In the evening."]],
+    "task":"Write three yes/no questions and three question-word questions for a new classmate. Give a short answer to each.",
+    "model":"Lernst du Deutsch? Ja. Wo wohnst du? In Berlin. Wann lernst du? Am Abend.",
+    "quiz":["Which word order makes a yes/no question?",["Du wohnst hier?","Wohnst du hier?","Hier du wohnst?"],1,"The standard neutral yes/no question begins with the conjugated verb."],
+    "readingQuiz":["When does Ben study German?",["In the morning","At noon","In the evening"],2,"Ben answers Am Abend."]
+  },
+  {
+    "slug":"a1-negation","title":"Say no clearly","goal":"Distinguish nicht from kein in basic sentences.",
+    "notes":["Use kein to negate an indefinite noun or a noun without an article: Ich habe kein Auto. Use nicht to negate adjectives, verbs or specific parts of a sentence: Ich bin nicht müde; ich wohne nicht in Berlin. The choice depends on what you are negating, not simply on the English word not.","Nicht often comes after a simple verb phrase, but before the adjective or location it negates. Learn short patterns first: Das ist nicht teuer. Ich komme nicht. Keine is used with a feminine noun or basic plural nouns. Read the entire statement to see whether it denies an object, a quality or an action."],
+    "phrases":[["Ich habe kein Auto.","I do not have a car."],["Das ist nicht teuer.","That is not expensive."],["Ich bin nicht müde.","I am not tired."],["Wir haben keine Zeit.","We do not have time."],["Ich komme nicht.","I am not coming."]],
+    "dialogue":[["Ben","Hast du ein Auto?","Do you have a car?"],["Mia","Nein, ich habe kein Auto. Ich fahre mit dem Bus.","No, I do not have a car. I travel by bus."],["Ben","Ist das teuer?","Is that expensive?"],["Mia","Nein, das ist nicht teuer.","No, that is not expensive."]],
+    "task":"Negate these statements: Ich habe ein Auto. Das ist teuer. Ich bin müde. Wir haben Zeit. Read the positive and negative forms aloud.",
+    "model":"Ich habe kein Auto. Das ist nicht teuer. Ich bin nicht müde. Wir haben keine Zeit.",
+    "quiz":["Complete: Das ist ___ teuer.",["kein","keine","nicht"],2,"Teuer is an adjective, so negate it with nicht."],
+    "readingQuiz":["How does Mia travel?",["By car","By bus","By plane"],1,"Mia says Ich fahre mit dem Bus."]
+  },
+  {
+    "slug":"a1-accusative","title":"I need a ticket","goal":"Recognise the masculine accusative article in everyday requests.",
+    "notes":["Some verbs connect a subject with a direct object: Ich brauche einen Stift. Ich is the subject; the pen is the thing needed. In the accusative, masculine der becomes den and ein becomes einen. Feminine die/eine and neuter das/ein stay the same in these simple patterns.","Use brauchen, kaufen and haben to practise: einen Stift, eine Tasche, ein Buch. Do not change every article to einen; first identify the noun's gender. Compare Der Stift ist blau with Ich brauche den Stift: the noun stays masculine, but its job in the sentence changes the article."],
+    "phrases":[["Ich brauche einen Stift.","I need a pen."],["Ich kaufe eine Tasche.","I am buying a bag."],["Ich habe ein Ticket.","I have a ticket."],["Ich sehe den Bus.","I see the bus."],["Brauchst du das Buch?","Do you need the book?"]],
+    "dialogue":[["Mia","Was brauchst du?","What do you need?"],["Ben","Ich brauche einen Stift und ein Buch.","I need a pen and a book."],["Mia","Hier ist ein Stift.","Here is a pen."]],
+    "task":"Create a shopping list with Stift, Tasche and Buch. Turn each item into a sentence beginning Ich brauche and choose the article carefully.",
+    "model":"Ich brauche einen Stift. Ich brauche eine Tasche. Ich brauche ein Buch.",
+    "quiz":["Complete: Ich brauche ___ Stift.",["ein","einen","eine"],1,"Stift is masculine and is the direct object of brauche: einen Stift."],
+    "readingQuiz":["Which two things does Ben need?",["A bag and a ticket","A pen and a book","A bus and a bag"],1,"Ben asks for einen Stift und ein Buch."]
+  },
+  {
+    "slug":"a1-word-order","title":"Mission: build a sentence","goal":"Keep the verb in second position when starting with time or place.",
+    "notes":["The verb is second in a normal statement, but the first element can contain more than one word. Ich lerne heute Deutsch and Heute lerne ich Deutsch are both possible. When heute comes first, the subject moves after the verb. Second position means the second element, not always the second written word.","Use a short time phrase such as am Abend to vary your sentences: Am Abend lerne ich Deutsch. Keep a yes/no question separate: Lernst du heute? It begins with the verb. Read your sentence aloud, identify the conjugated verb and check the element before it. This habit makes longer sentences easier later."],
+    "phrases":[["Heute lerne ich Deutsch.","Today I am learning German."],["Am Abend spiele ich.","In the evening I play."],["Hier wohnt Mia.","Mia lives here."],["Morgen komme ich.","I am coming tomorrow."],["Jetzt machen wir eine Pause.","Now we are taking a break."]],
+    "dialogue":[["Ben","Was machst du heute?","What are you doing today?"],["Mia","Heute lerne ich Deutsch. Am Abend spiele ich Fußball.","Today I study German. In the evening I play football."],["Ben","Morgen lerne ich auch.","Tomorrow I study too."]],
+    "task":"Rewrite Ich lerne heute Deutsch starting with Heute. Then write two new statements starting with Morgen and Am Abend, and one yes/no question.",
+    "model":"Heute lerne ich Deutsch. Morgen komme ich. Am Abend spiele ich Fußball. Lernst du heute?",
+    "quiz":["Choose the standard statement.",["Heute ich lerne Deutsch.","Heute lerne ich Deutsch.","Heute Deutsch ich lerne."],1,"After the first element Heute, the conjugated verb lerne comes second."],
+    "readingQuiz":["What does Mia do in the evening?",["Plays football","Studies English","Buys a book"],0,"Mia says Am Abend spiele ich Fußball."]
+  },
+  {
+    "slug":"a1-time","title":"Tell the time","goal":"Understand full hours, half hours and appointment times.",
+    "notes":["For clear official times, use the hour followed by Uhr and the minutes: acht Uhr dreißig. Ask Wie spät ist es? for the current time. Say um acht Uhr to explain when an event starts. The 24-hour clock is common in timetables: 14 Uhr is two in the afternoon.","In everyday speech, halb neun means 8:30, halfway towards nine, not 9:30. Viertel nach acht is 8:15 and Viertel vor neun is 8:45. Regional forms vary; the official hour-and-minutes form is a reliable alternative. Always check whether someone is asking the current time or the time of an event."],
+    "phrases":[["Wie spät ist es?","What time is it?"],["Es ist acht Uhr.","It is eight o'clock."],["halb neun","half past eight"],["um vierzehn Uhr","at two p.m."],["Viertel nach acht","quarter past eight"]],
+    "dialogue":[["Mia","Wann beginnt der Kurs?","When does the course begin?"],["Ben","Um halb neun.","At half past eight."],["Mia","Also um acht Uhr dreißig?","So at eight thirty?"],["Ben","Ja, genau.","Yes, exactly."]],
+    "task":"Write 08:00, 08:15, 08:30 and 14:00 in words. Give an appointment time using um and repeat it in another form where possible.",
+    "model":"acht Uhr; Viertel nach acht; halb neun; vierzehn Uhr. Der Kurs beginnt um acht Uhr dreißig.",
+    "quiz":["What time is halb neun?",["09:30","08:30","09:00"],1,"German half-hour expressions look ahead to the next hour."],
+    "readingQuiz":["When does the course begin?",["08:30","14:00","08:15"],0,"Ben confirms acht Uhr dreißig."]
+  },
+  {
+    "slug":"a1-calendar","title":"Days and dates","goal":"Discuss weekdays and simple calendar plans.",
+    "notes":["The weekdays are Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag and Sonntag. Use am with a day: am Montag. Heute means today, morgen tomorrow and gestern yesterday. A capital Morgen can mean morning, so pay attention to context and spelling.","Dates often use ordinal numbers: am ersten Mai means on the first of May. For now, learn am ersten, am zweiten and am dritten as useful chunks. Months such as Januar, April and Mai are capitalised. Ask Wann? for a date or day, and read a German numeric date in day-month-year order."],
+    "phrases":[["am Montag","on Monday"],["am Wochenende","at the weekend"],["heute","today"],["morgen","tomorrow"],["am ersten Mai","on the first of May"]],
+    "dialogue":[["Ben","Wann hast du Zeit?","When do you have time?"],["Mia","Am Samstag. Heute habe ich keine Zeit.","On Saturday. Today I do not have time."],["Ben","Gut, dann am Wochenende.","Good, then at the weekend."]],
+    "task":"Make a seven-day planner. Add three activities using am plus a weekday. Read the date 01.05 as am ersten Mai.",
+    "model":"Am Montag lerne ich. Am Mittwoch spiele ich Fußball. Am Samstag habe ich Zeit.",
+    "quiz":["Which expression means on Monday?",["um Montag","am Montag","in Montag"],1,"Am is used with a named weekday in this time expression."],
+    "readingQuiz":["When is Mia free?",["Today","On Monday","On Saturday"],2,"Mia answers Am Samstag."]
+  },
+  {
+    "slug":"a1-routines","title":"A day in your life","goal":"Describe a routine with separable verbs.",
+    "notes":["Some German verbs have a prefix that separates in a main clause. Aufstehen becomes Ich stehe um sieben Uhr auf. The conjugated verb takes second position and the prefix goes to the end. Learn the infinitive and the sentence pattern together so you do not forget the final piece.","Other useful examples are einkaufen and anrufen: Ich kaufe heute ein; ich rufe Mia an. Add a time phrase to make a routine specific. Use zuerst for first and dann for then when linking short sentences. Keep each sentence simple before combining several activities into a full day."],
+    "phrases":[["Ich stehe früh auf.","I get up early."],["Ich kaufe heute ein.","I go shopping today."],["Ich rufe Mia an.","I call Mia."],["Dann frühstücke ich.","Then I have breakfast."],["Ich gehe schlafen.","I go to sleep."]],
+    "dialogue":[["Mia","Wann stehst du auf?","When do you get up?"],["Ben","Um sieben Uhr. Dann frühstücke ich.","At seven. Then I have breakfast."],["Mia","Kaufst du heute ein?","Are you shopping today?"],["Ben","Ja, am Abend.","Yes, in the evening."]],
+    "task":"Write a four-sentence routine. Include aufstehen, frühstücken, einkaufen and schlafen gehen. Underline the separated prefixes.",
+    "model":"Ich stehe um sieben Uhr auf. Dann frühstücke ich. Am Abend kaufe ich ein. Um zehn Uhr gehe ich schlafen.",
+    "quiz":["Complete: Ich stehe um sieben Uhr ___.",["an","ein","auf"],2,"Aufstehen separates into stehe ... auf in this main clause."],
+    "readingQuiz":["When does Ben shop?",["In the evening","At seven in the morning","At noon"],0,"Ben answers Ja, am Abend to the shopping question."]
+  },
+  {
+    "slug":"a1-hobbies","title":"Things you enjoy","goal":"Talk about hobbies using gern and basic ability expressions.",
+    "notes":["Gern follows an activity to express liking it: Ich lese gern means I like reading. It is not an adjective describing the activity. Use nicht gern for an activity you do not enjoy. Useful hobbies include lesen, schwimmen, kochen, tanzen and Fußball spielen.","Some common verbs change in the present: ich lese but du liest and er liest. Ich schwimme follows the regular pattern. Ask Was machst du gern? to invite a longer answer. You can name two hobbies with und and contrast preferences with aber, keeping complete simple clauses on each side."],
+    "phrases":[["Ich lese gern.","I like reading."],["Ich schwimme gern.","I like swimming."],["Ich koche nicht gern.","I do not like cooking."],["Was machst du gern?","What do you like doing?"],["Wir spielen Fußball.","We play football."]],
+    "dialogue":[["Ben","Was machst du gern?","What do you like doing?"],["Mia","Ich lese gern und ich schwimme gern.","I like reading and I like swimming."],["Ben","Kochst du auch gern?","Do you like cooking too?"],["Mia","Nein, ich koche nicht gern.","No, I do not like cooking."]],
+    "task":"Make a likes-and-dislikes list with four activities. Turn it into sentences using gern and nicht gern and ask a friend the hobby question.",
+    "model":"Ich lese gern. Ich schwimme gern. Ich tanze nicht gern. Ich koche nicht gern.",
+    "quiz":["How do you say I like reading?",["Ich bin gern lesen.","Ich lese gern.","Ich gern lese."],1,"Use the conjugated activity verb lese followed by gern."],
+    "readingQuiz":["Which activity does Mia not enjoy?",["Reading","Swimming","Cooking"],2,"Mia explicitly says Ich koche nicht gern."]
+  },
+  {
+    "slug":"a1-week-plan","title":"Mission: plan a good week","goal":"Arrange a meeting and describe a weekly routine.",
+    "notes":["Combine a weekday with a time: am Freitag um sechs Uhr. To invite someone, ask Hast du Zeit? or Treffen wir uns? A short reply can accept, decline or suggest another day. Nein, leider nicht is a friendly way to decline before offering an alternative.","Check the final agreed day and time rather than the first suggestion. Conversations often change plans. Repeat the arrangement in a full sentence: Wir treffen uns am Samstag um zehn Uhr. The fixed phrase wir treffen uns means we meet each other; you can use it now without learning every reflexive verb."],
+    "phrases":[["Hast du am Freitag Zeit?","Do you have time on Friday?"],["Nein, leider nicht.","No, unfortunately not."],["Wie wäre es am Samstag?","How about Saturday?"],["Wir treffen uns um zehn Uhr.","We meet at ten o'clock."],["Das passt gut.","That works well."]],
+    "dialogue":[["Mia","Hast du am Freitag Zeit?","Do you have time on Friday?"],["Ben","Nein, leider nicht. Wie wäre es am Samstag?","No, unfortunately not. How about Saturday?"],["Mia","Gut. Um zehn Uhr?","Good. At ten?"],["Ben","Ja, das passt gut.","Yes, that works well."]],
+    "task":"Write an invitation with a day and time, a polite refusal and a new suggestion. Finish by confirming the final plan in one sentence.",
+    "model":"Hast du am Freitag Zeit? Nein, leider nicht. Wie wäre es am Samstag? Wir treffen uns am Samstag um zehn Uhr.",
+    "quiz":["Which phrase correctly combines a weekday and time?",["um Samstag am zehn Uhr","am Samstag um zehn Uhr","in Samstag zehn Uhr"],1,"Use am with the day and um with the clock time."],
+    "readingQuiz":["What is the final plan?",["Friday at ten","Saturday at ten","Saturday at six"],1,"They move the meeting from Friday to Saturday and agree on ten."]
+  },
+  {
+    "slug":"a1-food","title":"Your first German shopping list","goal":"Name common food and drink and express basic preferences.",
+    "notes":["Learn food with its article: das Brot, der Käse, die Milch, der Apfel and das Wasser. For a general quantity, German often uses no article: Ich kaufe Brot. When counting individual items, use the plural: zwei Äpfel. Notice the umlaut in Apfel/Äpfel.","Essen and trinken mean to eat and to drink. Essen changes to du isst and er/sie isst. Gern works with food activities just as with hobbies: Ich esse gern Brot. To say you like a food directly, use Ich mag Käse. Practise describing a meal with two foods and one drink."],
+    "phrases":[["das Brot","the bread"],["der Käse","the cheese"],["die Milch","the milk"],["zwei Äpfel","two apples"],["Ich trinke Wasser.","I drink water."]],
+    "dialogue":[["Ben","Was kaufst du?","What are you buying?"],["Mia","Brot, Käse und zwei Äpfel.","Bread, cheese and two apples."],["Ben","Und Milch?","And milk?"],["Mia","Nein, heute nur Wasser.","No, only water today."]],
+    "task":"Write a shopping list with five items. Describe what you eat and drink at breakfast using two complete sentences.",
+    "model":"Brot, Käse, Milch, Äpfel, Wasser. Ich esse Brot und Käse. Ich trinke Wasser.",
+    "quiz":["Complete: Du ___ Brot.",["esse","isst","essen"],1,"Essen changes its vowel with du: du isst."],
+    "readingQuiz":["Which drink does Mia choose today?",["Milk","Coffee","Water"],2,"Mia says heute nur Wasser."]
+  },
+  {
+    "slug":"a1-cafe","title":"At the café","goal":"Order politely, understand a follow-up question and ask for the bill.",
+    "notes":["Ich möchte is a useful polite request meaning I would like. Put the item after it: Ich möchte einen Kaffee, bitte. Kaffee is masculine, so it becomes einen Kaffee as the object. With water, say ein Wasser when ordering one serving; in other contexts Wasser can be uncountable.","The server may ask Sonst noch etwas? meaning anything else. Answer Ja, einen Tee, bitte or Nein, danke. Zum Mitnehmen means to take away, while hier means here. Die Rechnung, bitte asks for the bill. Read the order as a real exchange and practise responding rather than reciting a list."],
+    "phrases":[["Ich möchte einen Kaffee, bitte.","I would like a coffee, please."],["Sonst noch etwas?","Anything else?"],["Zum Mitnehmen, bitte.","To take away, please."],["Nein, danke.","No, thank you."],["Die Rechnung, bitte.","The bill, please."]],
+    "dialogue":[["Server","Was möchten Sie?","What would you like?"],["Mia","Einen Kaffee, bitte. Zum Mitnehmen.","A coffee, please. To take away."],["Server","Sonst noch etwas?","Anything else?"],["Mia","Nein, danke.","No, thank you."]],
+    "task":"Role-play both customer and server. Order a drink, specify here or takeaway, answer Anything else? and ask for the bill.",
+    "model":"Ich möchte einen Kaffee, bitte. Zum Mitnehmen. Nein, danke. Die Rechnung, bitte.",
+    "quiz":["Complete: Ich möchte ___ Kaffee.",["ein","eine","einen"],2,"Kaffee is masculine and is the object of möchte, so use einen."],
+    "readingQuiz":["Where will Mia drink her coffee?",["She orders it to take away","At a table in the café","The dialogue says at school"],0,"Zum Mitnehmen specifies takeaway, without saying the final location."]
+  },
+  {
+    "slug":"a1-market","title":"At the market","goal":"Ask for amounts and understand common units.",
+    "notes":["Use a number plus a unit to ask for food: ein Kilo Äpfel, zweihundert Gramm Käse, eine Flasche Wasser. Measure words often keep a singular-looking form after numbers, such as zwei Kilo. Learn the full phrase instead of adding an English-style plural to every unit.","Ich hätte gern is another polite request. Was kostet ein Kilo? asks for the unit price, which may differ from the total price. Listen for whether the answer concerns one item, one kilogram or the whole order. Repeat your amount clearly before paying, especially when the stall is busy."],
+    "phrases":[["ein Kilo Äpfel","a kilogram of apples"],["zweihundert Gramm Käse","two hundred grams of cheese"],["eine Flasche Wasser","a bottle of water"],["Ich hätte gern …","I would like …"],["Was kostet ein Kilo?","What does one kilogram cost?"]],
+    "dialogue":[["Mia","Ich hätte gern ein Kilo Äpfel.","I would like a kilogram of apples."],["Seller","Gern. Das kostet drei Euro.","Certainly. That costs three euros."],["Mia","Und zweihundert Gramm Käse, bitte.","And two hundred grams of cheese, please."]],
+    "task":"Prepare an order containing fruit by weight, cheese in grams and a bottle of water. Ask for a unit price and repeat the amount you want.",
+    "model":"Ich hätte gern ein Kilo Äpfel, zweihundert Gramm Käse und eine Flasche Wasser. Was kostet ein Kilo Äpfel?",
+    "quiz":["Which phrase orders 200 grams of cheese?",["zwei Kilo Käse","zweihundert Gramm Käse","zwanzig Gramm Käse"],1,"Zweihundert is 200, while zwanzig is 20."],
+    "readingQuiz":["How much do the apples cost?",["Two euros","Five euros","Three euros"],2,"The seller prices the kilogram of apples at drei Euro."]
+  },
+  {
+    "slug":"a1-restaurant","title":"A meal out","goal":"Read simple menu choices and state dietary preferences.",
+    "notes":["Menu vocabulary includes die Suppe, der Salat, das Hähnchen and die Rechnung. Use mit for with and ohne for without in memorised requests: ohne Fleisch, mit Reis. Ich esse kein Fleisch states that you do not eat meat; it does not automatically explain whether your reason is preference or allergy.","For an ingredient question, ask Ist Milch drin? or Ist das vegetarisch? If you have an allergy, state it explicitly: Ich habe eine Allergie gegen Nüsse. A language exercise cannot guarantee a meal's ingredients, so ask the staff to confirm. Practise the words slowly and clearly as complete requests."],
+    "phrases":[["die Suppe","the soup"],["der Salat","the salad"],["ohne Fleisch","without meat"],["Ist das vegetarisch?","Is that vegetarian?"],["Ist Milch drin?","Does it contain milk?"]],
+    "dialogue":[["Mia","Ist die Suppe vegetarisch?","Is the soup vegetarian?"],["Server","Ja. Möchten Sie Brot dazu?","Yes. Would you like bread with it?"],["Mia","Ja, bitte. Und ein Wasser.","Yes, please. And a water."]],
+    "task":"Create a two-item menu, order a meal and ask one ingredient question. Practise saying one clear food preference.",
+    "model":"Ich möchte die Suppe und ein Wasser. Ist die Suppe vegetarisch? Ich esse kein Fleisch.",
+    "quiz":["What does ohne Fleisch mean?",["With meat","Without meat","Only meat"],1,"Ohne means without."],
+    "readingQuiz":["What does Mia add to her soup order?",["Bread and water","Cheese and milk","Chicken and rice"],0,"She accepts Brot and orders ein Wasser."]
+  },
+  {
+    "slug":"a1-food-mission","title":"Mission: host a simple lunch","goal":"Plan a meal, shop for ingredients and invite a friend.",
+    "notes":["Plan a meal using familiar verbs: brauchen for need, kaufen for buy and kochen for cook. Start with a list, then turn the list into sentences. For a plural ingredient without an article, say Wir brauchen Tomaten. For one masculine object, keep the accusative pattern: einen Salat.","An invitation needs a time as well as food. Ask Kommst du um zwölf Uhr? and listen for a clear answer. Bring earlier skills into this task: numbers for quantities, kein for food preferences and gern for likes. A short, understandable lunch plan is a useful real-world A1 achievement."],
+    "phrases":[["Wir kochen zusammen.","We cook together."],["Wir brauchen Tomaten.","We need tomatoes."],["Kommst du um zwölf Uhr?","Are you coming at twelve?"],["Ich bringe Brot mit.","I will bring bread."],["Guten Appetit!","Enjoy your meal!"]],
+    "dialogue":[["Mia","Wir kochen eine Suppe. Kommst du um zwölf Uhr?","We are cooking a soup. Are you coming at twelve?"],["Ben","Ja, gern. Ich bringe Brot mit.","Yes, gladly. I will bring bread."],["Mia","Super! Wir brauchen auch Tomaten.","Great! We also need tomatoes."]],
+    "task":"Write a lunch invitation with a time and a shopping list of four items. Respond as your friend and offer to bring one item.",
+    "model":"Kommst du um zwölf Uhr? Wir kochen Suppe. Wir brauchen Tomaten, Wasser, Brot und Käse. Ja, gern. Ich bringe Brot mit.",
+    "quiz":["Complete: Ich bringe Brot ___.",["mit","auf","ein"],0,"Mitbringen is separable: ich bringe ... mit means I bring something along."],
+    "readingQuiz":["What will Ben bring?",["Tomatoes","Soup","Bread"],2,"Ben offers Ich bringe Brot mit."]
+  },
+  {
+    "slug":"a1-home","title":"Welcome to my home","goal":"Name rooms and describe a small home.",
+    "notes":["Useful room words are das Wohnzimmer, das Schlafzimmer, die Küche, das Bad and der Flur. Compound nouns take the gender of the final noun: Wohnzimmer ends in Zimmer, which is neuter. Learn the whole word, but recognising familiar parts can help you remember its meaning.","Describe a room with sein plus an adjective: Die Küche ist klein. In this position, the adjective has no extra ending. Compare die kleine Küche, which uses a different pattern that you can learn later. Use Es gibt with an object to say there is or there are: Es gibt ein Bad."],
+    "phrases":[["das Wohnzimmer","the living room"],["das Schlafzimmer","the bedroom"],["die Küche","the kitchen"],["das Bad","the bathroom"],["Die Wohnung ist klein.","The apartment is small."]],
+    "dialogue":[["Ben","Wie ist deine Wohnung?","What is your apartment like?"],["Mia","Sie ist klein. Es gibt eine Küche und ein Bad.","It is small. There is a kitchen and a bathroom."],["Ben","Und ein Wohnzimmer?","And a living room?"],["Mia","Ja, das Wohnzimmer ist hell.","Yes, the living room is bright."]],
+    "task":"Draw a simple floor plan with four labelled rooms. Describe two rooms using ist and an adjective such as klein, groß or hell.",
+    "model":"Das ist die Küche. Die Küche ist klein. Das Wohnzimmer ist hell. Es gibt ein Bad.",
+    "quiz":["Complete: Die Küche ist ___.",["kleine","kleinen","klein"],2,"After ist, the adjective stays in its basic form: klein."],
+    "readingQuiz":["Which room is bright?",["The bathroom","The living room","The kitchen"],1,"Mia says das Wohnzimmer ist hell."]
+  },
+  {
+    "slug":"a1-furniture","title":"Furniture and colours","goal":"Describe furniture using colours and contrasting qualities.",
+    "notes":["Build descriptions with a noun, sein and an adjective: Der Tisch ist braun. Common colours include rot, blau, grün, weiß and schwarz. Learn colours in short sentences rather than as isolated labels. The adjective stays unchanged after ist even when the noun has a different gender.","Use aber to contrast qualities: Das Sofa ist alt, aber bequem. Und adds another quality: Der Stuhl ist klein und leicht. Pronouns can replace a noun you have just named: der Tisch becomes er, die Lampe sie and das Sofa es. This gender link is grammatical, even for objects."],
+    "phrases":[["Der Tisch ist braun.","The table is brown."],["Die Lampe ist weiß.","The lamp is white."],["Das Sofa ist bequem.","The sofa is comfortable."],["Der Stuhl ist klein.","The chair is small."],["Es ist alt, aber schön.","It is old but beautiful."]],
+    "dialogue":[["Mia","Wie findest du das Sofa?","What do you think of the sofa?"],["Ben","Es ist alt, aber bequem.","It is old but comfortable."],["Mia","Ja, und die Lampe ist neu.","Yes, and the lamp is new."]],
+    "task":"Describe three pieces of furniture using a colour and one other quality. Replace one repeated noun with er, sie or es.",
+    "model":"Der Tisch ist braun. Er ist groß. Die Lampe ist weiß. Das Sofa ist blau und bequem.",
+    "quiz":["Which pronoun replaces das Sofa?",["er","es","sie"],1,"Sofa is neuter, so the matching singular pronoun is es."],
+    "readingQuiz":["What is new?",["The sofa","The table","The lamp"],2,"Mia says die Lampe ist neu."]
+  },
+  {
+    "slug":"a1-location","title":"Where are my keys?","goal":"Use common location phrases with in, auf and neben.",
+    "notes":["Ask Wo? for a fixed location. In common location phrases, masculine der and neuter das become dem, and feminine die becomes der: auf dem Tisch, in der Tasche. These are dative forms. Learn the phrases as chunks before trying to change every noun independently.","In means in, auf on a surface and neben next to. Das Buch ist auf dem Tisch locates the book. This lesson describes where things are, not where you move them; movement towards a destination can require a different case. Practise with objects already resting in place."],
+    "phrases":[["auf dem Tisch","on the table"],["in der Tasche","in the bag"],["neben dem Bett","next to the bed"],["Wo ist mein Handy?","Where is my mobile phone?"],["Hier ist der Schlüssel.","Here is the key."]],
+    "dialogue":[["Ben","Wo ist mein Handy?","Where is my mobile phone?"],["Mia","Es ist auf dem Tisch.","It is on the table."],["Ben","Und der Schlüssel?","And the key?"],["Mia","Der ist in der Tasche.","It is in the bag."]],
+    "task":"Place a book on a table and a key in a bag. Describe their locations. Draw a bed with an object next to it and label the scene.",
+    "model":"Das Buch ist auf dem Tisch. Der Schlüssel ist in der Tasche. Die Lampe ist neben dem Bett.",
+    "quiz":["Complete the fixed location: auf ___ Tisch.",["den","dem","das"],1,"For a fixed location with auf, masculine Tisch uses the dative dem."],
+    "readingQuiz":["Where is the key?",["On the table","Next to the bed","In the bag"],2,"Mia locates it in der Tasche."]
+  },
+  {
+    "slug":"a1-housing","title":"Read a housing advert","goal":"Find basic facts in a short apartment advertisement.",
+    "notes":["Housing adverts often compress information: 2 Zimmer, Küche, Bad; 60 m²; 800 Euro. Zimmer normally counts living rooms and bedrooms, while Küche and Bad are listed separately. Look for size, price and location instead of trying to translate every abbreviation on first reading.","Die Miete means rent and die Nebenkosten means additional charges. Warmmiete and Kaltmiete describe different rent totals, so ask what is included rather than assuming. For simple enquiries, use Ist die Wohnung noch frei? and Wie hoch ist die Miete? The practice advert here is fictional."],
+    "phrases":[["die Miete","the rent"],["zwei Zimmer","two rooms"],["sechzig Quadratmeter","sixty square metres"],["Ist die Wohnung noch frei?","Is the apartment still available?"],["die Nebenkosten","the additional charges"]],
+    "dialogue":[["Ben","Ist die Wohnung noch frei?","Is the apartment still available?"],["Owner","Ja. Sie hat zwei Zimmer und ist sechzig Quadratmeter groß.","Yes. It has two rooms and is sixty square metres."],["Ben","Wie hoch ist die Miete?","How much is the rent?"],["Owner","Achthundert Euro plus Nebenkosten.","Eight hundred euros plus additional charges."]],
+    "task":"Create a fictional advert with room count, size and rent. Write two questions you would ask before arranging a viewing.",
+    "model":"2 Zimmer, 60 m², 800 Euro plus Nebenkosten. Ist die Wohnung noch frei? Wie hoch sind die Nebenkosten?",
+    "quiz":["What does plus Nebenkosten tell you?",["All charges are included","Additional charges are extra","The apartment is free"],1,"Plus means the stated rent does not include those additional charges."],
+    "readingQuiz":["How many rooms does the apartment have?",["Two","Three","Six"],0,"The owner says zwei Zimmer."]
+  },
+  {
+    "slug":"a1-home-mission","title":"Mission: show a friend around","goal":"Give a short home tour and describe where everyday objects are.",
+    "notes":["A home tour combines room names, descriptions and location phrases. Start with Hier ist die Küche. Add one adjective, then locate an object. Short connected sentences make the tour easy to follow: Die Küche ist klein. Der Tisch ist hier. Das Buch ist auf dem Tisch.","Use an invitation such as Komm rein! with a friend and offer a drink using Möchtest du Wasser? Listen for what your guest asks before continuing the tour. This task reviews articles and pronouns too: das Bad can become es. Aim to speak without reading every sentence on the second attempt."],
+    "phrases":[["Komm rein!","Come in!"],["Hier ist die Küche.","Here is the kitchen."],["Möchtest du Wasser?","Would you like water?"],["Das Bad ist dort.","The bathroom is over there."],["Fühl dich wie zu Hause.","Make yourself at home."]],
+    "dialogue":[["Mia","Komm rein! Hier ist die Küche. Möchtest du Wasser?","Come in! Here is the kitchen. Would you like water?"],["Ben","Ja, gern. Wo ist das Bad?","Yes, please. Where is the bathroom?"],["Mia","Das Bad ist dort, neben dem Schlafzimmer.","The bathroom is over there, next to the bedroom."]],
+    "task":"Give a one-minute tour of an invented home. Name three rooms, describe two qualities, locate one object and offer a drink.",
+    "model":"Komm rein! Hier ist die Küche. Sie ist klein. Das Wohnzimmer ist hell. Das Buch ist auf dem Tisch. Möchtest du Wasser?",
+    "quiz":["Which question offers a drink?",["Wo ist das Bad?","Möchtest du Wasser?","Wie hoch ist die Miete?"],1,"Möchtest du Wasser? means Would you like water?"],
+    "readingQuiz":["Where is the bathroom?",["Next to the bedroom","In the kitchen","Outside"],0,"Mia says neben dem Schlafzimmer."]
+  },
+  {
+    "slug":"a1-town","title":"Explore the neighbourhood","goal":"Name useful places in town and ask where they are.",
+    "notes":["Useful town nouns include der Bahnhof, die Apotheke, der Supermarkt, die Post and die Bank. In a location question, use Wo ist plus the place. For existence, ask Gibt es hier einen Supermarkt? Supermarkt is masculine and follows es gibt as an accusative object.","Near and far are nah and weit. In der Nähe means nearby and is useful when you do not need an exact distance. Match a place to its purpose: a pharmacy is an Apotheke, not a supermarket. Practise by drawing a neighbourhood and describing which places it contains."],
+    "phrases":[["der Bahnhof","the station"],["die Apotheke","the pharmacy"],["der Supermarkt","the supermarket"],["die Post","the post office"],["in der Nähe","nearby"]],
+    "dialogue":[["Ben","Gibt es hier eine Apotheke?","Is there a pharmacy here?"],["Mia","Ja, in der Nähe. Sie ist neben der Post.","Yes, nearby. It is next to the post office."],["Ben","Danke! Ist der Bahnhof weit?","Thanks! Is the station far away?"],["Mia","Nein, nur fünf Minuten zu Fuß.","No, only five minutes on foot."]],
+    "task":"Draw five neighbourhood places and label them. Ask where two of them are and answer using in der Nähe or neben.",
+    "model":"Wo ist die Apotheke? Sie ist neben der Post. Gibt es hier einen Supermarkt? Ja, in der Nähe.",
+    "quiz":["Where would you ask a pharmacist for help?",["In der Post","In der Apotheke","Im Bahnhof"],1,"Apotheke means pharmacy."],
+    "readingQuiz":["What is next to the pharmacy?",["The post office","The school","The station"],0,"Mia says the pharmacy is neben der Post."]
+  },
+  {
+    "slug":"a1-directions","title":"Follow the route","goal":"Understand short directions and ask someone to repeat them.",
+    "notes":["Directions use geradeaus for straight ahead, links for left and rechts for right. The polite instruction Gehen Sie begins with the verb, followed by Sie. First learn complete commands such as Gehen Sie geradeaus rather than trying to construct every imperative from scratch.","An der Ampel means at the traffic light. Dann marks the next step in a route. Listen to all the steps before deciding where to turn. You can repeat the route as a question: Geradeaus und dann links? This confirms your understanding and gives the speaker a chance to correct you."],
+    "phrases":[["Gehen Sie geradeaus.","Go straight ahead."],["Dann links.","Then left."],["Dann rechts.","Then right."],["an der Ampel","at the traffic light"],["Wie komme ich zum Bahnhof?","How do I get to the station?"]],
+    "dialogue":[["Ben","Wie komme ich zum Bahnhof?","How do I get to the station?"],["Mia","Gehen Sie geradeaus und dann rechts an der Ampel.","Go straight ahead and then right at the traffic light."],["Ben","Also rechts?","So, right?"],["Mia","Ja, genau.","Yes, exactly."]],
+    "task":"Draw a route with two turns. Give three short instructions aloud, then repeat the route as a traveller checking the directions.",
+    "model":"Gehen Sie geradeaus. Dann rechts an der Ampel. Dann links. Also geradeaus, rechts und links?",
+    "quiz":["Which word means straight ahead?",["rechts","links","geradeaus"],2,"Geradeaus means straight ahead; links and rechts are left and right."],
+    "readingQuiz":["Which way should Ben turn at the light?",["Left","Right","Back"],1,"Mia gives rechts and confirms it when Ben checks."]
+  },
+  {
+    "slug":"a1-transport","title":"Catch the right train","goal":"Read basic departure information and buy a simple ticket.",
+    "notes":["At a station, look for Abfahrt for departure, Ankunft for arrival and Gleis for platform or track. The destination may appear after nach: nach Berlin. Use Ich möchte ein Ticket nach Köln to buy a ticket and ask Einfach oder hin und zurück? to distinguish one-way and return journeys.","Timetables commonly use the 24-hour clock. Der Zug fährt um fünfzehn Uhr means the train leaves at 15:00. A delay is Verspätung. Check the destination, time and platform together; finding the right city name alone is not enough if several trains leave for it."],
+    "phrases":[["die Abfahrt","the departure"],["die Ankunft","the arrival"],["Gleis drei","platform three"],["einfach","one-way"],["hin und zurück","return / round trip"]],
+    "dialogue":[["Ben","Ein Ticket nach Köln, bitte.","A ticket to Cologne, please."],["Clerk","Einfach oder hin und zurück?","One-way or return?"],["Ben","Einfach. Wann fährt der Zug?","One-way. When does the train leave?"],["Clerk","Um fünfzehn Uhr, Gleis drei.","At fifteen hundred, platform three."]],
+    "task":"Make a fictional ticket showing destination, departure time and platform. Read all three facts aloud and ask for a one-way ticket.",
+    "model":"Ein Ticket nach Köln, bitte. Einfach. Der Zug fährt um fünfzehn Uhr von Gleis drei.",
+    "quiz":["Which word identifies a departure?",["Ankunft","Abfahrt","Rückfahrt"],1,"Abfahrt is departure; Ankunft is arrival."],
+    "readingQuiz":["Which platform does Ben need?",["Five","Fifteen","Three"],2,"The clerk says Gleis drei."]
+  },
+  {
+    "slug":"a1-hotel","title":"Check in at a hotel","goal":"Confirm a booking and ask about simple hotel services.",
+    "notes":["At reception, start with Ich habe eine Reservierung and give the booking name. Ein Einzelzimmer is a single room; ein Doppelzimmer is a double room. Für zwei Nächte means for two nights. The staff may ask for a document, but use fictional names and details when practising this dialogue.","Useful service questions include Wann gibt es Frühstück? and Gibt es WLAN? Understand times as ranges: von sieben bis zehn Uhr. Ask for help with a simple problem using Das WLAN funktioniert nicht. Practise a calm short exchange that confirms room, duration and breakfast time."],
+    "phrases":[["Ich habe eine Reservierung.","I have a reservation."],["ein Einzelzimmer","a single room"],["für zwei Nächte","for two nights"],["Wann gibt es Frühstück?","When is breakfast?"],["Das WLAN funktioniert nicht.","The Wi-Fi does not work."]],
+    "dialogue":[["Mia","Ich habe eine Reservierung. Ein Einzelzimmer für zwei Nächte.","I have a reservation. A single room for two nights."],["Receptionist","Ja, Zimmer zwölf.","Yes, room twelve."],["Mia","Wann gibt es Frühstück?","When is breakfast?"],["Receptionist","Von sieben bis zehn Uhr.","From seven to ten."]],
+    "task":"Check in using a fictional name, room type and number of nights. Ask about breakfast and report one simple problem.",
+    "model":"Ich habe eine Reservierung auf den Namen Klein. Ein Einzelzimmer für zwei Nächte. Wann gibt es Frühstück? Das WLAN funktioniert nicht.",
+    "quiz":["What does für zwei Nächte mean?",["For two nights","In room two","At two o'clock"],0,"Nächte is the plural of Nacht, night."],
+    "readingQuiz":["When does breakfast end?",["At seven","At ten","At twelve"],1,"Von sieben bis zehn gives a range ending at ten."]
+  },
+  {
+    "slug":"a1-travel-mission","title":"Mission: a weekend in Cologne","goal":"Combine booking, transport and directions in a practical travel plan.",
+    "notes":["Break a trip into three short interactions: buy a ticket, reach the hotel and ask about check-in. Use the same names and times consistently across your plan. Nach Köln expresses a destination city; zum Hotel expresses going to a particular hotel. These are useful chunks for a beginner itinerary.","When plans change, extract the new information carefully. A train arriving at 16 Uhr and a meeting at 17 Uhr are different events. Ask Wann? for time and Wo? for place. End this unit by making a simple itinerary you can read without translating each word back into English."],
+    "phrases":[["Ich fahre nach Köln.","I am travelling to Cologne."],["Der Zug kommt um vier Uhr an.","The train arrives at four o'clock."],["Wie komme ich zum Hotel?","How do I get to the hotel?"],["Ich bleibe zwei Nächte.","I am staying two nights."],["Wir treffen uns am Bahnhof.","We meet at the station."]],
+    "dialogue":[["Mia","Wann kommst du in Köln an?","When do you arrive in Cologne?"],["Ben","Um sechzehn Uhr. Ich bleibe zwei Nächte.","At sixteen hundred. I am staying two nights."],["Mia","Wir treffen uns am Bahnhof.","We meet at the station."],["Ben","Super, bis Samstag!","Great, see you Saturday!"]],
+    "task":"Write a five-line itinerary with city, day, arrival time, meeting place and hotel duration. Add a question asking for directions to the hotel.",
+    "model":"Ich fahre am Samstag nach Köln. Ich komme um sechzehn Uhr an. Wir treffen uns am Bahnhof. Ich bleibe zwei Nächte. Wie komme ich zum Hotel?",
+    "quiz":["Which expression gives a destination city?",["nach Köln","am Köln","um Köln"],0,"Nach is used for going to most cities, such as Köln."],
+    "readingQuiz":["Where will the friends meet?",["At the hotel","At the station","At the café"],1,"Mia confirms am Bahnhof as the meeting place."]
+  },
+  {
+    "slug":"a1-clothes","title":"Clothes that fit","goal":"Name basic clothes and ask for a size.",
+    "notes":["Useful clothes include die Hose, das Hemd, die Jacke, der Rock and die Schuhe. Schuhe is plural; one shoe is der Schuh. Use Ich suche to explain what you want: Ich suche eine Jacke. The article follows the direct-object pattern you practised earlier.","Ask Haben Sie das in Größe M? for a different size. Zu groß and zu klein mean too big and too small, not very big or very small. Das passt means it fits. Describe the item after trying it on using a short sentence, then ask for an alternative if needed."],
+    "phrases":[["die Jacke","the jacket"],["die Schuhe","the shoes"],["Haben Sie das in Größe M?","Do you have that in size M?"],["Das ist zu klein.","That is too small."],["Das passt.","That fits."]],
+    "dialogue":[["Mia","Ich suche eine Jacke.","I am looking for a jacket."],["Assistant","Hier, Größe S.","Here, size S."],["Mia","Das ist zu klein. Haben Sie Größe M?","That is too small. Do you have size M?"],["Assistant","Ja, hier bitte.","Yes, here you are."]],
+    "task":"Describe two clothing items you want to buy. Role-play trying on one item, saying it is too small and asking for another size.",
+    "model":"Ich suche eine Jacke und Schuhe. Die Jacke ist zu klein. Haben Sie das in Größe M? Jetzt passt das.",
+    "quiz":["What does zu klein mean?",["Very small","Too small","Small enough"],1,"Zu before an adjective indicates an excessive degree: too small."],
+    "readingQuiz":["Which size does Mia request after trying S?",["L","XS","M"],2,"Mia asks Haben Sie Größe M?"]
+  },
+  {
+    "slug":"a1-weather","title":"Weather and the seasons","goal":"Describe everyday weather and choose a suitable activity.",
+    "notes":["Weather often uses es: Es regnet, es schneit, es ist kalt. Do not omit es even though it does not refer to a specific object. Die Sonne scheint means the sun is shining. Learn a weather sentence with each season: Frühling, Sommer, Herbst and Winter.","Use im with a season: im Sommer, im Winter. Heute describes today's weather; morgen describes a forecast or plan. Connect weather and an activity in two simple sentences: Es regnet. Ich bleibe zu Hause. You do not need a complex because-clause to communicate a useful plan."],
+    "phrases":[["Es regnet.","It is raining."],["Die Sonne scheint.","The sun is shining."],["Es ist kalt.","It is cold."],["im Sommer","in summer"],["Ich bleibe zu Hause.","I am staying at home."]],
+    "dialogue":[["Ben","Wie ist das Wetter heute?","What is the weather like today?"],["Mia","Es regnet und es ist kalt.","It is raining and it is cold."],["Ben","Dann bleibe ich zu Hause.","Then I will stay at home."]],
+    "task":"Write a three-day fictional forecast. Add one activity and one clothing choice for each day using short sentences.",
+    "model":"Heute regnet es. Ich bleibe zu Hause. Morgen scheint die Sonne. Ich spiele Fußball. Im Winter ist es kalt. Ich brauche eine Jacke.",
+    "quiz":["Complete: ___ regnet.",["Es","Ich","Wir"],0,"The standard weather expression uses the impersonal subject es."],
+    "readingQuiz":["What does Ben decide to do?",["Go swimming","Stay at home","Buy shoes"],1,"Ben says Dann bleibe ich zu Hause."]
+  },
+  {
+    "slug":"a1-body","title":"Describe how you feel","goal":"Name basic body parts and describe simple symptoms in German.",
+    "notes":["Learn der Kopf, der Hals, der Bauch, der Rücken and der Fuß. Ich habe Kopfschmerzen means I have a headache; Mein Bauch tut weh means my stomach hurts. These are language patterns for describing a feeling, not advice about what treatment to use.","Use seit with a time expression to describe an ongoing problem: seit gestern means since yesterday. Ask for clarification with Was bedeutet das? if you do not understand a word. In a real conversation, describe your own symptoms accurately rather than copying the example. Practise short sentences that state what hurts and since when."],
+    "phrases":[["der Kopf","the head"],["der Bauch","the stomach / belly"],["Ich habe Kopfschmerzen.","I have a headache."],["Mein Hals tut weh.","My throat hurts."],["seit gestern","since yesterday"]],
+    "dialogue":[["Mia","Wie geht es dir?","How are you?"],["Ben","Nicht gut. Ich habe Kopfschmerzen.","Not well. I have a headache."],["Mia","Seit wann?","Since when?"],["Ben","Seit gestern.","Since yesterday."]],
+    "task":"Label five body parts on a simple sketch. Write two fictional symptom sentences and add a time phrase to one of them.",
+    "model":"Kopf, Hals, Bauch, Rücken, Fuß. Ich habe Kopfschmerzen. Mein Hals tut seit gestern weh.",
+    "quiz":["What does seit gestern mean?",["Until tomorrow","Since yesterday","Every morning"],1,"Seit introduces the start of an ongoing period; gestern is yesterday."],
+    "readingQuiz":["What problem does Ben describe?",["A headache","A sore foot","A stomach ache"],0,"Ben says Ich habe Kopfschmerzen."]
+  },
+  {
+    "slug":"a1-appointments","title":"Make an appointment","goal":"Request an appointment and confirm a day and time.",
+    "notes":["Ein Termin is an appointment. Ich möchte einen Termin uses the masculine accusative form einen. When calling a practice or office, explain your request briefly and listen for the proposed slot. Am Dienstag um neun Uhr contains both a day and a clock time.","Kann ich später kommen? asks whether a later time is possible. If a proposed time works, say Ja, das passt. Repeat the complete arrangement to avoid mixing up dates or numbers. This lesson practises booking language only; it does not tell you how urgently a medical concern needs attention."],
+    "phrases":[["Ich möchte einen Termin.","I would like an appointment."],["am Dienstag um neun Uhr","on Tuesday at nine"],["Kann ich später kommen?","Can I come later?"],["Ja, das passt.","Yes, that works."],["Bitte sagen Sie das noch einmal.","Please say that once again."]],
+    "dialogue":[["Ben","Ich möchte einen Termin.","I would like an appointment."],["Receptionist","Am Dienstag um neun Uhr?","On Tuesday at nine?"],["Ben","Kann ich später kommen?","Can I come later?"],["Receptionist","Um elf Uhr.","At eleven."],["Ben","Ja, das passt.","Yes, that works."]],
+    "task":"Write a booking dialogue with an initial time, a request for a later time and a final confirmation. Repeat the final day and time aloud.",
+    "model":"Ich möchte einen Termin. Am Dienstag um neun Uhr? Kann ich später kommen? Um elf Uhr. Ja, Dienstag um elf Uhr passt.",
+    "quiz":["Why is it einen Termin after möchte?",["Termin is feminine","Termin is a masculine direct object","All appointments take einen"],1,"Termin is masculine and is the object of the request."],
+    "readingQuiz":["What time is finally accepted?",["Nine","Ten","Eleven"],2,"The later offer is elf Uhr, and Ben accepts it."]
+  },
+  {
+    "slug":"a1-everyday-help","title":"Mission: ask for help","goal":"Handle a small everyday problem with polite requests.",
+    "notes":["Können Sie mir helfen? is a useful polite request when something goes wrong. Mir means to me in this expression. Explain one concrete problem: Ich finde meine Tasche nicht or Mein Handy funktioniert nicht. A clear short statement lets the other person ask the right follow-up question.","Use Entschuldigung to get attention politely and Danke für Ihre Hilfe to finish. Describe a missing item with a colour or location from earlier lessons. If you miss a question, ask for repetition. This review combines clothes, locations and requests in a small lost-property scenario."],
+    "phrases":[["Können Sie mir helfen?","Can you help me?"],["Ich finde meine Tasche nicht.","I cannot find my bag."],["Sie ist schwarz.","It is black."],["Entschuldigung!","Excuse me!"],["Danke für Ihre Hilfe.","Thank you for your help."]],
+    "dialogue":[["Mia","Entschuldigung! Ich finde meine Tasche nicht.","Excuse me! I cannot find my bag."],["Staff","Welche Farbe hat sie?","What colour is it?"],["Mia","Sie ist schwarz.","It is black."],["Staff","Hier ist eine schwarze Tasche.","Here is a black bag."]],
+    "task":"Role-play asking for help with a missing bag. Give its colour, say where you last had it and thank the helper.",
+    "model":"Entschuldigung! Können Sie mir helfen? Ich finde meine Tasche nicht. Sie ist schwarz. Sie war im Café. Danke für Ihre Hilfe.",
+    "quiz":["Which phrase politely asks for help?",["Können Sie mir helfen?","Wie spät ist es?","Ich habe eine Reservierung."],0,"Können Sie mir helfen? directly asks whether the person can help you."],
+    "readingQuiz":["What colour is the missing bag?",["White","Black","Blue"],1,"Mia describes it as schwarz."]
+  },
+  {
+    "slug":"a1-work-study","title":"Work and study","goal":"Describe a job or course and where it takes place.",
+    "notes":["Useful phrases include Ich arbeite als Lehrer and Ich studiere Informatik. Studieren usually means studying at a university; lernen is the broader verb for learning or revising. Use arbeiten for work and am Computer for working at a computer. Name your activity with one clear present-tense sentence.","A profession often follows sein without an article: Sie ist Ärztin. Many profession nouns have masculine and feminine forms, such as Lehrer and Lehrerin. When speaking about a person, use the form appropriate to that person. Questions like Was machst du beruflich? ask about work rather than what someone is doing this second."],
+    "phrases":[["Ich arbeite im Büro.","I work in an office."],["Ich studiere Informatik.","I study computer science."],["Ich bin Lehrer.","I am a teacher."],["Was machst du beruflich?","What do you do for work?"],["Ich lerne für den Kurs.","I study for the course."]],
+    "dialogue":[["Ben","Was machst du beruflich?","What do you do for work?"],["Mia","Ich arbeite im Büro. Und du?","I work in an office. And you?"],["Ben","Ich studiere Informatik.","I study computer science."]],
+    "task":"Write a fictional work or study profile. Include role, location and one daily activity. Ask a partner what they do for work.",
+    "model":"Ich bin Lehrer. Ich arbeite in Berlin. Am Abend lerne ich Deutsch. Was machst du beruflich?",
+    "quiz":["Which verb usually describes university study?",["wohnen","studieren","kaufen"],1,"Studieren normally refers to higher education; lernen is the broader learning verb."],
+    "readingQuiz":["What does Ben study?",["German literature","Medicine","Computer science"],2,"Informatik means computer science."]
+  },
+  {
+    "slug":"a1-modal-verbs","title":"Can, must and would like","goal":"Use common modal verbs with an infinitive at the end.",
+    "notes":["Modal verbs add ideas such as ability, necessity or a wish. Ich kann schwimmen means I can swim; ich muss arbeiten means I must work; ich möchte lernen means I would like to learn. The modal is conjugated near the start, while the other verb stays in its infinitive form at the end.","Useful forms are ich kann/du kannst, ich muss/du musst and ich möchte/du möchtest. Add other information between the two verbs: Ich muss heute arbeiten. Do not conjugate both verbs. Practise by finding the modal and the infinitive in each sentence and drawing a line between them."],
+    "phrases":[["Ich kann schwimmen.","I can swim."],["Ich muss heute arbeiten.","I have to work today."],["Ich möchte Deutsch lernen.","I would like to learn German."],["Kannst du kommen?","Can you come?"],["Du musst warten.","You have to wait."]],
+    "dialogue":[["Mia","Kannst du heute kommen?","Can you come today?"],["Ben","Nein, ich muss arbeiten. Morgen kann ich kommen.","No, I have to work. Tomorrow I can come."],["Mia","Gut, dann bis morgen!","Good, then see you tomorrow!"]],
+    "task":"Write one ability, one obligation and one wish. Include a time phrase in two sentences and check that the infinitive is last.",
+    "model":"Ich kann schwimmen. Heute muss ich arbeiten. Am Abend möchte ich Deutsch lernen.",
+    "quiz":["Choose the correct sentence.",["Ich muss heute arbeiten.","Ich muss heute arbeite.","Ich arbeiten muss heute."],0,"Muss is conjugated; arbeiten remains an infinitive at the end."],
+    "readingQuiz":["Why can Ben not come today?",["He is swimming","He has to work","He is buying a ticket"],1,"Ben explains ich muss arbeiten."]
+  },
+  {
+    "slug":"a1-messages","title":"Write a short message","goal":"Write a clear invitation or cancellation with a greeting and closing.",
+    "notes":["A short message needs a purpose, essential details and a closing. For a friend, Hallo Mia and Viele Grüße work well. Give the day, time and place for an invitation. For a cancellation, say Ich kann heute nicht kommen and add a brief reason or an alternative plan.","Use und to add information and aber to contrast it. Keep complete clauses simple: Ich möchte kommen, aber ich muss arbeiten. Read your message as the recipient: can they tell what happens, when and where? Check names, capitals and verb endings before sending. Practise with fictional contact details."],
+    "phrases":[["Liebe Mia,","Dear Mia,"],["Ich kann heute nicht kommen.","I cannot come today."],["Hast du morgen Zeit?","Do you have time tomorrow?"],["Viele Grüße","Best wishes"],["Bis bald!","See you soon!"]],
+    "dialogue":[["Ben","Hallo Mia, ich kann heute nicht kommen. Ich muss arbeiten.","Hello Mia, I cannot come today. I have to work."],["Mia","Kein Problem. Hast du morgen Zeit?","No problem. Do you have time tomorrow?"],["Ben","Ja, um sechs Uhr. Bis morgen!","Yes, at six. See you tomorrow!"]],
+    "task":"Write a 30-word message cancelling a meeting and suggesting another day and time. Include a greeting, reason and closing.",
+    "model":"Hallo Mia, ich kann heute leider nicht kommen. Ich muss arbeiten. Hast du morgen um sechs Uhr Zeit? Wir können ins Café gehen. Viele Grüße, Ben",
+    "quiz":["Which connector contrasts two statements?",["und","aber","auch"],1,"Aber means but and signals a contrast."],
+    "readingQuiz":["When do they suggest meeting instead?",["Today at six","Tomorrow at six","Next Monday at nine"],1,"Mia suggests tomorrow; Ben adds um sechs Uhr."]
+  },
+  {
+    "slug":"a1-past","title":"Yesterday and last weekend","goal":"Understand a first set of past-tense sentences.",
+    "notes":["For sein and haben, common past forms include ich war, du warst, er war and ich hatte, du hattest, er hatte. Ich war zu Hause means I was at home. Use gestern or am Wochenende to make the time clear. These simple forms are useful in everyday conversation.","The conversational perfect often uses haben plus a participle: Ich habe Deutsch gelernt. Some movement verbs use sein: Ich bin nach Köln gefahren. The auxiliary is conjugated and the participle goes at the end. This lesson introduces a small set of complete patterns; practise them before extending to many irregular verbs."],
+    "phrases":[["Ich war zu Hause.","I was at home."],["Ich hatte Zeit.","I had time."],["Ich habe Deutsch gelernt.","I studied German."],["Ich habe gekocht.","I cooked."],["Ich bin nach Köln gefahren.","I travelled to Cologne."]],
+    "dialogue":[["Mia","Was hast du gestern gemacht?","What did you do yesterday?"],["Ben","Ich war zu Hause. Ich habe Deutsch gelernt und gekocht.","I was at home. I studied German and cooked."],["Mia","Ich bin nach Köln gefahren.","I travelled to Cologne."]],
+    "task":"Write a three-sentence diary for a fictional yesterday. Use war once, habe plus a participle once and bin gefahren once.",
+    "model":"Gestern war ich zu Hause. Ich habe Deutsch gelernt. Am Abend bin ich nach Köln gefahren.",
+    "quiz":["Complete: Ich ___ nach Köln gefahren.",["habe","bin","hatte"],1,"Fahren used for travelling to a destination forms this perfect tense with sein: bin gefahren."],
+    "readingQuiz":["Who travelled to Cologne?",["Ben","Both speakers","Mia"],2,"Mia says Ich bin nach Köln gefahren."]
+  },
+  {
+    "slug":"a1-final-mission","title":"Your A1 adventure: final mission","goal":"Bring introductions, plans, requests and past experiences together.",
+    "notes":["You now have tools for short everyday conversations. Begin this final mission with an introduction, then arrange a meeting, order a drink and describe yesterday. Use familiar sentences accurately. You can ask for repetition whenever you need it; maintaining the exchange is part of communicating successfully.","Review your work in four passes: check who does each action, check the verb form, check articles on objects and check times or numbers. A completed course is practice, not an official language certificate. Keep revisiting difficult lessons and use the linked A1 resources for broader listening, reading and exam-style practice."],
+    "phrases":[["Ich lerne seit einem Monat Deutsch.","I have been learning German for a month."],["Können wir uns morgen treffen?","Can we meet tomorrow?"],["Ich möchte einen Tee.","I would like a tea."],["Gestern habe ich gelernt.","Yesterday I studied."],["Bitte sprechen Sie langsam.","Please speak slowly."]],
+    "dialogue":[["Mia","Hallo! Ich bin Mia. Ich lerne Deutsch.","Hello! I am Mia. I am learning German."],["Ben","Freut mich. Können wir uns morgen im Café treffen?","Nice to meet you. Can we meet at the café tomorrow?"],["Mia","Ja, um zehn Uhr. Gestern habe ich viel gelernt.","Yes, at ten. Yesterday I studied a lot."],["Ben","Super. Dann bis morgen!","Great. Then see you tomorrow!"]],
+    "task":"Create a 90-second role-play: introduce yourself, arrange tomorrow's café meeting, order a drink and describe yesterday. Write a matching 40-word message and review one difficult earlier lesson.",
+    "model":"Hallo, ich heiße Alex. Ich komme aus Indien. Können wir uns morgen um zehn Uhr im Café treffen? Ich möchte einen Tee. Gestern habe ich Deutsch gelernt. Bitte sprechen Sie langsam.",
+    "quiz":["Which sentence correctly describes yesterday?",["Gestern ich habe gelernt.","Gestern habe ich gelernt.","Gestern ich gelernt habe."],1,"In a main clause starting with Gestern, habe is the second element and gelernt is last."],
+    "readingQuiz":["When and where will the friends meet?",["Today at the station","Tomorrow at ten in the café","Yesterday at school"],1,"Ben proposes tomorrow in the café and Mia agrees to ten o'clock."]
+  }
+]

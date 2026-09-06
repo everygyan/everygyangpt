@@ -455,6 +455,20 @@ img { max-width: 100%; }
 }
 
 /* Learn German */
+.german-pdf-link { display: flex; flex: 0 0 auto; align-items: center; gap: 5px; margin-left: auto; padding: 10px; color: #067daf; border: 1px solid #b6dcec; border-radius: 9px; font-size: .72rem; font-weight: 800; background: #effaff; }
+.german-unit-filter { display: grid; gap: 8px; margin-top: 24px; font-size: .8rem; }
+.german-unit-filter select { width: 100%; min-width: 0; padding: 10px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+.german-teaching { margin: 24px 0; }
+.german-teaching > p, .german-mission p { font-size: .92rem; line-height: 1.75; }
+.german-dialogue-line { display: flex; gap: 12px; margin: 12px 0; padding: 14px; border: 1px solid #a8c4d4; border-radius: 12px; }
+.german-dialogue-line > button { align-self: start; flex-shrink: 0; padding: 8px; color: #076a91; background: #e0f5ff; border: 0; border-radius: 8px; }
+.german-dialogue-line p { margin: 5px 0; font-size: .9rem; line-height: 1.6; }
+.german-dialogue-line small { font-weight: 800; color: #078bc8; }
+.german-teaching summary, .german-mission summary { cursor: pointer; font-size: .8rem; font-weight: 700; padding-block: 5px; }
+.german-mission { padding: 18px; border: 2px solid #72af24; border-radius: 12px; margin: 24px 0; }
+.german-mission h3 { margin-top: 0; }
+.german-worksheet-button { margin-bottom: 10px; }
+@media (max-width: 540px) { .german-pdf-link { padding: 8px; } .german-pdf-link span { display: none; } .german-player-footer { max-height: 40dvh; overflow-y: auto; } }
 .german-page { background: #f7fbff; }
 .german-hub { --german-navy: #102a43; --german-blue: #1cb0f6; --german-green: #58cc02; --german-line: #dce8f1; color: var(--german-navy); font-family: Arial, Helvetica, sans-serif; }
 .german-hero { position: relative; overflow: hidden; padding: 78px 0 84px; background: radial-gradient(circle at 82% 18%, rgba(255,211,92,.42), transparent 22%), radial-gradient(circle at 15% 80%, rgba(28,176,246,.18), transparent 27%), linear-gradient(145deg, #effaff 0%, #fff 47%, #fff8dd 100%); border-bottom: 1px solid #dbeaf3; }

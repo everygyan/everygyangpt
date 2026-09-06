@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, Flame, Headphones, Heart, LockKeyhole, Play, RotateCcw, Sparkles, Star, Trophy, Volume2, X } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, Download, Flame, Headphones, Heart, Play, RotateCcw, Sparkles, Star, Trophy, Volume2, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { GermanCourseCatalog, GermanLesson, GermanLevelCode } from "@/data/german-course";
 import type { GermanProgress } from "@/lib/german-course";
 
@@ -28,6 +28,37 @@ export function GermanLearningHub({ catalog, catalogSource, initialProgress, lea
   const [checked, setChecked] = useState(false);
   const [syncMessage, setSyncMessage] = useState("");
   const [streak, setStreak] = useState(0);
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [saving, setSaving] = useState(false);
+  const [unitFilter, setUnitFilter] = useState("all");
+  const dialogRef = useRef<HTMLElement>(null);
+  const exercises = activeLesson?.exercises?.length ? activeLesson.exercises : activeLesson ? [activeLesson.exercise] : [];
+  const activeExercise = exercises[questionIndex];
+  const lastQuestion = questionIndex === exercises.length - 1;
+
+  useEffect(() => {
+    if (!activeLesson) return;
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    dialogRef.current?.querySelector<HTMLButtonElement>("button")?.focus();
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !saving) setActiveLesson(null);
+      if (event.key !== "Tab") return;
+      const focusable = Array.from(dialogRef.current?.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], summary, [tabindex="0"]') ?? []);
+      const first = focusable[0];
+      const last = focusable.at(-1);
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKey);
+      window.speechSynthesis?.cancel();
+      previouslyFocused?.focus();
+    };
+  }, [activeLesson, saving]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -65,12 +96,11 @@ export function GermanLearningHub({ catalog, catalogSource, initialProgress, lea
     setSelectedAnswer(null);
     setChecked(false);
     setSyncMessage("");
-    document.body.style.overflow = "hidden";
+    setQuestionIndex(0);
   }
 
   function closeLesson() {
     setActiveLesson(null);
-    document.body.style.overflow = "";
   }
 
   function speak(text: string) {
@@ -83,7 +113,7 @@ export function GermanLearningHub({ catalog, catalogSource, initialProgress, lea
   }
 
   async function finishLesson() {
-    if (!activeLesson) return;
+    if (!activeLesson || !lastQuestion || !checked || selectedAnswer !== activeExercise.answer || saving) return;
     const nextCompleted = new Set(completed).add(activeLesson.slug);
     setCompleted(nextCompleted);
     setStreak(1);
@@ -99,18 +129,21 @@ export function GermanLearningHub({ catalog, catalogSource, initialProgress, lea
       return;
     }
     if (catalogSource !== "supabase") {
-      setSyncMessage("Progress saved on this device. Run the Supabase course migration to enable account sync.");
+      setSyncMessage("Progress saved on this device. Account sync is temporarily unavailable.");
       return;
     }
     try {
+      setSaving(true);
       const response = await fetch("/api/learn-german/progress", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ lessonSlug: activeLesson.slug, score: 100 }),
       });
-      setSyncMessage(response.ok ? "Progress synced to your EveryGyan account." : "Saved on this device; account sync will retry next time.");
+      setSyncMessage(response.ok ? "Progress synced to your EveryGyan account." : "Saved on this device. Use Save completion again to retry account sync.");
     } catch {
-      setSyncMessage("Saved on this device; account sync will retry next time.");
+      setSyncMessage("Saved on this device. Use Save completion again to retry account sync.");
+    } finally {
+      setSaving(false);
     }
   }
 
@@ -134,7 +167,7 @@ export function GermanLearningHub({ catalog, catalogSource, initialProgress, lea
               <a className="german-secondary-button" href="#course-path">Explore the course <ArrowRight size={17} /></a>
             </div>
             <div className="german-trust-row">
-              <span><Check size={16} /> Free starter lessons</span>
+              <span><Check size={16} /> 50 structured A1 lessons</span>
               <span><Volume2 size={16} /> German pronunciation</span>
               <span><Trophy size={16} /> A1 to C1 path</span>
             </div>
@@ -143,7 +176,7 @@ export function GermanLearningHub({ catalog, catalogSource, initialProgress, lea
             <div className="german-mascot" aria-hidden="true">G</div>
             <div className="german-card-bubble">
               <strong>{learnerName ? `Hallo, ${learnerName.split(" ")[0]}!` : "Hallo! Bereit?"}</strong>
-              <span>Your next German win is only five minutes away.</span>
+              <span>Make time for one lesson today. Learn, practise and use it.</span>
             </div>
             <div className="german-stat-grid">
               <div><Flame size={24} /><strong>{streak}</strong><span>day streak</span></div>
@@ -157,7 +190,7 @@ export function GermanLearningHub({ catalog, catalogSource, initialProgress, lea
       <section className="shell german-course-section" id="course-path">
         <div className="german-section-heading">
           <div><span className="german-eyebrow">CEFR learning path</span><h2>Choose your level</h2><p>Start where you feel comfortable. You can explore every level at any time.</p></div>
-          <span className="german-source-status"><span /> {catalogSource === "supabase" ? "Curriculum live from Supabase" : "Starter curriculum active"}</span>
+          <span className="german-source-status"><span /> Learn at your own pace</span>
         </div>
 
         <div className="german-level-tabs" role="tablist" aria-label="German course levels">
@@ -172,7 +205,7 @@ export function GermanLearningHub({ catalog, catalogSource, initialProgress, lea
                 type="button"
                 role="tab"
                 aria-selected={selectedLevel === level.code}
-                onClick={() => setSelectedLevel(level.code)}
+                onClick={() => { setSelectedLevel(level.code); setUnitFilter("all"); }}
               >
                 <strong>{level.code}</strong><span>{level.title}</span><small>{done}/{lessonCount}</small>
               </button>
@@ -188,11 +221,17 @@ export function GermanLearningHub({ catalog, catalogSource, initialProgress, lea
             <p>{activeLevel.outcome}</p>
             <div className="german-progress-label"><span>Level progress</span><strong>{progressPercent}%</strong></div>
             <div className="german-progress"><span style={{ width: `${progressPercent}%` }} /></div>
-            <small>{completedInLevel} of {levelLessons.length} starter lessons complete</small>
+            <small>{completedInLevel} of {levelLessons.length} lessons complete</small>
+            <label className="german-unit-filter">Jump to a unit
+              <select value={unitFilter} onChange={(event) => setUnitFilter(event.target.value)}>
+                <option value="all">All units</option>
+                {groupedUnits.map((unit, i) => <option key={unit.title} value={unit.title}>Unit {i + 1}: {unit.title}</option>)}
+              </select>
+            </label>
           </aside>
 
           <div className="german-path">
-            {groupedUnits.map((unit, unitIndex) => (
+            {groupedUnits.map((unit, unitIndex) => (unitFilter === "all" || unitFilter === unit.title) && (
               <div className="german-unit" key={unit.title}>
                 <header><span>Unit {unitIndex + 1}</span><h3>{unit.title}</h3></header>
                 <div className="german-lesson-path">
@@ -203,6 +242,7 @@ export function GermanLearningHub({ catalog, catalogSource, initialProgress, lea
                         <button className={`german-lesson-node ${isDone ? "complete" : ""}`} type="button" onClick={() => openLesson(lesson)} aria-label={`Open ${lesson.title}`}>
                           {isDone ? <Check size={27} strokeWidth={3} /> : <span>{lesson.icon}</span>}
                         </button>
+                        {lesson.pdfUrl?.startsWith("/resources/german-a1/") && <a className="german-pdf-link" href={lesson.pdfUrl} download aria-label={`Download worksheet for ${lesson.title}`}><Download size={18} /><span>PDF</span></a>}
                         <button className="german-lesson-copy" type="button" onClick={() => openLesson(lesson)}>
                           <small>Lesson {lessonNumber(levelLessons, lesson)} · {lesson.minutes} min · +{lesson.xp} XP</small>
                           <strong>{lesson.title}</strong>
@@ -211,10 +251,6 @@ export function GermanLearningHub({ catalog, catalogSource, initialProgress, lea
                       </div>
                     );
                   })}
-                  <div className="german-lesson-row locked">
-                    <span className="german-lesson-node"><LockKeyhole size={22} /></span>
-                    <div className="german-lesson-copy"><small>More lessons coming next</small><strong>Checkpoint challenge</strong><span>Review this level and test your growing skills.</span></div>
-                  </div>
                 </div>
               </div>
             ))}
@@ -245,16 +281,19 @@ export function GermanLearningHub({ catalog, catalogSource, initialProgress, lea
 
       {activeLesson && (
         <div className="german-lesson-overlay" role="presentation">
-          <section className="german-lesson-player" role="dialog" aria-modal="true" aria-labelledby="german-lesson-title">
+          <section ref={dialogRef} className="german-lesson-player" role="dialog" aria-modal="true" aria-labelledby="german-lesson-title">
             <header className="german-player-header">
-              <button type="button" onClick={closeLesson} aria-label="Close lesson"><X size={23} /></button>
-              <div className="german-player-progress"><span style={{ width: checked && selectedAnswer === activeLesson.exercise.answer ? "100%" : "55%" }} /></div>
+              <button type="button" disabled={saving} onClick={closeLesson} aria-label="Close lesson"><X size={23} /></button>
+              <div className="german-player-progress" aria-label={`Question ${questionIndex + 1} of ${exercises.length}`}><span style={{ width: `${100 * (questionIndex + (checked && selectedAnswer === activeExercise.answer ? 1 : 0)) / exercises.length}%` }} /></div>
               <span><Heart size={20} fill="currentColor" /> {activeLesson.xp} XP</span>
             </header>
             <div className="german-player-body">
               <span className="german-eyebrow">{activeLesson.level} · {activeLesson.unit}</span>
               <h2 id="german-lesson-title">{activeLesson.title}</h2>
               <p>{activeLesson.description}</p>
+              {activeLesson.pdfUrl?.startsWith("/resources/german-a1/") && <a className="german-secondary-button german-worksheet-button" href={activeLesson.pdfUrl} download><Download size={18} /> Download lesson worksheet (PDF)</a>}
+              {!!activeLesson.notes?.length && <section className="german-teaching"><h3>Learn the idea</h3>{activeLesson.notes.map((note) => <p key={note}>{note}</p>)}</section>}
+              <h3>Words and phrases · listen and repeat</h3>
 
               <div className="german-phrase-list">
                 {activeLesson.phrases.map((phrase) => (
@@ -265,26 +304,30 @@ export function GermanLearningHub({ catalog, catalogSource, initialProgress, lea
                 ))}
               </div>
 
+              {!!activeLesson.dialogue?.length && <section className="german-teaching"><h3>Try the conversation</h3><p>Read both roles. Listen, repeat, then hide the translation and try again.</p>{activeLesson.dialogue.map((line, i) => <div className="german-dialogue-line" key={i}><button type="button" onClick={() => speak(line.german)} aria-label={`Listen to dialogue line ${i + 1}`}><Volume2 size={18} /></button><div><small>{line.speaker}</small><p lang="de">{line.german}</p><details><summary>Show translation</summary><p>{line.english}</p></details></div></div>)}</section>}
+              {activeLesson.task && <section className="german-mission"><h3>Your real-life mission</h3><p>{activeLesson.task}</p><details><summary>See a sample answer</summary><p>{activeLesson.model}</p></details></section>}
+
               <div className="german-question">
-                <span><Headphones size={19} /> Quick check</span>
-                <h3>{activeLesson.exercise.prompt}</h3>
+                <span><Headphones size={19} /> Practice · question {questionIndex + 1} of {exercises.length}</span>
+                <h3>{activeExercise.prompt}</h3>
                 <div className="german-answer-grid">
-                  {activeLesson.exercise.choices.map((choice, index) => {
-                    const correct = checked && index === activeLesson.exercise.answer;
-                    const wrong = checked && selectedAnswer === index && index !== activeLesson.exercise.answer;
+                  {activeExercise.choices.map((choice, index) => {
+                    const correct = checked && index === activeExercise.answer;
+                    const wrong = checked && selectedAnswer === index && index !== activeExercise.answer;
                     return <button className={`${selectedAnswer === index ? "selected" : ""} ${correct ? "correct" : ""} ${wrong ? "wrong" : ""}`} key={choice} type="button" disabled={checked} onClick={() => setSelectedAnswer(index)}><span>{index + 1}</span>{choice}{correct && <Check size={18} />}{wrong && <X size={18} />}</button>;
                   })}
                 </div>
               </div>
             </div>
-            <footer className={`german-player-footer ${checked ? selectedAnswer === activeLesson.exercise.answer ? "success" : "error" : ""}`}>
-              <div>
-                {checked && <><strong>{selectedAnswer === activeLesson.exercise.answer ? "Sehr gut!" : "Almost there."}</strong><span>{activeLesson.exercise.explanation}</span>{syncMessage && <small>{syncMessage}</small>}</>}
+            <footer className={`german-player-footer ${checked ? selectedAnswer === activeExercise.answer ? "success" : "error" : ""}`}>
+              <div aria-live="polite">
+                {checked && <><strong>{selectedAnswer === activeExercise.answer ? "Sehr gut!" : "Almost there."}</strong><span>{activeExercise.explanation}</span>{syncMessage && <small>{syncMessage}</small>}</>}
               </div>
               {!checked && <button className="german-primary-button" type="button" disabled={selectedAnswer === null} onClick={() => setChecked(true)}>Check answer</button>}
-              {checked && selectedAnswer !== activeLesson.exercise.answer && <button className="german-secondary-button" type="button" onClick={resetLesson}><RotateCcw size={17} /> Try again</button>}
-              {checked && selectedAnswer === activeLesson.exercise.answer && !completed.has(activeLesson.slug) && <button className="german-primary-button" type="button" onClick={finishLesson}>Complete lesson <ChevronRight size={18} /></button>}
-              {checked && selectedAnswer === activeLesson.exercise.answer && completed.has(activeLesson.slug) && <button className="german-primary-button" type="button" onClick={closeLesson}>Back to course <ChevronRight size={18} /></button>}
+              {checked && selectedAnswer !== activeExercise.answer && <button className="german-secondary-button" type="button" onClick={resetLesson}><RotateCcw size={17} /> Try again</button>}
+              {checked && selectedAnswer === activeExercise.answer && !lastQuestion && <button className="german-primary-button" type="button" onClick={() => { setQuestionIndex((i) => i + 1); resetLesson(); }}>Next question <ChevronRight size={18} /></button>}
+              {checked && selectedAnswer === activeExercise.answer && lastQuestion && <button className="german-primary-button" type="button" disabled={saving} onClick={finishLesson}>{saving ? "Saving…" : completed.has(activeLesson.slug) ? "Save completion again" : "Complete lesson"}<ChevronRight size={18} /></button>}
+              {checked && selectedAnswer === activeExercise.answer && lastQuestion && completed.has(activeLesson.slug) && <button className="german-secondary-button" type="button" disabled={saving} onClick={closeLesson}>Back to course</button>}
             </footer>
           </section>
         </div>

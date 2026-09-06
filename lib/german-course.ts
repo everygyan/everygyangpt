@@ -15,7 +15,7 @@ type LessonRow = {
   icon: string;
   estimated_minutes: number;
   xp_reward: number;
-  content: Pick<GermanLesson, "phrases" | "exercise">;
+  content: Pick<GermanLesson, "phrases" | "exercise" | "exercises" | "notes" | "dialogue" | "task" | "model" | "pdfUrl">;
 };
 
 export type GermanProgress = {
@@ -44,6 +44,8 @@ export async function getGermanCatalog(): Promise<{ catalog: GermanCourseCatalog
       slug: row.slug, level: row.level, unit: row.unit_title, unitOrder: row.unit_order, lessonOrder: row.lesson_order,
       title: row.title, description: row.description, icon: row.icon, minutes: row.estimated_minutes, xp: row.xp_reward,
       phrases: row.content.phrases, exercise: row.content.exercise,
+      exercises: row.content.exercises, notes: row.content.notes, dialogue: row.content.dialogue,
+      task: row.content.task, model: row.content.model, pdfUrl: row.content.pdfUrl,
     }));
     const resources: GermanResource[] = resourcesResult.data.map((row) => ({
       level: row.level as GermanResource["level"], title: row.title, provider: row.provider, description: row.description,
