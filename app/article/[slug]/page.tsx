@@ -4,6 +4,7 @@ import { ArrowLeft, Bookmark, Share2 } from "lucide-react";
 import { notFound } from "next/navigation";
 import { Newsletter } from "@/components/newsletter";
 import { CommentsSection, type PublicComment } from "@/components/comments-section";
+import { ArticleReadAloud } from "@/components/article-read-aloud";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
@@ -15,6 +16,7 @@ type PublishedArticle = {
   title: string;
   slug: string;
   excerpt: string | null;
+  content: unknown;
   content_html: string | null;
   featured_image_url: string | null;
   featured_image_alt: string | null;
@@ -32,7 +34,7 @@ async function getArticle(slug: string) {
   const supabase = await createClient();
   const { data } = await supabase
     .from("articles")
-    .select("id, title, slug, excerpt, content_html, featured_image_url, featured_image_alt, published_at, updated_at, allow_comments, sections(name), profiles(display_name), article_categories(categories(name)), article_tags(tags(name))")
+    .select("id, title, slug, excerpt, content, content_html, featured_image_url, featured_image_alt, published_at, updated_at, allow_comments, sections(name), profiles(display_name), article_categories(categories(name)), article_tags(tags(name))")
     .eq("slug", slug)
     .maybeSingle();
   return data as unknown as PublishedArticle | null;
@@ -44,6 +46,29 @@ function relationName(value: { name?: string } | { name?: string }[] | null) {
 
 function relationDisplayName(value: { display_name?: string } | { display_name?: string }[] | null) {
   return Array.isArray(value) ? value[0]?.display_name : value?.display_name;
+}
+
+function articleAuthor(content: unknown, fallback?: string) {
+  if (content && typeof content === "object" && !Array.isArray(content)) {
+    const name = (content as { authorName?: unknown }).authorName;
+    if (typeof name === "string" && name.trim()) return name.trim();
+  }
+  return fallback || "Sandeep";
+}
+
+function articlePlainText(html: string | null) {
+  return String(html ?? "")
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 async function getComments(articleId: string): Promise<PublicComment[]> {
@@ -82,7 +107,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const comments = article.allow_comments ? await getComments(article.id) : [];
 
   const section = relationName(article.sections) || "Latest";
-  const author = relationDisplayName(article.profiles) || "Sandeep";
+  const author = articleAuthor(article.content, relationDisplayName(article.profiles));
   const category = article.article_categories?.map((item) => relationName(item.categories)).find(Boolean) || "EveryGyan";
   const tags = article.article_tags?.map((item) => relationName(item.tags)).filter((tag): tag is string => Boolean(tag)) ?? [];
   const style = ({ News: "blue", Travel: "teal", Entertainment: "violet", Health: "green", Learn: "orange" } as Record<string, string>)[section] || "blue";
@@ -105,7 +130,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         {article.featured_image_url && <div className="article-cover shell database-cover" role="img" aria-label={article.featured_image_alt || article.title} style={{ backgroundImage: `url(${article.featured_image_url})` }} />}
         <div className="article-layout shell">
           <aside className="share-column" aria-label="Share article"><button aria-label="Save article"><Bookmark size={19} /></button><button aria-label="Share article"><Share2 size={19} /></button></aside>
-          <article className="article-content" dangerouslySetInnerHTML={{ __html: article.content_html || "" }} />
+          <div><ArticleReadAloud title={article.title} text={articlePlainText(article.content_html)} /><article className="article-content" dangerouslySetInnerHTML={{ __html: article.content_html || "" }} /></div>
           <aside className="article-aside"><div className="aside-card"><p className="eyebrow">About the author</p><h3>{author}</h3><p>EveryGyan editor sharing clear, useful knowledge for curious readers.</p></div></aside>
         </div>
         {article.allow_comments && <CommentsSection articleId={article.id} initialComments={comments} />}

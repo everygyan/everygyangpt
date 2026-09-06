@@ -12,6 +12,7 @@ export type ArticleEditorData = {
   title?: string;
   slug?: string;
   excerpt?: string;
+  authorName?: string;
   contentHtml?: string;
   sectionId?: string;
   categoryId?: string;
@@ -196,6 +197,7 @@ export function ArticleEditor({
 
         <aside className="editor-settings">
           <h2>Article settings</h2>
+          <label>Author name<input name="authorName" defaultValue={initial.authorName} placeholder="Name shown to readers" maxLength={100} required /></label>
           <label>Section<select name="sectionId" value={sectionId} onChange={(event) => { const nextSection = event.target.value; setSectionId(nextSection); setCategoryId(categories.find((category) => category.section_id === nextSection)?.id ?? ""); }} required>{sections.map((section) => <option key={section.id} value={section.id}>{section.name}</option>)}</select></label>
           <label>Category<select name="categoryId" value={categoryId} onChange={(event) => setCategoryId(event.target.value)} required><option value="" disabled>Choose category</option>{availableCategories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}</select></label>
           <label>Tags<input name="tags" defaultValue={initial.tags} placeholder="travel, technology, guide" /></label>

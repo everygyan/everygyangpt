@@ -39,6 +39,14 @@ function displayName(value: unknown): string | undefined {
   return undefined;
 }
 
+function contentAuthor(value: unknown): string | undefined {
+  if (value && typeof value === "object" && !Array.isArray(value) && "authorName" in value) {
+    const name = (value as { authorName?: unknown }).authorName;
+    return typeof name === "string" && name.trim() ? name.trim() : undefined;
+  }
+  return undefined;
+}
+
 function validSection(value: string | undefined): Section {
   return (["News", "Travel", "Entertainment", "Health", "Learn"] as string[]).includes(value ?? "")
     ? value as Section
@@ -51,7 +59,7 @@ export async function getPublishedArticles(): Promise<Article[]> {
     const supabase = createPublicSupabaseClient();
     const { data, error } = await supabase
       .from("articles")
-      .select("slug, title, excerpt, content_html, featured_image_url, featured_image_alt, is_featured, is_breaking, published_at, sections(name, slug), profiles(display_name), article_categories(is_primary, categories(name, slug))")
+      .select("slug, title, excerpt, content, content_html, featured_image_url, featured_image_alt, is_featured, is_breaking, published_at, sections(name, slug), profiles(display_name), article_categories(is_primary, categories(name, slug))")
       .eq("status", "published")
       .order("published_at", { ascending: false })
       .limit(50);
@@ -73,7 +81,7 @@ export async function getPublishedArticles(): Promise<Article[]> {
         categorySlug: relationSlug(primaryCategory?.categories),
         image: row.featured_image_url || fallbackImages[section],
         imageAlt: row.featured_image_alt || row.title,
-        author: displayName(row.profiles) ?? "Sandeep",
+        author: contentAuthor(row.content) ?? displayName(row.profiles) ?? "Sandeep",
         publishedAt: new Date(row.published_at ?? Date.now()).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),
         readTime: `${readMinutes} min read`,
         featured: row.is_featured,

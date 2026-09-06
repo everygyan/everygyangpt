@@ -8,12 +8,15 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
   const supabase = await createClient();
   const [{ sections, categories }, articleResult, categoryResult, tagsResult] = await Promise.all([
     getEditorOptions(),
-    supabase.from("articles").select("id, title, slug, excerpt, content_html, section_id, featured_image_url, featured_image_alt, is_featured, is_breaking, allow_comments, seo_title, seo_description").eq("id", id).single(),
+    supabase.from("articles").select("id, title, slug, excerpt, content, content_html, section_id, featured_image_url, featured_image_alt, is_featured, is_breaking, allow_comments, seo_title, seo_description, profiles(display_name)").eq("id", id).single(),
     supabase.from("article_categories").select("category_id").eq("article_id", id).eq("is_primary", true).maybeSingle(),
     supabase.from("article_tags").select("tags(name)").eq("article_id", id),
   ]);
   if (articleResult.error || !articleResult.data) notFound();
   const article = articleResult.data;
+  const storedContent = article.content && typeof article.content === "object" && !Array.isArray(article.content) ? article.content as Record<string, unknown> : {};
+  const authorRelation = article.profiles as unknown as { display_name?: string } | { display_name?: string }[] | null;
+  const profileAuthor = Array.isArray(authorRelation) ? authorRelation[0]?.display_name : authorRelation?.display_name;
   const tagNames = (tagsResult.data ?? [])
     .map((item) => {
       const relation = item.tags as unknown as { name?: string } | { name?: string }[] | null;
@@ -26,6 +29,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
     title: article.title,
     slug: article.slug,
     excerpt: article.excerpt ?? "",
+    authorName: typeof storedContent.authorName === "string" ? storedContent.authorName : profileAuthor ?? "Sandeep",
     contentHtml: article.content_html ?? "",
     sectionId: article.section_id,
     categoryId: categoryResult.data?.category_id,
