@@ -59,7 +59,9 @@ export async function saveMenuItem(_previous: MenuActionState, formData: FormDat
     let url: string | null = null;
     let sectionId: string | null = null;
     let categoryId: string | null = null;
-    if (target.startsWith("section:")) sectionId = target.slice(8);
+    if (target === "none") {
+      if (parentId) return { error: "Choose a destination for this submenu item." };
+    } else if (target.startsWith("section:")) sectionId = target.slice(8);
     else if (target.startsWith("category:")) categoryId = target.slice(9);
     else if (target === "custom") {
       url = validCustomUrl(text(formData, "customUrl"));
@@ -82,7 +84,7 @@ export async function saveMenuItem(_previous: MenuActionState, formData: FormDat
     if (result.error) return { error: result.error.message };
     revalidatePath("/admin/menus");
     revalidatePath("/", "layout");
-    return { success: itemId ? "Menu item updated." : "Menu item created." };
+    return { success: itemId ? "Menu item updated." : target === "none" ? "Main menu heading created. You can now add submenus beneath it." : "Menu item created." };
   } catch (error) {
     return { error: error instanceof Error ? error.message : "The menu item could not be saved." };
   }
@@ -101,3 +103,4 @@ export async function deleteMenuItem(itemId: string) {
     return { error: error instanceof Error ? error.message : "The menu item could not be deleted." };
   }
 }
+

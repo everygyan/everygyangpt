@@ -103,9 +103,9 @@ export function SiteHeader() {
           <nav className={`primary-nav ${menuOpen ? "is-open" : ""}`} aria-label="Primary navigation">
             {navigation.map((item) => (
               <div className={`navigation-item ${openNavigationId === item.id ? "is-open" : ""}`} key={item.id}>
-                <Link href={item.href} onClick={closeNavigation}>{item.label}</Link>
+                {item.href ? <Link href={item.href} onClick={closeNavigation}>{item.label}</Link> : <button className="navigation-heading" type="button" onClick={() => setOpenNavigationId((current) => current === item.id ? null : item.id)}>{item.label}</button>}
                 {!!item.children.length && <button type="button" aria-label={`Show ${item.label} submenu`} aria-expanded={openNavigationId === item.id} onClick={() => setOpenNavigationId((current) => current === item.id ? null : item.id)}><ChevronDown size={14} /></button>}
-                {!!item.children.length && <div className="navigation-submenu">{item.children.map((child) => <Link key={child.id} href={child.href} onClick={closeNavigation}>{child.label}</Link>)}</div>}
+                {!!item.children.length && <div className="navigation-submenu">{item.children.map((child) => child.href ? <Link key={child.id} href={child.href} onClick={closeNavigation}>{child.label}</Link> : null)}</div>}
               </div>
             ))}
           </nav>

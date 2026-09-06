@@ -34,7 +34,7 @@ export default async function MenusPage({ searchParams }: { searchParams: Promis
   const initial: MenuFormInitial | undefined = editing ? {
     id: editing.id,
     label: editing.label,
-    target: editing.section_id ? `section:${editing.section_id}` : editing.category_id ? `category:${editing.category_id}` : "custom",
+    target: editing.section_id ? `section:${editing.section_id}` : editing.category_id ? `category:${editing.category_id}` : editing.url ? "custom" : "none",
     customUrl: editing.url ?? "",
     parentId: editing.parent_id ?? "",
     sortOrder: editing.sort_order,
@@ -46,7 +46,7 @@ export default async function MenusPage({ searchParams }: { searchParams: Promis
       <section className="admin-main">
         <AdminPageHeader title="Manage website menus" context="navigation" displayName={profile.display_name} avatarUrl={profile.avatar_url} role={profile.role} />
         <div className="admin-content menu-management">
-          <div className="menu-management-heading"><div><p className="eyebrow">Primary navigation</p><h2>Menu items and submenus</h2><p>Connect each item to a section, category or custom page. Drag-free ordering keeps changes predictable.</p></div>{editing && <Link className="button menu-new-button" href="/admin/menus"><Plus size={17} /> Create new</Link>}</div>
+          <div className="menu-management-heading"><div><p className="eyebrow">Primary navigation</p><h2>Menu items and submenus</h2><p>Create a main heading without a destination, then add submenu items that link to sections, categories or custom pages.</p></div>{editing && <Link className="button menu-new-button" href="/admin/menus"><Plus size={17} /> Create new</Link>}</div>
           <div className="menu-management-grid">
             <section className="menu-editor-card"><h3>{editing ? `Edit “${editing.label}”` : "Create menu item"}</h3><MenuItemForm key={editing?.id ?? "new"} sections={(sections ?? []).map((section) => ({ id: section.id, label: section.name }))} categories={categoryOptions} parents={roots.map((root) => ({ id: root.id, label: root.label }))} initial={initial} /></section>
             <section className="menu-list-card"><div className="menu-list-heading"><h3>Website menu</h3><span>{items.length} items</span></div>

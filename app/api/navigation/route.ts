@@ -53,7 +53,7 @@ export async function GET() {
       const categorySection = one(category?.sections);
       const href = safeHref(row.url)
         ?? (category?.slug && categorySection?.slug ? `/topic/${categorySection.slug}/${category.slug}` : null)
-        ?? (section?.slug ? `/topic/${section.slug}` : "/");
+        ?? (section?.slug ? `/topic/${section.slug}` : null);
       return { id: row.id, parentId: row.parent_id, label: row.label, href, children: [] as NavigationItem[] };
     });
     const byId = new Map(flat.map((item) => [item.id, item]));
@@ -69,3 +69,4 @@ export async function GET() {
     return Response.json({ items: fallbackNavigation() }, { headers: { "Cache-Control": "no-store" } });
   }
 }
+
