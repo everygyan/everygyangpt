@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Bold, Eye, ImagePlus, Italic, Link2, List, ListOrdered, LoaderCircle, Quote, Save, Send } from "lucide-react";
+import { ArrowLeft, Bold, Eye, ImagePlus, Italic, Link2, List, ListOrdered, LoaderCircle, Quote, Save, Send, Trash2, Upload } from "lucide-react";
 import { useActionState, useMemo, useRef, useState, type ClipboardEvent, type DragEvent } from "react";
 import { saveArticle, type ArticleActionState } from "@/app/admin/articles/actions";
 
@@ -44,10 +44,14 @@ export function ArticleEditor({
     initial.categoryId ?? categories.find((category) => category.section_id === (initial.sectionId ?? sections[0]?.id))?.id ?? "",
   );
   const [contentHtml, setContentHtml] = useState(initial.contentHtml ?? "");
+  const [featuredImageUrl, setFeaturedImageUrl] = useState(initial.featuredImageUrl ?? "");
+  const [featuredImageAlt, setFeaturedImageAlt] = useState(initial.featuredImageAlt ?? "");
+  const [featuredUploading, setFeaturedUploading] = useState(false);
   const [mediaUploads, setMediaUploads] = useState(0);
   const [mediaError, setMediaError] = useState("");
   const editorRef = useRef<HTMLDivElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
+  const featuredImageInputRef = useRef<HTMLInputElement>(null);
   const availableCategories = useMemo(
     () => categories.filter((category) => category.section_id === sectionId),
     [categories, sectionId],
@@ -128,6 +132,17 @@ export function ArticleEditor({
     editorRef.current?.focus();
   }
 
+  async function uploadFeaturedImage(file: File) {
+    setFeaturedUploading(true);
+    const url = await uploadImage(file);
+    if (url) {
+      setFeaturedImageUrl(url);
+      if (!featuredImageAlt.trim()) setFeaturedImageAlt(file.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " "));
+    }
+    setFeaturedUploading(false);
+    if (featuredImageInputRef.current) featuredImageInputRef.current.value = "";
+  }
+
   function pasteImages(event: ClipboardEvent<HTMLDivElement>) {
     const files = Array.from(event.clipboardData.items)
       .filter((item) => item.kind === "file" && item.type.startsWith("image/"))
@@ -151,6 +166,7 @@ export function ArticleEditor({
       <input type="hidden" name="articleId" value={state.articleId ?? initial.id ?? ""} />
       <input type="hidden" name="slug" value={state.slug ?? initial.slug ?? ""} />
       <input type="hidden" name="contentHtml" value={contentHtml} />
+      <input type="hidden" name="featuredImageUrl" value={featuredImageUrl} />
       <header className="editor-topbar">
         <Link href="/admin" className="editor-back"><ArrowLeft size={19} /> Dashboard</Link>
         <span className="save-status">{pending ? "Saving…" : state.success || "Changes not saved"}</span>
@@ -201,8 +217,21 @@ export function ArticleEditor({
           <label>Section<select name="sectionId" value={sectionId} onChange={(event) => { const nextSection = event.target.value; setSectionId(nextSection); setCategoryId(categories.find((category) => category.section_id === nextSection)?.id ?? ""); }} required>{sections.map((section) => <option key={section.id} value={section.id}>{section.name}</option>)}</select></label>
           <label>Category<select name="categoryId" value={categoryId} onChange={(event) => setCategoryId(event.target.value)} required><option value="" disabled>Choose category</option>{availableCategories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}</select></label>
           <label>Tags<input name="tags" defaultValue={initial.tags} placeholder="travel, technology, guide" /></label>
-          <label>Featured image URL<input name="featuredImageUrl" type="url" defaultValue={initial.featuredImageUrl} placeholder="https://..." /></label>
-          <label>Featured image description<input name="featuredImageAlt" defaultValue={initial.featuredImageAlt} placeholder="Describe the image" /></label>
+          <div className="featured-image-setting">
+            <span className="featured-image-label">Featured image</span>
+            <div className={`featured-image-upload ${featuredImageUrl ? "has-image" : ""}`} style={featuredImageUrl ? { backgroundImage: `linear-gradient(rgba(7,27,67,.12), rgba(7,27,67,.55)), url(${featuredImageUrl})` } : undefined}>
+              {!featuredImageUrl && <ImagePlus size={28} />}
+              <strong>{featuredImageUrl ? "Featured image selected" : "Upload from your device"}</strong>
+              <span>{featuredImageUrl ? "This image will appear on the article and its cards." : "JPG, PNG, WebP, GIF or AVIF · maximum 10 MB"}</span>
+              <div>
+                <button type="button" disabled={featuredUploading} onClick={() => featuredImageInputRef.current?.click()}>{featuredUploading ? <LoaderCircle className="spinner" size={15} /> : <Upload size={15} />}{featuredUploading ? "Uploading…" : featuredImageUrl ? "Replace" : "Choose image"}</button>
+                {featuredImageUrl && <button className="featured-image-remove" type="button" disabled={featuredUploading} onClick={() => setFeaturedImageUrl("")}><Trash2 size={14} /> Remove</button>}
+              </div>
+            </div>
+            <input ref={featuredImageInputRef} className="visually-hidden" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif" onChange={(event) => { const file = event.target.files?.[0]; if (file) void uploadFeaturedImage(file); }} />
+            <details className="featured-image-url"><summary>Or use an image URL</summary><input type="url" value={featuredImageUrl} onChange={(event) => setFeaturedImageUrl(event.target.value)} placeholder="https://..." /></details>
+          </div>
+          <label>Featured image description<input name="featuredImageAlt" value={featuredImageAlt} onChange={(event) => setFeaturedImageAlt(event.target.value)} placeholder="Describe the image for readers" /></label>
           <label className="toggle-label"><span><strong>Homepage carousel</strong><small>Include this story in the rotating homepage feature (maximum 25)</small></span><input name="isFeatured" type="checkbox" defaultChecked={initial.isFeatured} /></label>
           <label className="toggle-label"><span><strong>Show in Live ticker</strong><small>Scroll this article topic and headline in the Live bar</small></span><input name="isBreaking" type="checkbox" defaultChecked={initial.isBreaking} /></label>
           <label className="toggle-label"><span><strong>Allow comments</strong><small>Readers can join the discussion</small></span><input name="allowComments" type="checkbox" defaultChecked={initial.allowComments ?? true} /></label>
@@ -212,3 +241,4 @@ export function ArticleEditor({
     </form>
   );
 }
+
