@@ -6,11 +6,13 @@ import { ChevronDown, LayoutDashboard, LogOut, Menu, Search, UserRound, X } from
 import { useEffect, useMemo, useState } from "react";
 import { sections } from "@/data/articles";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { ProfileAvatar } from "@/components/profile-avatar";
 import type { NavigationItem } from "@/lib/navigation-types";
 import { createClient } from "@/lib/supabase/client";
 
 type HeaderProfile = {
   displayName: string;
+  avatarUrl: string | null;
   role: "reader" | "editor" | "moderator" | "admin";
 };
 
@@ -40,12 +42,13 @@ export function SiteHeader() {
       if (!active || !userData.user) return;
       const { data } = await supabase
         .from("profiles")
-        .select("display_name, role")
+        .select("display_name, avatar_url, role")
         .eq("id", userData.user.id)
         .single();
       if (!active) return;
       setProfile({
         displayName: data?.display_name || userData.user.user_metadata?.display_name || "EveryGyan reader",
+        avatarUrl: data?.avatar_url || userData.user.user_metadata?.avatar_url || null,
         role: data?.role || "reader",
       });
     }
@@ -141,13 +144,13 @@ export function SiteHeader() {
                   onClick={() => setProfileOpen((value) => !value)}
                   onMouseEnter={() => setProfileOpen(true)}
                 >
-                  <span className="profile-avatar">{profile.displayName.charAt(0).toUpperCase()}</span>
+                  <ProfileAvatar name={profile.displayName} url={profile.avatarUrl} />
                   <span className="profile-name">{profile.displayName.split(" ")[0]}</span>
                   <ChevronDown size={14} />
                 </button>
                 <div className={`profile-dropdown ${profileOpen ? "is-open" : ""}`}>
                   <div className="profile-summary">
-                    <span className="profile-avatar profile-avatar-large">{profile.displayName.charAt(0).toUpperCase()}</span>
+                    <ProfileAvatar name={profile.displayName} url={profile.avatarUrl} className="profile-avatar-large" />
                     <div><strong>{profile.displayName}</strong><small>{profile.role}</small></div>
                   </div>
                   <Link href="/account" onClick={() => setProfileOpen(false)}><UserRound size={17} /> My profile</Link>
@@ -177,3 +180,4 @@ export function SiteHeader() {
     </>
   );
 }
+

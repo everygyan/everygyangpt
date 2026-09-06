@@ -1,6 +1,12 @@
+import { CalendarDays, LayoutDashboard, LogOut, ShieldCheck, UserRound } from "lucide-react";
 import Link from "next/link";
 import { signOut } from "@/app/auth/actions";
+import { ProfileAvatar } from "@/components/profile-avatar";
+import { ProfileSettings } from "@/components/profile-settings";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { requireUser } from "@/lib/auth";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function AccountPage({
   searchParams,
@@ -10,20 +16,58 @@ export default async function AccountPage({
   const profile = await requireUser();
   const params = await searchParams;
   const canWrite = profile.role === "admin" || profile.role === "editor";
+  const supabase = await createClient();
+  const [{ data: userData }, { data: profileDetails }] = await Promise.all([
+    supabase.auth.getUser(),
+    supabase.from("profiles").select("bio, preferred_locale").eq("id", profile.id).single(),
+  ]);
+  const user = userData.user;
+  const metadata = user?.user_metadata ?? {};
+  const address = typeof metadata.address === "object" && metadata.address ? metadata.address as Record<string, unknown> : {};
+  const memberSince = user?.created_at
+    ? new Intl.DateTimeFormat("en", { month: "long", year: "numeric" }).format(new Date(user.created_at))
+    : "Recently";
+
   return (
-    <main className="account-page">
-      <section className="account-card">
-        <Link className="admin-logo" href="/">Every<span>Gyan</span></Link>
-        <p className="eyebrow">Your account</p>
-        <h1>Hello, {profile.display_name}.</h1>
-        <p>Your current access level is <strong>{profile.role}</strong>.</p>
-        {params.error && <p className="form-message form-error">Your account does not have publishing access. An administrator can promote it in Supabase.</p>}
-        <div className="account-actions">
-          {canWrite && <Link className="button button-primary" href="/admin">Open publishing dashboard</Link>}
-          <Link className="button account-secondary" href="/">Read EveryGyan</Link>
-          <form action={signOut}><button className="text-button" type="submit">Sign out</button></form>
+    <>
+      <SiteHeader />
+      <main className="account-page">
+        <div className="shell account-shell">
+          <header className="account-hero">
+            <ProfileAvatar name={profile.display_name} url={profile.avatar_url} className="account-hero-avatar" />
+            <div><p className="eyebrow">Your EveryGyan account</p><h1>{profile.display_name}</h1><p>{user?.email}</p></div>
+            <span className="account-role"><ShieldCheck size={16} /> {profile.role}</span>
+          </header>
+
+          {params.error && <p className="form-message form-error">Your account does not have publishing access. An administrator can promote it in Supabase.</p>}
+
+          <div className="account-layout">
+            <aside className="account-sidebar">
+              <nav aria-label="Account settings"><a href="#profile-details"><UserRound size={17} /> Profile details</a><a href="#security"><ShieldCheck size={17} /> Password & security</a>{canWrite && <Link href="/admin"><LayoutDashboard size={17} /> Publishing dashboard</Link>}</nav>
+              <div className="account-member-since"><CalendarDays size={18} /><div><small>Member since</small><strong>{memberSince}</strong></div></div>
+              <form action={signOut}><button type="submit"><LogOut size={17} /> Sign out</button></form>
+            </aside>
+            <ProfileSettings initial={{
+              displayName: profile.display_name,
+              firstName: String(metadata.first_name ?? ""),
+              lastName: String(metadata.last_name ?? ""),
+              email: user?.email ?? "",
+              contactPhone: String(metadata.contact_phone ?? ""),
+              bio: profileDetails?.bio ?? "",
+              avatarUrl: profile.avatar_url,
+              preferredLocale: profileDetails?.preferred_locale ?? "en",
+              addressLine1: String(address.line_1 ?? ""),
+              addressLine2: String(address.line_2 ?? ""),
+              city: String(address.city ?? ""),
+              stateRegion: String(address.state_region ?? ""),
+              postalCode: String(address.postal_code ?? ""),
+              country: String(address.country ?? ""),
+            }} />
+          </div>
         </div>
-      </section>
-    </main>
+      </main>
+      <SiteFooter />
+    </>
   );
 }
+
