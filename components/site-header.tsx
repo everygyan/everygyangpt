@@ -72,11 +72,6 @@ export function SiteHeader() {
     setOpenNavigationId(null);
   }
 
-  async function signOut() {
-    if (supabase) await supabase.auth.signOut();
-    window.location.replace("/");
-  }
-
   const canPublish = profile?.role === "admin" || profile?.role === "editor";
 
   return (
@@ -155,7 +150,7 @@ export function SiteHeader() {
                   </div>
                   <Link href="/account" onClick={() => setProfileOpen(false)}><UserRound size={17} /> My profile</Link>
                   {canPublish && <Link href="/admin" onClick={() => setProfileOpen(false)}><LayoutDashboard size={17} /> Publishing dashboard</Link>}
-                  <button type="button" onClick={signOut}><LogOut size={17} /> Sign out</button>
+                  <form action="/auth/signout" method="post"><button type="submit"><LogOut size={17} /> Sign out</button></form>
                 </div>
               </div>
             ) : (
@@ -180,4 +175,3 @@ export function SiteHeader() {
     </>
   );
 }
-

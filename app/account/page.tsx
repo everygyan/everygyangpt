@@ -1,6 +1,5 @@
 import { CalendarDays, LayoutDashboard, LogOut, ShieldCheck, UserRound } from "lucide-react";
 import Link from "next/link";
-import { signOut } from "@/app/auth/actions";
 import { ProfileAvatar } from "@/components/profile-avatar";
 import { ProfileSettings } from "@/components/profile-settings";
 import { SiteFooter } from "@/components/site-footer";
@@ -45,7 +44,7 @@ export default async function AccountPage({
             <aside className="account-sidebar">
               <nav aria-label="Account settings"><a href="#profile-details"><UserRound size={17} /> Profile details</a><a href="#security"><ShieldCheck size={17} /> Password & security</a>{canWrite && <Link href="/admin"><LayoutDashboard size={17} /> Publishing dashboard</Link>}</nav>
               <div className="account-member-since"><CalendarDays size={18} /><div><small>Member since</small><strong>{memberSince}</strong></div></div>
-              <form action={signOut}><button type="submit"><LogOut size={17} /> Sign out</button></form>
+              <form action="/auth/signout" method="post"><button type="submit"><LogOut size={17} /> Sign out</button></form>
             </aside>
             <ProfileSettings initial={{
               displayName: profile.display_name,
@@ -70,4 +69,3 @@ export default async function AccountPage({
     </>
   );
 }
-

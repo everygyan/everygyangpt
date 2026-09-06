@@ -1,4 +1,3 @@
-import { signOut } from "@/app/auth/actions";
 
 export function AdminPageHeader({ title, context, displayName }: { title: string; context: string; displayName: string }) {
   const firstName = displayName.split(" ")[0] || "Admin";
@@ -7,7 +6,7 @@ export function AdminPageHeader({ title, context, displayName }: { title: string
       <div><p>EveryGyan workspace · {context}</p><h1>{title}</h1></div>
       <div className="admin-account">
         <div className="author-avatar">{firstName[0]?.toUpperCase()}</div>
-        <form action={signOut}><button type="submit">Sign out</button></form>
+        <form action="/auth/signout" method="post"><button type="submit">Sign out</button></form>
       </div>
     </header>
   );

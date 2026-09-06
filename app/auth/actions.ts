@@ -101,10 +101,3 @@ export async function updatePassword(
   const { error } = await supabase.auth.updateUser({ password });
   return error ? { error: error.message } : { success: "Your password has been updated." };
 }
-
-export async function signOut() {
-  if (!isSupabaseConfigured()) redirect("/login");
-  const supabase = await createClient();
-  await supabase.auth.signOut();
-  redirect("/login");
-}

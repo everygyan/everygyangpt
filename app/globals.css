@@ -87,6 +87,8 @@ img { max-width: 100%; }
 .profile-dropdown > a, .profile-dropdown > button { width: 100%; min-height: 39px; display: flex; align-items: center; gap: 9px; padding: 0 10px; color: var(--ink); background: transparent; border: 0; border-radius: 7px; font-size: .76rem; font-weight: 700; text-align: left; }
 .profile-dropdown > a:hover, .profile-dropdown > button:hover { color: var(--blue); background: var(--surface-2); }
 .profile-dropdown > button { margin-top: 4px; padding-top: 4px; color: #b42318; border-top: 1px solid var(--line); border-radius: 0 0 7px 7px; }
+.profile-dropdown > form > button { width: 100%; min-height: 39px; display: flex; align-items: center; gap: 9px; margin-top: 4px; padding: 4px 10px 0; color: #b42318; background: transparent; border: 0; border-top: 1px solid var(--line); border-radius: 0 0 7px 7px; font-size: .76rem; font-weight: 700; text-align: left; cursor: pointer; }
+.profile-dropdown > form > button:hover { background: var(--surface-2); }
 .mobile-menu-button { display: none; }
 .search-panel { position: absolute; inset: 100% 0 auto; padding: 16px 0; background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: var(--shadow); }
 .search-form { display: flex; align-items: center; gap: 12px; }
@@ -630,4 +632,3 @@ button.german-lesson-copy:hover strong { color: #068dc9; }
 @media (prefers-reduced-motion: reduce) {
   .german-primary-button, .german-secondary-button, .german-lesson-node, .german-resource-card { transition: none; }
 }
-
