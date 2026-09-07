@@ -4,7 +4,7 @@
   "nodes": [
     {
       "parameters": {},
-      "id": "aca537af-df36-4b5a-b859-b2d356910f3a",
+      "id": "fbc33ec9-a0e3-44b4-ba4e-b1266bc486c7",
       "name": "Manual Trigger",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
@@ -24,7 +24,7 @@
           ]
         }
       },
-      "id": "96ecd553-97c6-4f80-ab08-989dff0251d0",
+      "id": "afc58e58-5597-4108-a435-17c0d2bf11ea",
       "name": "Weekly Schedule",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
@@ -35,9 +35,9 @@
     },
     {
       "parameters": {
-        "jsCode": "return [{json:{\"section\":\"Travel\",\"category\":\"Culture\",\"categoryId\":\"6ec628d8-2090-4c04-b54d-220626b76022\",\"slug\":\"culture\",\"sectionId\":\"d0facefb-1eee-429a-bb85-b85ff9c599c3\",\"index\":4,\"feeds\":[\"https://news.google.com/rss/search?q=Culture%20latest%20developments%20when%3A3d&hl=en-US&gl=US&ceid=US:en\",\"https://www.bing.com/news/search?q=Culture%20latest%20developments%20when%3A3d&format=rss\"],\"models\":[\"nvidia/nemotron-3-ultra-550b-a55b:free\",\"google/gemma-4-31b-it:free\",\"openrouter/free\"],\"imageModel\":\"bytedance-seed/seedream-5-0-lite\"}}];"
+        "jsCode": "return [{json:{\"section\":\"Travel\",\"category\":\"Culture\",\"categoryId\":\"6ec628d8-2090-4c04-b54d-220626b76022\",\"slug\":\"culture\",\"sectionId\":\"d0facefb-1eee-429a-bb85-b85ff9c599c3\",\"index\":4,\"feeds\":[\"https://news.google.com/rss/search?q=Culture%20latest%20developments%20when%3A3d&hl=en-US&gl=US&ceid=US:en\",\"https://www.bing.com/news/search?q=Culture%20latest%20developments%20when%3A3d&format=rss\"],\"models\":[\"inclusionai/ling-3.0-flash-fin:free\",\"google/gemma-4-31b-it:free\",\"openrouter/free\"],\"imageModel\":\"bytedance-seed/seedream-5-0-lite\"}}];"
       },
-      "id": "186b49e3-93f4-4fd0-a2e8-c917eac3cac7",
+      "id": "c70877ff-d7b7-41f4-9978-68c5125d5d55",
       "name": "Category Config",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -70,7 +70,7 @@
           }
         }
       },
-      "id": "854e25cf-b3f5-456a-9533-075961786738",
+      "id": "5ae06fe6-d36f-4ff9-8fd9-11d750262d20",
       "name": "Get Admin Profile",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -83,7 +83,7 @@
       "parameters": {
         "jsCode": "const c=$('Category Config').first().json; return c.feeds.map(feedUrl=>({json:{feedUrl}}));"
       },
-      "id": "b8b74426-0276-4ca2-9ced-a1c811e8689f",
+      "id": "f3b1bc94-4168-4ef1-89d8-6d8f8613aca7",
       "name": "Expand RSS Feeds",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -96,7 +96,7 @@
       "parameters": {
         "url": "={{ $json.feedUrl }}"
       },
-      "id": "e7890925-870c-4c01-b660-0f06e800c090",
+      "id": "60e5f51d-2b5e-47bc-bb25-de0f064373be",
       "name": "Read RSS Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "typeVersion": 1.2,
@@ -110,7 +110,7 @@
       "parameters": {
         "jsCode": "const c=$('Category Config').first().json;\nconst seen=new Set();\nconst stories=$input.all().map(i=>i.json).filter(s=>s.title&&s.link).filter(s=>{const key=String(s.link).split('?')[0];if(seen.has(key))return false;seen.add(key);return true;}).map(s=>({title:String(s.title).trim(),url:String(s.link),published:s.isoDate||s.pubDate||'',summary:String(s.contentSnippet||s.content||s.description||'').replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').slice(0,900)})).sort((a,b)=>Date.parse(b.published||0)-Date.parse(a.published||0)).slice(0,10);\nif(stories.length<3) throw new Error('Fewer than three usable RSS stories were found; stopping to avoid a weak article.');\nreturn [{json:{...c,stories}}];"
       },
-      "id": "d6a13ac8-7382-4d17-afe9-b0c3447d631f",
+      "id": "c35866fb-a834-4864-b19b-df58513cdf4a",
       "name": "Curate Top 10",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -142,12 +142,12 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({models:$json.models,messages:[{role:'system',content:'You are a rigorous chief news editor. Use only the supplied RSS evidence. Select one timely angle supported by at least three sources. Distinguish facts from analysis and never invent quotations, statistics or events. Return strict JSON with topic, angle, key_facts, source_urls and cautions.'},{role:'user',content:'Section: '+$json.section+'; category: '+$json.category+'; RSS evidence: '+JSON.stringify($json.stories)}],temperature:0.15,response_format:{type:'json_object'}}) }}",
+        "jsonBody": "={{ JSON.stringify({models:$json.models,messages:[{role:'system',content:'You are a rigorous chief news editor. Use only the supplied RSS evidence. Select one timely angle supported by at least three sources. Distinguish facts from analysis and never invent quotations, statistics or events. Return strict JSON with topic, angle, key_facts, source_urls and cautions.'},{role:'user',content:'Section: '+$json.section+'; category: '+$json.category+'; RSS evidence: '+JSON.stringify($json.stories)}],temperature:0.15,max_tokens:1400,reasoning:{effort:'low',exclude:true},response_format:{type:'json_object'} }) }}",
         "options": {
           "timeout": 180000
         }
       },
-      "id": "48b199ce-e5b8-427b-ba29-631f75c42e16",
+      "id": "40d24b7d-ed95-4b1e-b1a5-908c24adccf4",
       "name": "Analyse Sources",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -161,9 +161,9 @@
     },
     {
       "parameters": {
-        "jsCode": "const c=$('Curate Top 10').first().json;const raw=$json.choices?.[0]?.message?.content;if(!raw)throw new Error('Source analysis returned no text.');const clean=String(raw).replace(/^\\s*\\x60{3}(?:json)?/i,'').replace(/\\x60{3}\\s*$/,'').trim();return [{json:{...c,analysis:JSON.parse(clean)}}];"
+        "jsCode": "const c=$('Curate Top 10').first().json;const raw=String($json.choices?.[0]?.message?.content||'').replace(/^\\s*\\x60{3}(?:json)?/i,'').replace(/\\x60{3}\\s*$/,'').trim();let analysis;try{const start=raw.indexOf('{');const end=raw.lastIndexOf('}');if(start<0||end<=start)throw new Error('No JSON object');analysis=JSON.parse(raw.slice(start,end+1));}catch{analysis={topic:c.stories[0]?.title||c.category+' developments',angle:'What the latest '+c.category+' reports reveal, where the evidence agrees, and what readers should watch next.',key_facts:c.stories.slice(0,8).map(story=>story.title),source_urls:c.stories.map(story=>story.url),cautions:['RSS summaries provide limited context; retain attribution and avoid unsupported claims.']};}return [{json:{...c,analysis}}];"
       },
-      "id": "2e62aad0-fcfe-4a14-8855-8ffeefdcde9e",
+      "id": "4c9a3d25-9906-471b-bd8e-f59801f4be17",
       "name": "Parse Analysis",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -195,12 +195,12 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({models:$json.models,messages:[{role:'system',content:'Act as the chief editor of EveryGyan. Create a detailed eight-section outline for an original evidence-based article. Each section must have a heading, a specific writing_prompt, target_words between 280 and 320, and source URLs it may rely on. Avoid copying source headlines. Return strictly a JSON object with a sections array and no markdown fences.'},{role:'user',content:'Category: '+$json.category+'; editorial analysis: '+JSON.stringify($json.analysis)+'; evidence: '+JSON.stringify($json.stories)}],temperature:0.2,response_format:{type:'json_object'}}) }}",
+        "jsonBody": "={{ JSON.stringify({models:$json.models,messages:[{role:'system',content:'Act as the chief editor of EveryGyan. Create a detailed eight-section outline for an original evidence-based article. Each section must have a heading, a specific writing_prompt, target_words between 280 and 320, and source URLs it may rely on. Avoid copying source headlines. Return strictly a JSON object with a sections array and no markdown fences.'},{role:'user',content:'Category: '+$json.category+'; editorial analysis: '+JSON.stringify($json.analysis)+'; evidence: '+JSON.stringify($json.stories)}],temperature:0.2,max_tokens:2600,reasoning:{effort:'low',exclude:true},response_format:{type:'json_object'} }) }}",
         "options": {
           "timeout": 180000
         }
       },
-      "id": "35133338-c133-4400-b156-8c4fcce28132",
+      "id": "1a12660a-090f-4198-a814-862c3d989463",
       "name": "Generate 8-Section Outline",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -214,9 +214,9 @@
     },
     {
       "parameters": {
-        "jsCode": "const c=$('Parse Analysis').first().json;const raw=$json.choices?.[0]?.message?.content;if(!raw)throw new Error('Outline model returned no text.');const parsed=JSON.parse(String(raw).replace(/^\\s*\\x60{3}(?:json)?/i,'').replace(/\\x60{3}\\s*$/,'').trim());const sections=Array.isArray(parsed)?parsed:parsed.sections;if(!Array.isArray(sections)||sections.length!==8)throw new Error('Outline must contain exactly eight sections.');return sections.map((section,index)=>({json:{...c,section,index}}));"
+        "jsCode": "const c=$('Parse Analysis').first().json;const raw=String($json.choices?.[0]?.message?.content||'').replace(/^\\s*\\x60{3}(?:json)?/i,'').replace(/\\x60{3}\\s*$/,'').trim();let sections;try{const start=raw.indexOf('{');const end=raw.lastIndexOf('}');if(start<0||end<=start)throw new Error('No JSON object');const parsed=JSON.parse(raw.slice(start,end+1));sections=Array.isArray(parsed)?parsed:parsed.sections;}catch{sections=null;}if(!Array.isArray(sections)||sections.length!==8){const headings=['The development at a glance','Background and wider context','The strongest evidence','How the key players are responding','Practical and industry impact','Risks, limits and unanswered questions','What to watch next','Conclusions and reader takeaways'];sections=headings.map((heading,index)=>({heading,writing_prompt:'Write approximately 300 evidence-based words for '+heading+'. Examine '+String(c.analysis?.angle||c.analysis?.topic||c.category)+' using only the supplied RSS stories. Attribute factual claims, distinguish analysis from confirmed facts, and avoid repetition with the other sections.',target_words:300,source_urls:c.stories.slice(index%3,index%3+5).map(story=>story.url)}));}return sections.map((section,index)=>({json:{...c,section,index}}));"
       },
-      "id": "8f621981-7aac-45ee-9699-17b961152506",
+      "id": "f132488b-98e2-4050-af8f-1e3bcd075d1d",
       "name": "Split Outline",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -231,7 +231,7 @@
           "reset": false
         }
       },
-      "id": "aa99fdde-58d8-4839-8d7e-6c8df524886c",
+      "id": "efa0d5a4-29eb-4620-bede-926144d206d3",
       "name": "Loop Through Sections",
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
@@ -263,12 +263,12 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({models:$json.models,messages:[{role:'system',content:'Act as an expert journalist. Write only this body section in professional Markdown. Aim for 300 words. Use only supplied evidence, attribute factual claims with inline source links, avoid fabricated quotes or numbers, and do not write an article introduction or conclusion.'},{role:'user',content:'Full angle: '+JSON.stringify($json.analysis)+'; section outline: '+JSON.stringify($json.section)+'; RSS evidence: '+JSON.stringify($json.stories)}],temperature:0.35}) }}",
+        "jsonBody": "={{ JSON.stringify({models:$json.models,messages:[{role:'system',content:'Act as an expert journalist. Write only this body section in professional Markdown. Aim for 300 words. Use only supplied evidence, attribute factual claims with inline source links, avoid fabricated quotes or numbers, and do not write an article introduction or conclusion.'},{role:'user',content:'Full angle: '+JSON.stringify($json.analysis)+'; section outline: '+JSON.stringify($json.section)+'; RSS evidence: '+JSON.stringify($json.stories)}],temperature:0.3,max_tokens:1200,reasoning:{effort:'low',exclude:true} }) }}",
         "options": {
           "timeout": 180000
         }
       },
-      "id": "9af8759f-542a-4203-9be2-474374adf845",
+      "id": "fd814407-63fd-4cf7-82fa-37d160b8f242",
       "name": "Write One Section",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -284,7 +284,7 @@
       "parameters": {
         "jsCode": "const source=$('Loop Through Sections').item.json;const text=$json.choices?.[0]?.message?.content;if(!text)throw new Error('Section writer returned no text.');return [{json:{index:source.index,heading:source.section.heading,text:String(text),category:source.category}}];"
       },
-      "id": "7c6c51e9-186a-4066-9cf6-63e5be50a4fa",
+      "id": "94f6a9b3-cbbb-48c8-859d-1e29e7ea1699",
       "name": "Capture Written Section",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -299,7 +299,7 @@
         "destinationFieldName": "sections",
         "options": {}
       },
-      "id": "acc29dc9-7699-4279-b3a0-5965974aa092",
+      "id": "172eebe8-4566-4908-849c-8e15924ec7fc",
       "name": "Aggregate Sections",
       "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
@@ -331,12 +331,12 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({models:['google/gemma-4-31b-it:free','nvidia/nemotron-3-ultra-550b-a55b:free','openrouter/free'],messages:[{role:'system',content:'You are the final EveryGyan editor. Smooth transitions, remove repetition, preserve source links and factual caveats, and keep the complete article at or below 2,500 words. Return strict JSON: headline (new and not copied), summary (35-55 words), body_markdown with professional ## headings, tags (5-10 strings), seo_title (max 60 characters), meta_description (140-160 characters), image_prompt (editorial 16:9 photo, no text/logos), image_alt. Never add facts absent from the supplied sections.'},{role:'user',content:'Category: '+$('Category Config').first().json.category+'; completed sections: '+JSON.stringify($json.sections)}],temperature:0.25,response_format:{type:'json_object'}}) }}",
+        "jsonBody": "={{ JSON.stringify({models:['inclusionai/ling-3.0-flash-fin:free','google/gemma-4-31b-it:free','openrouter/free'],messages:[{role:'system',content:'You are the final EveryGyan editor. Smooth transitions and remove only genuine repetition while preserving the substantive reporting, source links and factual caveats from all eight sections. Do not summarize the sections into a short article. Target 2,000 to 2,500 words and never exceed 2,500 words. Return strict JSON: headline (new and not copied), summary (35-55 words), body_markdown with professional ## headings, tags (5-10 strings), seo_title (max 60 characters), meta_description (140-160 characters), image_prompt (editorial 16:9 photo, no text/logos), image_alt. Never add facts absent from the supplied sections.'},{role:'user',content:'Category: '+$('Category Config').first().json.category+'; completed sections: '+JSON.stringify($json.sections)}],temperature:0.2,max_tokens:6500,reasoning:{effort:'low',exclude:true},response_format:{type:'json_object'} }) }}",
         "options": {
           "timeout": 180000
         }
       },
-      "id": "4ca29509-1e61-4e14-82a8-2e41dacf702c",
+      "id": "8d170549-dffc-4949-b91f-81458564d429",
       "name": "Assemble and Polish",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -350,9 +350,9 @@
     },
     {
       "parameters": {
-        "jsCode": "const c=$('Category Config').first().json;const raw=$json.choices?.[0]?.message?.content;if(!raw)throw new Error('Polish model returned no text.');const article=JSON.parse(String(raw).replace(/^\\s*\\x60{3}(?:json)?/i,'').replace(/\\x60{3}\\s*$/,'').trim());if(!article.headline||!article.summary||!article.body_markdown)throw new Error('Final article JSON is incomplete.');return [{json:{...c,article}}];"
+        "jsCode": "const c=$('Category Config').first().json;const context=$('Parse Analysis').first().json;const rows=($('Aggregate Sections').first().json.sections||[]).map(value=>value.json||value).sort((a,b)=>(a.index||0)-(b.index||0));const assembled=rows.map(row=>String(row.text||'').trim()).filter(Boolean).join('\\n\\n');if(!assembled)throw new Error('No completed article sections were available.');const topic=String(context.analysis?.topic||context.analysis?.angle||c.category+' update').trim();const angle=String(context.analysis?.angle||'A detailed review of the latest '+c.category+' developments, their context and practical implications.').trim();const fallback={headline:topic.slice(0,140),summary:angle.slice(0,320),body_markdown:assembled,tags:[c.category,c.section,'Latest updates','EveryGyan'],seo_title:topic.slice(0,60),meta_description:angle.slice(0,160),image_prompt:'Professional editorial documentary photograph representing '+topic+', visually accurate, engaging 16:9 composition, no words, captions, logos or watermarks.',image_alt:topic};const raw=$json.choices?.[0]?.message?.content;let article=fallback;if(raw){try{const parsed=JSON.parse(String(raw).replace(/^\\s*\\x60{3}(?:json)?/i,'').replace(/\\x60{3}\\s*$/,'').trim());article={...fallback,...parsed};}catch{article=fallback;}}if(!article.headline||!article.summary||!article.body_markdown)article=fallback;return [{json:{...context,article}}];"
       },
-      "id": "180bf276-d75f-418f-bd87-0407affb6781",
+      "id": "d6611fb2-9164-4b49-9949-8ba6dc67da31",
       "name": "Parse Final Article",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -384,12 +384,12 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({model:$json.imageModel,prompt:$json.article.image_prompt,resolution:'1K',aspect_ratio:'16:9',n:1,output_format:'png'}) }}",
+        "jsonBody": "={{ JSON.stringify({model:$json.imageModel,prompt:$json.article.image_prompt,resolution:'2K',aspect_ratio:'16:9',n:1,output_format:'png'}) }}",
         "options": {
           "timeout": 240000
         }
       },
-      "id": "45d4a6cc-f165-4f74-bdd8-ba9e1195bbdd",
+      "id": "e56ea983-8eac-4949-adda-8490de20a817",
       "name": "Generate Featured Image",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -405,7 +405,7 @@
       "parameters": {
         "jsCode": "const c=$('Parse Final Article').first().json;const image=$json.data?.[0];if(!image?.b64_json)throw new Error('Image model did not return base64 image data.');const mediaType=image.media_type||'image/png';const extension=mediaType==='image/jpeg'?'jpg':mediaType==='image/webp'?'webp':'png';const fileName=Date.now()+'-'+Math.random().toString(36).slice(2,9)+'.'+extension;const storagePath='automation/'+c.slug+'/'+fileName;return [{json:{...c,storagePath,mediaType},binary:{data:{data:image.b64_json,mimeType:mediaType,fileName}}}];"
       },
-      "id": "e4dbeaae-650b-4609-859a-64500663cad1",
+      "id": "e3714ba9-a2a0-4dd0-b65d-7c526ce5e929",
       "name": "Prepare Image Binary",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -446,7 +446,7 @@
           "timeout": 120000
         }
       },
-      "id": "1fac3c93-b81c-45f1-bd73-910f1098a616",
+      "id": "da104412-e148-4f8e-8358-c4965dc0c635",
       "name": "Upload Image to Supabase",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -462,7 +462,7 @@
       "parameters": {
         "jsCode": "const c=$('Prepare Image Binary').first().json;const a=c.article;const escape=s=>String(s??'').replace(/[&<>\"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[ch]));const inline=s=>escape(s).replace(/\\*\\*(.+?)\\*\\*/g,'<strong>$1</strong>').replace(/\\[([^\\]]+)\\]\\((https?:\\/\\/[^)]+)\\)/g,'<a href=\"$2\" target=\"_blank\" rel=\"noopener noreferrer\">$1</a>');const html=String(a.body_markdown).split(/\\n{2,}/).map(block=>{const b=block.trim();if(!b)return '';const h=b.match(/^#{1,4}\\s+(.+)/);if(h)return '<h2>'+inline(h[1])+'</h2>';return '<p>'+inline(b).replace(/\\n/g,'<br>')+'</p>';}).join('');const slug=String(a.headline).normalize('NFKD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70)+'-'+Date.now().toString(36);const adminRaw=$('Get Admin Profile').first().json;const admin=Array.isArray(adminRaw)?adminRaw[0]:adminRaw;if(!admin?.id)throw new Error('No Supabase admin profile was found.');const tags=[...new Set((a.tags||[]).map(t=>String(t).trim()).filter(Boolean))].slice(0,10);return [{json:{article:{author_id:admin.id,section_id:c.sectionId,title:a.headline,slug,excerpt:a.summary,content:{type:'html',html,authorName:'Admin',automation:{category:c.category,source_urls:c.analysis?.source_urls||c.stories.map(s=>s.url),generated_at:new Date().toISOString()}},content_html:html,featured_image_url:$env.SUPABASE_URL+'/storage/v1/object/public/article-images/'+c.storagePath,featured_image_alt:a.image_alt||a.headline,status:'draft',is_featured:false,is_breaking:false,allow_comments:true,seo_title:a.seo_title||a.headline,seo_description:a.meta_description||a.summary,published_at:null},categoryId:c.categoryId,tags}}];"
       },
-      "id": "2465619a-1d6d-498f-b8b4-40bdbd16b7ef",
+      "id": "133c8feb-7bc3-4ebb-8fd9-b786bce7f085",
       "name": "Prepare Safe Draft",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -497,7 +497,7 @@
         "jsonBody": "={{ JSON.stringify($json.article) }}",
         "options": {}
       },
-      "id": "c605236c-62c8-4c9b-acd6-ef0bfb9830d0",
+      "id": "9fe2e8a4-f3cf-4a21-88cd-09da2fa1414d",
       "name": "Insert Draft Article",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -532,7 +532,7 @@
         "jsonBody": "={{ JSON.stringify({article_id:(Array.isArray($json)?$json[0]:$json).id,category_id:$('Prepare Safe Draft').first().json.categoryId,is_primary:true}) }}",
         "options": {}
       },
-      "id": "3a43a6ce-ff9b-4fcd-8057-8689fd7b4c70",
+      "id": "c3a72e28-cf79-4c46-89f4-9d8c0bbe1352",
       "name": "Link Article Category",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -545,7 +545,7 @@
       "parameters": {
         "jsCode": "const tags=$('Prepare Safe Draft').first().json.tags;return [{json:{tags:tags.map(name=>({name,slug:name.normalize('NFKD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,80)})).filter(t=>t.slug)}}];"
       },
-      "id": "80b92be0-3bf0-4b4b-9771-77f8294e957a",
+      "id": "443847d8-30b4-4ad3-92b0-a6951b362f10",
       "name": "Prepare Tags",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -580,7 +580,7 @@
         "jsonBody": "={{ JSON.stringify($json.tags) }}",
         "options": {}
       },
-      "id": "9cc03d1e-9bf7-4095-96fc-3d46e37611a3",
+      "id": "6ba2ba7f-9bae-4ca9-a080-a577ae40dba1",
       "name": "Upsert Tags",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -615,7 +615,7 @@
         "jsonBody": "={{ JSON.stringify((Array.isArray($json)?$json:[$json]).map(tag=>({article_id:(Array.isArray($('Insert Draft Article').first().json)?$('Insert Draft Article').first().json[0]:$('Insert Draft Article').first().json).id,tag_id:tag.id}))) }}",
         "options": {}
       },
-      "id": "16434a01-9ca4-4af5-82f0-e2572c87b9b0",
+      "id": "bef09591-6378-4c38-b3cc-16a4dc6fe763",
       "name": "Link Article Tags",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -918,7 +918,7 @@
     "saveDataSuccessExecution": "all",
     "executionTimeout": 1800
   },
-  "versionId": "439e9a73-1b8b-4264-93a4-0ecccf277f23",
+  "versionId": "6b40bcc8-323e-4b7b-b8ef-8e7db606c22d",
   "meta": {
     "templateCredsSetupCompleted": false
   },
